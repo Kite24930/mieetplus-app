@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap");
+:root {
+  --mieet-color: #B5DECC;
+}
+
+* {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.noto-sans {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.text-mieetcolor {
+  color: var(--mieet-color);
+}
+
+header {
+  height: 60px;
+}
+
+body {
+  padding-top: 60px;
+}
+
+#tellers .swiper-slide {
+  width: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#tellers .swiper-slide img {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border: solid var(--mieet-color) 3px;
+}
+#tellers .swiper-slide img.viewed {
+  border-color: lightgrey;
+}
+#tellers .swiper-slide:first-child {
+  margin-left: 10px;
+}
+#tellers .company-name {
+  font-size: 0.5rem;
+  width: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#modalEl {
+  height: 100dvh;
+}
+#modalEl .company-img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border: solid var(--mieet-color) 3px;
+}
+#modalEl #tellerSwiper .swiper-slide {
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
+  display: flex;
+}
+
+.follow-btn.followed {
+  background-color: hotpink;
+  color: white;
+  border: none;
+}
+
+/*# sourceMappingURL=recruit.css.map */

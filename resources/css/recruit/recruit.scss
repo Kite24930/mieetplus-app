@@ -1,0 +1,58 @@
+@import "common";
+
+#tellers {
+    .swiper-slide {
+        width: 66px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        img {
+            width: 58px;
+            height: 58px;
+            object-fit: cover;
+            border: solid var(--mieet-color) 3px;
+            &.viewed {
+                border-color: lightgrey;
+            }
+        }
+        &:first-child {
+            margin-left: 10px;
+        }
+    }
+
+    .company-name {
+        font-size: 0.5rem;
+        width: 66px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+#modalEl {
+    height: 100dvh;
+    .company-img {
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+        border: solid var(--mieet-color) 3px;
+    }
+    #tellerSwiper {
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            background-blend-mode: darken;
+            display: flex;
+        }
+    }
+}
+
+.follow-btn {
+    &.followed {
+        background-color: hotpink;
+        color: white;
+        border: none;
+    }
+}

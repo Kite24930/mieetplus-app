@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'index'])->name('index');
+Route::get('/recruit', [MainController::class, 'recruit'])->name('recruit');
+Route::get('/recruit/company/{id}', [MainController::class, 'companyDetail'])->name('companyDetail');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
