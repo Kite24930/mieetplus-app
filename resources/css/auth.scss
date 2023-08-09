@@ -1,0 +1,12 @@
+@import "common";
+
+#container {
+    input {
+        &::placeholder {
+            color: #ACB6BE;
+        }
+    }
+    a {
+        color: #ADADAD;
+    }
+}

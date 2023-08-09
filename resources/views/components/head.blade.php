@@ -5,5 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/icon.png">
+    {{ $slot }}
     <title>{{ $title }}</title>
 </head>

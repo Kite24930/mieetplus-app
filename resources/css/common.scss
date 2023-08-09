@@ -6,7 +6,7 @@
     --mieet-color: #B5DECC;
     --green-background: #F2FAF6;
     --green-color: #73CF98;
-    --default-font-color: #111928;
+    --default-font-color: #586C61;
 }
 
 * {
@@ -26,10 +26,25 @@
     color: var(--mieet-color);
 }
 
-header {
-    height: 60px;
+.green-btn {
+    background-color: var(--green-color);
+    color: white;
+    border-radius: 5px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        background-color: #5DCB8E;
+    }
 }
 
-body {
-    padding-top: 60px;
+.green-background {
+    background-color: var(--green-background);
+}
+
+.flex-center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

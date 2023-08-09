@@ -1,6 +1,7 @@
 <x-recruit.template title="Mieet Plus 就活部">
     <div class="w-full flex justify-center">
         <div class="container max-w-screen-sm flex flex-col justify-center">
+            {{-- テラーズ表示範囲 start --}}
             <div id="tellers" class="swiper mySwiper container relative z-0">
                 <div class="swiper-wrapper">
                     @foreach($companies as $i => $company)
@@ -100,6 +101,10 @@
                     </div>
                 </div>
             </div>
+            {{-- テラーズ表示範囲 end --}}
+            {{-- 投稿範囲 start --}}
+
+            {{-- 投稿範囲 end --}}
         </div>
     </div>
     @vite(['resources/js/recruit/recruit.js'])

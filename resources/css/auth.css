@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap");
+:root {
+  --mieet-color: #B5DECC;
+  --green-background: #F2FAF6;
+  --green-color: #73CF98;
+  --default-font-color: #586C61;
+}
+
+* {
+  font-family: "Noto Sans JP", sans-serif;
+  color: var(--default-font-color);
+}
+
+.noto-sans {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.text-mieetcolor {
+  color: var(--mieet-color);
+}
+
+.green-btn {
+  background-color: var(--green-color);
+  color: white;
+  border-radius: 5px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border: none;
+  cursor: pointer;
+}
+.green-btn:hover {
+  background-color: #5DCB8E;
+}
+
+.green-background {
+  background-color: var(--green-background);
+}
+
+.flex-center-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container input::placeholder {
+  color: #ACB6BE;
+}
+#container a {
+  color: #ADADAD;
+}
+
+/*# sourceMappingURL=auth.css.map */

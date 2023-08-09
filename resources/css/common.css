@@ -3,12 +3,10 @@
   --mieet-color: #B5DECC;
   --green-background: #F2FAF6;
   --green-color: #73CF98;
-  --default-font-color: #111928;
 }
 
 * {
   font-family: "Noto Sans JP", sans-serif;
-  color: var(--default-font-color);
 }
 
 .noto-sans {
@@ -23,12 +21,18 @@
   color: var(--mieet-color);
 }
 
-header {
-  height: 60px;
+.green-btn {
+  background-color: var(--green-color);
+  color: white;
+  border-radius: 5px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border: none;
+  cursor: pointer;
 }
 
-body {
-  padding-top: 60px;
+.green-background {
+  background-color: var(--green-background);
 }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=common.css.map */
