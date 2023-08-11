@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
+use App\Models\Student;
+use App\Models\StudentList;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -44,5 +49,32 @@ class MainController extends Controller
     public function companyDetail($id) {
         $data = [];
         return view('recruit.detail', $data);
+    }
+
+    public function dashboard() {
+        switch (Auth::user()->getRoleNames()[0]) {
+            case 'admin':
+                $data = [
+                    'students' => StudentList::orderBy('created_at', 'desc')->take(5)->get(),
+                    'student_count' => Student::count(),
+                    'company_count' => User::role('company')->count(),
+                    'today_followed_count' => Follower::whereDate('created_at', date('Y-m-d'))->count(),
+                ];
+                break;
+            case 'company':
+                $data = [
+                    'user' => Auth::user(),
+                ];
+                break;
+            case 'student':
+                $data = [
+                    'user' => Auth::user(),
+                ];
+                break;
+            default:
+                $data = [];
+                break;
+        }
+        return view('dashboard.dashboard', $data);
     }
 }

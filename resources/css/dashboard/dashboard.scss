@@ -1,0 +1,9 @@
+@import "common";
+
+header {
+    .link {
+        &:hover {
+            background-color: rgba(88, 108, 97, 0.2);
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@import "../common";
+
+:root {
+    --mieet-color: #B5DECC;
+    --green-background: #F2FAF6;
+    --green-color: #73CF98;
+    --default-font-color: #586C61;
+}
+
+* {
+    color: var(--default-font-color);
+}
+
+header {
+    height: 100dvh;
+    width: 250px;
+}
+
+body {
+    padding-top: 0;
+    padding-left: 250px;
+    background-color: var(--green-background);
+}
+
+.green-background {
+    background-color: var(--green-color);
+    color: white;
+}
+
+.badge {
+    font-size: 10px;
+}
+
+.text-grey-900 {
+    color: #111928;
+}
+
+.text-grey-500 {
+    color: #6B7280;
+}
+
+.rounded-badge {
+    background-color: #DEF7EC;
+    color: #03543F;
+}

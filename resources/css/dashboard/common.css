@@ -32,6 +32,9 @@ body {
 }
 
 :root {
+  --mieet-color: #B5DECC;
+  --green-background: #F2FAF6;
+  --green-color: #73CF98;
   --default-font-color: #586C61;
 }
 
@@ -47,6 +50,7 @@ header {
 body {
   padding-top: 0;
   padding-left: 250px;
+  background-color: var(--green-background);
 }
 
 /*# sourceMappingURL=common.css.map */
