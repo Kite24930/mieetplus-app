@@ -17,12 +17,17 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $max = time();
+        $min = strtotime('-1 years');
+        $randTimeStamp = random_int($min, $max);
+        $randomDate = date('Y-m-d H:i:s', $randTimeStamp);
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'email_verified_at' => $randomDate,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'status' => 1,
         ];
     }
 

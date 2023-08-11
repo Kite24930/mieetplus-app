@@ -39,6 +39,21 @@ body {
     color: #6B7280;
 }
 
+.back-grey-50 {
+    background-color: #F9FAFB;
+}
+
+.search-box {
+    border-radius: 8px;
+    background-color: #F9FAFB;
+    border: 1px solid #D1D5DB;
+    input {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
 .rounded-badge {
     background-color: #DEF7EC;
     color: #03543F;

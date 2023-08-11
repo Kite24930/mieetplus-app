@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->text('name');
             $table->text('ruby');
-            $table->integer('category_id')->unsigned();
+            $table->text('category');
             $table->text('url')->nullable()->default(null);
             $table->text('job_description_tellers');
             $table->text('tellers_img_1')->nullable()->default(null);
@@ -53,6 +53,7 @@ return new class extends Migration
             $table->text('movie')->nullable()->default(null);
             $table->char('logo', 3)->nullable()->default(null);
             $table->tinyInteger('mail_permission')->default(0);
+            $table->tinyInteger('status')->default(1);
         });
     }
 

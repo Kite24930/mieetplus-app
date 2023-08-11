@@ -22,6 +22,7 @@ export default defineConfig({
                 recruit: 'resources/js/recruit/recruit.js',
                 companyDetail: 'resources/js/recruit/companyDetail.js',
                 dashboard: 'resources/js/dashboard/dashboard.js',
+                companyList: 'resources/js/dashboard/companyList.js',
             }
         }
     }

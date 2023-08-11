@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Follower;
 use App\Models\Student;
 use App\Models\StudentList;
@@ -64,6 +65,7 @@ class MainController extends Controller
             case 'company':
                 $data = [
                     'user' => Auth::user(),
+                    'company' => Company::where('user_id', Auth::id())->first(),
                 ];
                 break;
             case 'student':
