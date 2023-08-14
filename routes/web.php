@@ -27,7 +27,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/companyList', [AdminController::class, 'companyList'])->name('companyList');
         Route::get('/studentList', [AdminController::class, 'studentList'])->name('studentList');
         Route::get('/company/add', [AdminController::class, 'companyAdd'])->name('companyAdd');
+        Route::post('/company/add', [AdminController::class, 'companyAddPost'])->name('companyAddPost');
         Route::get('/company/edit/{id}', [AdminController::class, 'companyEdit'])->name('companyEdit');
+
     });
     Route::group(['permission:company'], function () {
 

@@ -52,7 +52,6 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'roles' => 'Student',
         ]);
 
         $student = Student::create([
@@ -61,6 +60,8 @@ class RegisteredUserController extends Controller
             'faculty' => $request->faculty,
             'glade' => $request->glade,
         ]);
+
+        $user->assignRole('student');
 
         DB::commit();
 

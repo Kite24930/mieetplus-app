@@ -19,11 +19,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth')->group(function () {
-    Route::group(['permission:admin'], function () {
-        Route::post('/company/register', [ApiController::class, 'companyRegister'])->name('companyRegister');
-    });
-    Route::group(['permission:company'], function () {
-
-    });
-});
