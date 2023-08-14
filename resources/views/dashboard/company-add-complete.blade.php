@@ -9,20 +9,16 @@
                 @if($msg == 'ok')
                     <div class="text-center">企業アカウントの発行が完了しました。</div>
                 </div>
-                <div class="my-8">
-                    <div>
-                        <a href="mailto:{{ $email }}?cc=contact@mie-projectm.com&subject=【Mieet Plus 就活部】企業アカウント発行のお知らせ&body={{ $body }}" class="green-btn">登録完了メールを送る</a>
-                    </div>
+                <div class="my-8 w-full flex-center-box">
+                    <a href="mailto:{{ $email }}?cc=contact@mie-projectm.com&subject=【Mieet Plus 就活部】企業アカウント発行のお知らせ&body={{ $body }}" class="green-btn">登録完了メールを送る</a>
                 @else
                     <div>
                         <p class="text-center">企業アカウントの発行に失敗しました。</p>
                         <p>{{ $err }}</p>
                     </div>
                 </div>
-                <div class="my-8">
-                    <div>
-                        <a href="{{ route('companyAdd') }}" class="green-btn">戻る</a>
-                    </div>
+                <div class="my-8 flex-center-box">
+                    <a href="{{ route('companyAdd') }}" class="green-btn">戻る</a>
                 @endif
             </div>
         </div>
