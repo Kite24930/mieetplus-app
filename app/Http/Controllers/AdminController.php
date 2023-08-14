@@ -19,6 +19,7 @@ class AdminController extends Controller
     public function companyList() {
         $data = [
             'companies' => Company::all(),
+            'count' => Company::count(),
         ];
         return view('dashboard.company-list', $data);
     }

@@ -12,8 +12,11 @@
                     <button id="search" type="button" class="flex-center-box h-full w-8 rounded hover:bg-gray-200">
                         <i class="bi bi-search"></i>
                     </button>
-                    <x-search-box id="searchBox" class="flex-grow h-3.5 bg-transparent border-none text-xs px-1" placeholder="検索" />
+                    <x-search-box id="search-input" class="flex-grow h-3.5 bg-transparent border-none text-xs px-1" placeholder="検索" />
                 </div>
+            </div>
+            <div class="text-right pb-4 pr-4 text-sm text-grey-500">
+                {{ $count }}件中 <span id="applicable" class="text-base">{{ $count }}件</span>表示中
             </div>
             <hr class="w-full">
             <div>

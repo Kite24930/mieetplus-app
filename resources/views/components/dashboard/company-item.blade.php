@@ -1,4 +1,4 @@
-<tr class="border-b">
+<tr data-bs-name="{{ $data->name }}" class="border-b company-item">
     <td class="p-4">{{ $data->id }}</td>
     <td class="p-4">{{ $data->name }}</td>
     <td class="p-4">{{ $data->category }}</td>
