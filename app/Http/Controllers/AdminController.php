@@ -43,6 +43,7 @@ class AdminController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($password),
+                'first_login' => 0,
             ]);
 
             $user->assignRole('company');

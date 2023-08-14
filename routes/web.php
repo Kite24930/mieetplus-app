@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/company/add', [AdminController::class, 'companyAdd'])->name('companyAdd');
         Route::post('/company/add', [AdminController::class, 'companyAddPost'])->name('companyAddPost');
         Route::get('/company/edit/{id}', [AdminController::class, 'companyEdit'])->name('companyEdit');
-
     });
     Route::group(['permission:company'], function () {
-
+        Route::get('/company/firstLogin', [CompanyController::class, 'firstLogin'])->name('companyFirstLogin');
+        Route::post('/company/firstLogin', [CompanyController::class, 'firstLoginPost'])->name('companyFirstLoginPost');
+        Route::get('/company/detail', [CompanyController::class, 'companyDetail'])->name('companyDetail');
+        Route::get('/company/detail/edit', [CompanyController::class, 'companyDetailEdit'])->name('companyDetailEdit');
+        Route::post('/company/detail/edit', [CompanyController::class, 'companyDetailEditPost'])->name('companyDetailEditPost');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

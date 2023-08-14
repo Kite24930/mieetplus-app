@@ -46,6 +46,11 @@
   align-items: center;
 }
 
+.disabled {
+  background-color: lightgrey;
+  color: #6B7280;
+}
+
 #container input::placeholder {
   color: #ACB6BE;
 }

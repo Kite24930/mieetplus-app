@@ -63,6 +63,14 @@ class MainController extends Controller
                 ];
                 break;
             case 'company':
+                $company = Company::where('user_id', Auth::id())->first();
+                $fistLogin = Auth::user()->first_login;
+                if ($company === null) {
+                    if ($fistLogin === 1) {
+                        return redirect()->route('companyDetailEdit');
+                    }
+                    return redirect()->route('companyFirstLogin');
+                }
                 $data = [
                     'user' => Auth::user(),
                     'company' => Company::where('user_id', Auth::id())->first(),
