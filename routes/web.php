@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/company/detail', [CompanyController::class, 'companyDetail'])->name('companyDetail');
         Route::get('/company/detail/edit', [CompanyController::class, 'companyDetailEdit'])->name('companyDetailEdit');
         Route::post('/company/detail/edit', [CompanyController::class, 'companyDetailEditPost'])->name('companyDetailEditPost');
+        Route::get('company/followers', [CompanyController::class, 'followers'])->name('companyFollowers');
+        Route::get('company/setting', [CompanyController::class, 'setting'])->name('companySetting');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

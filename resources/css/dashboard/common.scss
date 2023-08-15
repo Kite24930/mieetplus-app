@@ -1,16 +1,5 @@
 @import "../common";
 
-:root {
-    --mieet-color: #B5DECC;
-    --green-background: #F2FAF6;
-    --green-color: #73CF98;
-    --default-font-color: #586C61;
-}
-
-* {
-    color: var(--default-font-color);
-}
-
 header {
     height: 100dvh;
     width: 250px;
@@ -43,6 +32,10 @@ body {
     background-color: #F9FAFB;
 }
 
+.bg-red {
+    background-color: #FF6C75;
+}
+
 .search-box {
     border-radius: 8px;
     background-color: #F9FAFB;
@@ -57,4 +50,10 @@ body {
 .rounded-badge {
     background-color: #DEF7EC;
     color: #03543F;
+}
+
+input {
+    &::placeholder {
+        color: #ACB6BE;
+    }
 }

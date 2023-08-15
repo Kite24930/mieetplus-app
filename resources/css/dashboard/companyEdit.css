@@ -109,13 +109,44 @@ header .link:hover {
   background-color: rgba(88, 108, 97, 0.2);
 }
 
-.green-btn {
-  padding-top: 8px;
-  padding-bottom: 8px;
+.text-2xs {
+  font-size: 0.53rem;
+  line-height: 0.75rem;
 }
 
-.detail {
-  color: var(--green-color);
+main table tr {
+  border-bottom: #6B7280 solid 1px;
+}
+main table td:first-child {
+  width: 0;
+  white-space: nowrap;
+}
+main table .no-spin::-webkit-inner-spin-button,
+main table .no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin-right: 0;
+  -moz-appearance: textfield;
+}
+main .omission {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+main .toastui-editor-tooltip .text {
+  color: white;
+}
+main .tellers .preview {
+  background-size: cover;
+  background-position: center;
+}
+main .tellers .container * {
+  color: white;
 }
 
-/*# sourceMappingURL=companyList.css.map */
+footer {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+/*# sourceMappingURL=companyEdit.css.map */
