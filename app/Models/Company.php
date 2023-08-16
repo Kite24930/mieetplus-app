@@ -10,9 +10,10 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'ruby',
-        'category_id',
+        'category',
         'url',
         'job_description_tellers',
         'tellers_img_1',

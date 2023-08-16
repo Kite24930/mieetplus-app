@@ -3,6 +3,20 @@
 
     </x-dashboard.company-header>
     <main class="w-full flex flex-col py-6 px-4 mb-10">
+        @if(isset($msg))
+            <div>
+                <h1 class="text-3xl bg-yellow-500 underline p-3 inline-block rounded">{{ $msg }}</h1>
+            </div>
+        @endif
+        @if($errors->count() > 0)
+            <div>
+                <ul class="text-xl bg-yellow-500 text-red-500 underline p-3 inline-block rounded">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form id="form" action="{{ route('companyDetailEditPost') }}" method="POST" class="w-full" enctype="multipart/form-data">
             @csrf
             <h2 class="text-2xl m-3">企業情報</h2>
@@ -16,7 +30,7 @@
                             </div>
                         </td>
                         <td class="p-4">
-                            <x-text-input id="name" class="w-full" placeholder="企業名" type="text" name="name" :value="isset($company) ? $company->name : old('name')" required autocomplete="username" />
+                            <x-text-input id="name" class="w-full" placeholder="企業名" type="text" name="name" :value="isset($company) ? $company->name : old('name')" required />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </td>
                     </tr>
@@ -41,9 +55,9 @@
                         </td>
                         <td class="p-4">
                             <x-input-select id="category" class="w-full" name="category" required style="color: #ACB6BE">
-                                <option value="placeholder" disabled selected class="hidden">業種</option>
+                                <option value="placeholder" disabled @if(!isset($company)) selected @endif class="hidden">業種</option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" @if(isset($company)) @if($company->category == $category->name) selected @endif @endif>{{ $category->name }}</option>
+                                    <option value="{{ $category->name }}" @if(isset($company)) @if($company->category == $category->name) selected @endif @else @if(old('category') == $category->name) selected @endif @endif>{{ $category->name }}</option>
                                 @endforeach
                             </x-input-select>
                             <x-input-error :messages="$errors->get('category')" class="mt-2" />
@@ -112,7 +126,7 @@
                             </div>
                         </td>
                         <td class="p-4">
-                            <x-text-input id="establishment_date" class="w-full" placeholder="設立年月" type="month" name="establishment_date" :value="isset($company) ? $company->establishment_date : old('establishment_date')" required />
+                            <x-text-input id="establishment_date" class="w-40" placeholder="設立年月" type="month" name="establishment_date" :value="isset($company) ? date('Y-m', strtotime($company->establishment_date)) : old('establishment_date')" required />
                             <x-input-error :messages="$errors->get('establishment_date')" class="mt-2" />
                         </td>
                     </tr>
@@ -198,16 +212,16 @@
                             </div>
                         </td>
                         <td class="p-4">
-                            <div data-target="content" class="editor relative z-10 w-full">
+                            <div data-target="contents" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="content" id="content" class="hidden" required>@if(isset($company)) $company->content @endif</textarea>
-                            <label for="content" class="text-sm">
+                            <textarea name="contents" id="contents" class="hidden" required>@if(isset($company)) {{ $company->content }} @else {{ old('contents') }} @endif</textarea>
+                            <label for="contents" class="text-sm">
                                 企業の事業内容を入力してください。
                                 <br>
                                 ※表や画像はPCでは画面幅の50%程度、スマートフォンでは表示領域の100%のサイズで表示されます
                             </label>
-                            <x-input-error :messages="$errors->get('content')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('contents')" class="mt-2" />
                         </td>
                     </tr>
                     <tr>
@@ -221,7 +235,7 @@
                             <div data-target="pr" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="pr" id="pr" class="hidden">@if(isset($company)) $company->pr @endif</textarea>
+                            <textarea name="pr" id="pr" class="hidden">@if(isset($company)) {{ $company->pr }} @else {{ old('pr') }} @endif</textarea>
                             <label for="pr" class="text-sm">
                                 企業のPRを入力してください。
                                 <br>
@@ -241,13 +255,13 @@
                             <div data-target="job_description" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="job_description" id="job_description" class="hidden">@if(isset($company)) $company->job_description @endif</textarea>
+                            <textarea name="job_description" id="job_description" class="hidden">@if(isset($company)) {{ $company->job_description }} @else {{ old('job_description') }} @endif</textarea>
                             <label for="job_description" class="text-sm">
                                 採用後に実際に行う業務の内容を具体的に入力してください。
                                 <br>
                                 ※表や画像はPCでは画面幅の50%程度、スマートフォンでは表示領域の100%のサイズで表示されます
                                 <br>
-                                <span class="text-red-500">※登録しない場合はTellersと同様の内容が表示されます。</span>
+                                <span class="text-green-500">※登録しない場合はTellersと同様の内容が表示されます。</span>
                             </label>
                             <x-input-error :messages="$errors->get('job_description')" class="mt-2" />
                         </td>
@@ -263,13 +277,13 @@
                             <div data-target="culture" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="culture" id="culture" class="hidden">@if(isset($company)) $company->culture @endif</textarea>
+                            <textarea name="culture" id="culture" class="hidden">@if(isset($company)) {{ $company->culture }} @else {{ old('culture') }} @endif</textarea>
                             <label for="culture" class="text-sm">
                                 どんな雰囲気で仕事をしているのか、職場がどんな空気感で仕事をしているのか、社員同士の関係性などを入力してください。
                                 <br>
                                 ※表や画像はPCでは画面幅の50%程度、スマートフォンでは表示領域の100%のサイズで表示されます
                                 <br>
-                                <span class="text-red-500">※登録しない場合はTellersと同様の内容が表示されます。</span>
+                                <span class="text-green-500">※登録しない場合はTellersと同様の内容が表示されます。</span>
                             </label>
                             <x-input-error :messages="$errors->get('culture')" class="mt-2" />
                         </td>
@@ -285,7 +299,7 @@
                             <div data-target="environment" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="environment" id="environment" class="hidden">@if(isset($company)) $company->environment @endif</textarea>
+                            <textarea name="environment" id="environment" class="hidden">@if(isset($company)) {{ $company->environment }} @else {{ old('environment') }} @endif</textarea>
                             <label for="environment" class="text-sm">
                                 現代の就活生はワークライフバランスを重視しています。
                                 <br>
@@ -293,7 +307,7 @@
                                 <br>
                                 ※表や画像はPCでは画面幅の50%程度、スマートフォンでは表示領域の100%のサイズで表示されます
                                 <br>
-                                <span class="text-red-500">※登録しない場合はTellersと同様の内容が表示されます。</span>
+                                <span class="text-green-500">※登録しない場合はTellersと同様の内容が表示されます。</span>
                             </label>
                             <x-input-error :messages="$errors->get('environment')" class="mt-2" />
                         </td>
@@ -309,7 +323,7 @@
                             <div data-target="feature" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="feature" id="feature" class="hidden" required>@if(isset($company)) $company->feature @endif</textarea>
+                            <textarea name="feature" id="feature" class="hidden" required>@if(isset($company)) {{ $company->feature }} @else {{ old('feature') }} @endif</textarea>
                             <label for="feature" class="text-sm">
                                 貴社の強みと弱みを入力してください。
                                 <br>
@@ -329,7 +343,7 @@
                             <div data-target="career_path" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="career_path" id="career_path" class="hidden" required>@if(isset($company)) $company->career_path @endif</textarea>
+                            <textarea name="career_path" id="career_path" class="hidden" required>@if(isset($company)) {{ $company->career_path }} @else {{ old('career_path') }} @endif</textarea>
                             <label for="career_path" class="text-sm">
                                 キャリアパスを入力してください。
                                 <br>
@@ -349,7 +363,7 @@
                             <div data-target="desired_person" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="desired_person" id="desired_person" class="hidden" required>@if(isset($company)) $company->desired_person @endif</textarea>
+                            <textarea name="desired_person" id="desired_person" class="hidden" required>@if(isset($company)) {{ $company->desired_person }} @else {{ old('desired_person') }} @endif</textarea>
                             <label for="desired_person" class="text-sm">
                                 求める能力・人物像を入力してください。
                                 <br>
@@ -369,7 +383,7 @@
                             <div data-target="transfer" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="transfer" id="transfer" class="hidden" required>@if(isset($company)) $company->transfer @endif</textarea>
+                            <textarea name="transfer" id="transfer" class="hidden" required>@if(isset($company)) {{ $company->transfer }} @else {{ old('transfer') }} @endif</textarea>
                             <label for="transfer" class="text-sm">
                                 転勤の有無や頻度、異動の有無や頻度、制度などを入力してください。
                                 <br>
@@ -389,7 +403,7 @@
                             <div data-target="notice" class="editor relative z-10 w-full">
 
                             </div>
-                            <textarea name="notice" id="notice" class="hidden">@if(isset($company)) $company->notice @endif</textarea>
+                            <textarea name="notice" id="notice" class="hidden">@if(isset($company)) {{ $company->notice }} @else {{ old('notice') }} @endif</textarea>
                             <label for="notice" class="text-sm">
                                 企業詳細ページにお知らせなどを表示できます。
                                 <br>
@@ -521,7 +535,7 @@
                         </td>
                         <td class="p-4 flex justify-between">
                             <div>
-                                <input id="top_img" type="file" accept="image/jpeg,image/png" class="hidden">
+                                <input id="top_img" name="top_img" type="file" accept="image/jpeg,image/png" class="hidden">
                                 <div>
                                     <label for="top_img" class="green-btn px-3">ファイルを選択</label>
                                     <br>
@@ -529,7 +543,7 @@
                                 </div>
                                 <br>
                                 <div class="text-sm">
-                                    <span class="text-base text-red-500">※JPEG, PNGのみ</span>
+                                    <span class="text-base text-green-500">※JPEG, PNGのみ</span>
                                     <br>
                                     投稿画像としての使用及び企業情報詳細画面の最上部に表示されます。
                                     <br>
@@ -539,13 +553,13 @@
                                 <div class="flex flex-col items-end mt-5">
                                     詳細画面TOP画像
                             @if(isset($company))
-                                    <img src="{{ asset($company->top_img) }}" alt="{{ $company->name }}" class="w-60 h-32 top_img object-cover border border-green-600">
+                                    <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="w-60 h-32 top_img object-cover border border-green-600">
                                 </div>
                             </div>
                             <div class="text-right ms-5 w-60">
                                 投稿用表示
                                 <div id="top_img_check">
-                                    <img src="{{ asset($company->top_img) }}" alt="{{ $company->name }}" class="border border-green-600">
+                                    <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="border border-green-600 top_img">
                                 </div>
                             @else
                                     <img src="http://via.placeholder.com/240x240" alt="placeholder" class="w-60 h-32 top_img object-cover border border-green-600">
@@ -554,7 +568,7 @@
                             <div class="text-right ms-5 w-60">
                                 投稿用表示
                                 <div id="top_img_check">
-                                    <img src="http://via.placeholder.com/240x240" alt="placeholder" class="border border-green-600">
+                                    <img src="http://via.placeholder.com/240x240" alt="placeholder" class="border border-green-600 top_img">
                                 </div>
                             @endif
                             </div>
@@ -569,7 +583,7 @@
                         </td>
                         <td class="p-4 flex justify-between">
                             <div>
-                                <input id="logo" type="file" accept="image/jpeg,image/png" class="hidden">
+                                <input id="logo" name="logo" type="file" accept="image/jpeg,image/png" class="hidden">
                                 <div>
                                     <label for="logo" class="green-btn px-3">ファイルを選択</label>
                                     <br>
@@ -577,7 +591,7 @@
                                 </div>
                                 <br>
                                 <div class="text-sm">
-                                    <span class="text-base text-red-500">※JPEG, PNGのみ</span>
+                                    <span class="text-base text-green-500">※JPEG, PNGのみ</span>
                                     <br>
                                     アイコン画像として使用します。
                                     <br>
@@ -590,7 +604,7 @@
                             @if(isset($company))
                             <div class="text-right">
                                 アイコン表示
-                                <img src="{{ asset('storage/company/'.$company->id.'/top_img.jpg') }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full">
+                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full">
                             </div>
                             @else
                             <div class="text-right">
@@ -639,10 +653,10 @@
                 </tr>
                 <tr>
                     <td class="p-4">
-                        <div data-target="job_description_tellers" class="tellers-editor relative z-10 w-full" data-bs-target="job_description_preview_container" data-bs-button="job_description_preview_btn">
+                        <div data-target="job_description_tellers" class="tellers-editor relative z-10 w-full" data-bs-target="job_description_preview_container" data-bs-button="job_description_preview_btn" data-bs-background="tellers_img_1_url" data-bs-preview="job_description_preview">
 
                         </div>
-                        <textarea name="job_description_tellers" id="job_description_tellers" class="hidden">@if(isset($company)) $company->job_description_tellers @endif</textarea>
+                        <textarea name="job_description_tellers" id="job_description_tellers" class="hidden">@if(isset($company)) {{ $company->job_description_tellers }} @else {{ old('job_description_tellers') }} @endif</textarea>
                         <label for="job_description_tellers" class="text-sm">
                             採用後に実際に行う業務の内容を具体的に入力してください。
                             <br>
@@ -654,14 +668,15 @@
                             <h2>背景画像</h2>
                             <div class="badge bg-gray-400 text-white p-1 rounded">任意</div>
                         </div>
-                        <input id="tellers_img_1" type="file" accept="image/jpeg,image/png" class="hidden">
+                        <input id="tellers_img_1" name="tellers_img_1" type="file" accept="image/jpeg,image/png" class="hidden tellers-img" data-bs-target="job_description_preview" data-bs-label="tellers_img_1_file">
                         <div class="mt-5">
                             <label for="tellers_img_1" class="green-btn px-5">ファイルを選択</label>
-                            <span id="tellers_img_1_file" class="ml-3">ファイルが選択されていません</span>
+                            <br>
+                            <div id="tellers_img_1_file" class="ml-3 mt-4 omission">ファイルが選択されていません</div>
                         </div>
                         <br>
                         <div class="text-sm">
-                            <span class="text-base text-red-500">※JPEG, PNGのみ</span>
+                            <span class="text-base text-green-500">※JPEG, PNGのみ</span>
                             <br>
                             Tellers[実際の仕事内容]の背景として使用します。
                             <br>
@@ -669,11 +684,12 @@
                             <br>
                             ※2MB以上のファイルを選択するとアップロードできない場合があります。
                         </div>
+                        <input type="hidden" id="tellers_img_1_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
                         <x-input-error :messages="$errors->get('tellers_img_1')" class="mt-2" />
                     </td>
                     <td class="flex-center-box flex-col p-4">
                         <button id="job_description_preview_btn" type="button" class="green-btn px-3 mb-3" data-target="job_description_preview_container" data-bs-text="job_description_tellers">プレビュー更新</button>
-                        <div id="job_description_preview" style="background-image: url('https://via.placeholder.com/480x640.png/007799?text=cats+perferendis')" class="w-[207px] h-[460px] preview relative flex-center-box">
+                        <div id="job_description_preview" class="w-[207px] h-[460px] preview relative flex-center-box">
                             <div class="absolute top-0 left-0 w-full flex flex-col mt-3 text-2xs">
                                 <div class="progress-wrapper w-full flex justify-evenly">
                                     <div class="progress-bar mx-1"></div>
@@ -713,12 +729,12 @@
                             <div class="absolute bottom-0 right-0 w-full">
                                 <div class="w-full flex justify-between items-end text-2xl p-4">
                                     <div><i class="bi bi-arrow-left-circle-fill text-white"></i></div>
-                                    <div class="text-base text-white">2/3</div>
+                                    <div class="text-base text-white">1/3</div>
                                     <div><i class="bi bi-arrow-right-circle-fill text-white"></i></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-sm text-red-500">
+                        <div class="text-sm text-green-500">
                             ※あくまでもプレビューですので、実際の表示とは異なる場合があります。
                         </div>
                     </td>
@@ -737,10 +753,10 @@
                 </tr>
                 <tr>
                     <td class="p-4">
-                        <div data-target="culture_tellers" class="tellers-editor relative z-10 w-full" data-bs-target="culture_preview_container" data-bs-button="culture_preview_btn">
+                        <div data-target="culture_tellers" class="tellers-editor relative z-10 w-full" data-bs-target="culture_preview_container" data-bs-button="culture_preview_btn" data-bs-background="tellers_img_2_url" data-bs-preview="culture_preview">
 
                         </div>
-                        <textarea name="culture_tellers" id="culture_tellers" class="hidden">@if(isset($company)) $company->culture_tellers @endif</textarea>
+                        <textarea name="culture_tellers" id="culture_tellers" class="hidden">@if(isset($company)) {{ $company->culture_tellers }} @else {{ old('culture_tellers') }} @endif</textarea>
                         <label for="culture_tellers" class="text-sm">
                             社内の雰囲気や社風など、普段の業務を行う時の空気感が伝わる内容を入力してください。
                             <br>
@@ -752,14 +768,15 @@
                             <h2>背景画像</h2>
                             <div class="badge bg-gray-400 text-white p-1 rounded">任意</div>
                         </div>
-                        <input id="tellers_img_2" type="file" accept="image/jpeg,image/png" class="hidden">
+                        <input id="tellers_img_2" name="tellers_img_2" type="file" accept="image/jpeg,image/png" class="hidden tellers-img" data-bs-target="culture_preview" data-bs-label="tellers_img_2_file">
                         <div class="mt-5">
                             <label for="tellers_img_2" class="green-btn px-5">ファイルを選択</label>
-                            <span id="tellers_img_2_file" class="ml-3">ファイルが選択されていません</span>
+                            <br>
+                            <div id="tellers_img_2_file" class="ml-3 mt-4 omission">ファイルが選択されていません</div>
                         </div>
                         <br>
                         <div class="text-sm">
-                            <span class="text-base text-red-500">※JPEG, PNGのみ</span>
+                            <span class="text-base text-green-500">※JPEG, PNGのみ</span>
                             <br>
                             Tellers[社内の雰囲気・社風]の背景として使用します。
                             <br>
@@ -767,11 +784,12 @@
                             <br>
                             ※2MB以上のファイルを選択するとアップロードできない場合があります。
                         </div>
+                        <input type="hidden" id="tellers_img_2_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
                         <x-input-error :messages="$errors->get('tellers_img_1')" class="mt-2" />
                     </td>
                     <td class="flex-center-box flex-col p-4">
                         <button id="culture_preview_btn" type="button" class="green-btn px-3 mb-3" data-target="culture_preview_container" data-bs-text="culture_tellers">プレビュー更新</button>
-                        <div id="culture_preview" style="background-image: url('https://via.placeholder.com/480x640.png/007799?text=cats+perferendis')" class="w-[207px] h-[460px] preview relative flex-center-box">
+                        <div id="culture_preview" class="w-[207px] h-[460px] preview relative flex-center-box">
                             <div class="absolute top-0 left-0 w-full flex flex-col mt-3 text-2xs">
                                 <div class="progress-wrapper w-full flex justify-evenly">
                                     <div class="progress-bar mx-1"></div>
@@ -811,12 +829,12 @@
                             <div class="absolute bottom-0 right-0 w-full">
                                 <div class="w-full flex justify-between items-end text-2xl p-4">
                                     <div><i class="bi bi-arrow-left-circle-fill text-white"></i></div>
-                                    <div class="text-base text-white">1/3</div>
+                                    <div class="text-base text-white">2/3</div>
                                     <div><i class="bi bi-arrow-right-circle-fill text-white"></i></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-sm text-red-500">
+                        <div class="text-sm text-green-500">
                             ※あくまでもプレビューですので、実際の表示とは異なる場合があります。
                         </div>
                     </td>
@@ -835,10 +853,10 @@
                 </tr>
                 <tr>
                     <td class="p-4">
-                        <div data-target="environment_tellers" class="tellers-editor relative z-10 w-full" data-bs-target="environment_preview_container" data-bs-button="environment_preview_btn">
+                        <div data-target="environment_tellers" class="tellers-editor relative z-10 w-full" data-bs-target="environment_preview_container" data-bs-button="environment_preview_btn" data-bs-background="tellers_img_3_url" data-bs-preview="environment_preview">
 
                         </div>
-                        <textarea name="environment_tellers" id="environment_tellers" class="hidden">@if(isset($company)) $company->environment_tellers @endif</textarea>
+                        <textarea name="environment_tellers" id="environment_tellers" class="hidden">@if(isset($company)) {{ $company->environment_tellers }} @else {{ old('environment_tellers') }} @endif</textarea>
                         <label for="environment_tellers" class="text-sm">
                             普段の残業の頻度や時間、休日出勤の頻度や休日のパターンなど、
                             <br>
@@ -852,14 +870,15 @@
                             <h2>背景画像</h2>
                             <div class="badge bg-gray-400 text-white p-1 rounded">任意</div>
                         </div>
-                        <input id="tellers_img_3" type="file" accept="image/jpeg,image/png" class="hidden">
+                        <input id="tellers_img_3" name="tellers_img_3" type="file" accept="image/jpeg,image/png" class="hidden tellers-img" data-bs-target="environment_preview" data-bs-label="tellers_img_3_file">
                         <div class="mt-5">
                             <label for="tellers_img_3" class="green-btn px-5">ファイルを選択</label>
-                            <span id="tellers_img_3_file" class="ml-3">ファイルが選択されていません</span>
+                            <br>
+                            <div id="tellers_img_3_file" class="ml-3 mt-4 omission">ファイルが選択されていません</div>
                         </div>
                         <br>
                         <div class="text-sm">
-                            <span class="text-base text-red-500">※JPEG, PNGのみ</span>
+                            <span class="text-base text-green-500">※JPEG, PNGのみ</span>
                             <br>
                             Tellers[労働環境]の背景として使用します。
                             <br>
@@ -867,11 +886,12 @@
                             <br>
                             ※2MB以上のファイルを選択するとアップロードできない場合があります。
                         </div>
+                        <input type="hidden" id="tellers_img_3_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
                         <x-input-error :messages="$errors->get('tellers_img_1')" class="mt-2" />
                     </td>
                     <td class="flex-center-box flex-col p-4">
                         <button id="environment_preview_btn" type="button" class="green-btn px-3 mb-3" data-target="environment_preview_container" data-bs-text="environment_tellers">プレビュー更新</button>
-                        <div id="environment_preview" style="background-image: url('https://via.placeholder.com/480x640.png/007799?text=cats+perferendis')" class="w-[207px] h-[460px] preview relative flex-center-box">
+                        <div id="environment_preview" class="w-[207px] h-[460px] preview relative flex-center-box">
                             <div class="absolute top-0 left-0 w-full flex flex-col mt-3 text-2xs">
                                 <div class="progress-wrapper w-full flex justify-evenly">
                                     <div class="progress-bar mx-1"></div>
@@ -916,7 +936,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-sm text-red-500">
+                        <div class="text-sm text-green-500">
                             ※あくまでもプレビューですので、実際の表示とは異なる場合があります。
                         </div>
                     </td>
@@ -927,6 +947,9 @@
     </main>
     <footer class="flex flex-col justify-start items-center z-50">
         <div class="flex-center-box p-3 w-80 gap-3">
+            <button type="button" id="dropdown" class="text-3xl hidden">
+                <i class="bi bi-list"></i>
+            </button>
             <button type="button" id="preview" class="green-btn w-full hidden">
                 プレビュー
             </button>

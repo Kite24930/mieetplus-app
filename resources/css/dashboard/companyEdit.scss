@@ -63,11 +63,16 @@ main {
         .preview {
             background-size: cover;
             background-position: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            background-blend-mode: darken;
         }
         .container {
             * {
                 color: white;
             }
+        }
+        .omission {
+            width: calc(100dvw - 560px);
         }
     }
 }

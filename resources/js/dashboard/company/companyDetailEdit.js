@@ -106,6 +106,8 @@ window.addEventListener('load', (e) => {
             editor: editor,
             container: editor.getAttribute('data-bs-target'),
             btn: editor.getAttribute('data-bs-button'),
+            imgUrl: editor.getAttribute('data-bs-background'),
+            preview: editor.getAttribute('data-bs-preview'),
         }
         tellersEditor.push(obj);
     });
@@ -113,11 +115,36 @@ window.addEventListener('load', (e) => {
     tellersEditor.forEach((editor) => {
         const previewBtn = document.getElementById(editor.btn);
         const previewContainer = document.getElementById(editor.container);
+        const backImgUrl = document.getElementById(editor.imgUrl);
+        const preview = document.getElementById(editor.preview);
+        preview.style.backgroundImage = 'url(' + backImgUrl.value + ')';
         previewBtn.addEventListener('click', (e) => {
             previewContainer.innerHTML = editor.editorInstance.getHTML();
         });
         const target = editor.editor.getAttribute('data-target');
         editor.editorInstance.setMarkdown(document.getElementById(target).value);
+        previewContainer.innerHTML = editor.editorInstance.getHTML();
+    });
+
+    document.querySelectorAll('.tellers-img').forEach((img) => {
+        const target = img.getAttribute('data-bs-target');
+        const preview = document.getElementById(target);
+        const label = document.getElementById(img.getAttribute('data-bs-label'));
+        img.addEventListener('change', (e) => {
+            const reader = new FileReader();
+            const file = e.target.files[0];
+            reader.addEventListener('load', (e) => {
+                preview.style.backgroundImage = 'url(' + e.target.result + ')';
+            });
+            reader.readAsDataURL(file);
+            label.innerHTML = file.name;
+        });
+    });
+    const faculties = document.getElementById('faculties').value.split(',');
+    document.querySelectorAll('.faculties').forEach((faculty) => {
+        if (faculties.includes(faculty.value)) {
+            faculty.checked = true;
+        }
     });
 });
 
@@ -241,7 +268,7 @@ document.getElementById('submit').addEventListener('click', (e) => {
         msg += "従業員数を入力してください。\n";
         check = false;
     }
-    if (document.getElementById('content').value === '') {
+    if (document.getElementById('contents').value === '') {
         msg += "事業内容を入力してください。\n";
         check = false;
     }

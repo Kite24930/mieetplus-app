@@ -51,7 +51,7 @@ return new class extends Migration
             $table->text('recruit_email')->nullable()->default(null);
             $table->text('top_img');
             $table->text('movie')->nullable()->default(null);
-            $table->char('logo', 3)->nullable()->default(null);
+            $table->text('logo')->nullable()->default(null);
             $table->tinyInteger('mail_permission')->default(0);
             $table->tinyInteger('status')->default(1);
         });
