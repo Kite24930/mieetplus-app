@@ -381,6 +381,30 @@
                     <tr>
                         <td class="align-middle back-grey-50 p-4">
                             <div class="w-full flex justify-start items-center gap-2">
+                                <div>お知らせ</div>
+                                <div class="badge bg-gray-400 text-white p-1 rounded">任意</div>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <div data-target="notice" class="editor relative z-10 w-full">
+
+                            </div>
+                            <textarea name="notice" id="notice" class="hidden">@if(isset($company)) $company->notice @endif</textarea>
+                            <label for="notice" class="text-sm">
+                                企業詳細ページにお知らせなどを表示できます。
+                                <br>
+                                例）採用情報の更新、イベントの開催など
+                                <br>
+                                自由に入力していただけます。
+                                <br>
+                                ※表や画像はPCでは画面幅の50%程度、スマートフォンでは表示領域の100%のサイズで表示されます
+                            </label>
+                            <x-input-error :messages="$errors->get('notice')" class="mt-2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle back-grey-50 p-4">
+                            <div class="w-full flex justify-start items-center gap-2">
                                 <div>対象学部</div>
                                 <div class="badge bg-gray-400 text-white p-1 rounded">任意</div>
                             </div>
@@ -499,8 +523,9 @@
                             <div>
                                 <input id="top_img" type="file" accept="image/jpeg,image/png" class="hidden">
                                 <div>
-                                    <label for="top_img" class="green-btn px-5">ファイルを選択</label>
-                                    <div id="top_img_file" class="ml-3 omission w-80 inline-block">ファイルが選択されていません</div>
+                                    <label for="top_img" class="green-btn px-3">ファイルを選択</label>
+                                    <br>
+                                    <div id="top_img_file" class="ml-3 omission w-80 inline-block mt-4">ファイルが選択されていません</div>
                                 </div>
                                 <br>
                                 <div class="text-sm">
@@ -519,14 +544,18 @@
                             </div>
                             <div class="text-right ms-5 w-60">
                                 投稿用表示
-                                <img id="top_img_check" src="{{ asset($company->top_img) }}" alt="{{ $company->name }}" class="w-60 h-60 top_img object-cover border border-green-600">
+                                <div id="top_img_check">
+                                    <img src="{{ asset($company->top_img) }}" alt="{{ $company->name }}" class="border border-green-600">
+                                </div>
                             @else
                                     <img src="http://via.placeholder.com/240x240" alt="placeholder" class="w-60 h-32 top_img object-cover border border-green-600">
                                 </div>
                             </div>
                             <div class="text-right ms-5 w-60">
                                 投稿用表示
-                                <img id="top_img_check" src="http://via.placeholder.com/240x240" alt="placeholder" class="w-60 h-60 top_img object-cover border border-green-600">
+                                <div id="top_img_check">
+                                    <img src="http://via.placeholder.com/240x240" alt="placeholder" class="border border-green-600">
+                                </div>
                             @endif
                             </div>
                         </td>
@@ -542,8 +571,9 @@
                             <div>
                                 <input id="logo" type="file" accept="image/jpeg,image/png" class="hidden">
                                 <div>
-                                    <label for="logo" class="green-btn px-5">ファイルを選択</label>
-                                    <span id="logo_file" class="ml-3 omission w-80 inline-block">ファイルが選択されていません</span>
+                                    <label for="logo" class="green-btn px-3">ファイルを選択</label>
+                                    <br>
+                                    <span id="logo_file" class="ml-3 omission w-80 inline-block mt-4">ファイルが選択されていません</span>
                                 </div>
                                 <br>
                                 <div class="text-sm">
@@ -810,7 +840,9 @@
                         </div>
                         <textarea name="environment_tellers" id="environment_tellers" class="hidden">@if(isset($company)) $company->environment_tellers @endif</textarea>
                         <label for="environment_tellers" class="text-sm">
-                            普段の残業の頻度や時間、休日出勤の頻度や休日のパターンなど、ワークライフバランスに関わる内容を入力してください。
+                            普段の残業の頻度や時間、休日出勤の頻度や休日のパターンなど、
+                            <br>
+                            ワークライフバランスに関わる内容を入力してください。
                             <br>
                             ※表や画像は表示領域の100%のサイズで表示されます
                         </label>
