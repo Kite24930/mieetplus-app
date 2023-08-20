@@ -57,7 +57,7 @@
         <main class="w-full flex py-9 px-12 gap-9">
             <div class="bg-white w-80 rounded-lg text-sm">
                 <div class="p-4">
-                    最近登録した学生ユーザー
+                    最近フォローされた学生ユーザー
                 </div>
                 <hr class="w-full">
                 <ul class="mx-4">
@@ -76,26 +76,26 @@
                 <div class="flex justify-evenly items-center w-full p-16">
                     <div class="flex-center-box flex-col flex-1 flex-grow">
                         <div class="text-3xl font-bold">
-                            {{ $student_count }}人
+                            {{ $all_followers }}人
                         </div>
                         <div class="text-sm">
-                            学生ユーザー総数
+                            フォロワー総数
                         </div>
                     </div>
                     <div class="flex-center-box flex-col flex-1 flex-grow">
                         <div class="text-3xl font-bold">
-                            {{ $company_count }}社
+                            {{ $monthly_followers }}人
                         </div>
                         <div class="text-sm">
-                            企業アカウント総数
+                            最近1ヶ月でフォローされた数
                         </div>
                     </div>
                     <div class="flex-center-box flex-col flex-1 flex-grow">
                         <div class="text-3xl font-bold">
-                            {{ $today_followed_count }}回
+                            {{ $weekly_followers }}人
                         </div>
                         <div class="text-sm">
-                            今日学生がフォローした総数
+                            最近1週間でフォローされた数
                         </div>
                     </div>
                 </div>

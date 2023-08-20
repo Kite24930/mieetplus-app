@@ -11,6 +11,8 @@ class Follower extends Model
 
     protected $fillable = [
         'student_id',
-        'company_id'
+        'company_id',
+        'created_at',
+        'updated_at',
     ];
 }

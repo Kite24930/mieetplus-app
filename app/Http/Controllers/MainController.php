@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Follower;
+use App\Models\FollowerList;
 use App\Models\Student;
 use App\Models\StudentList;
 use App\Models\User;
@@ -74,6 +75,10 @@ class MainController extends Controller
                 $data = [
                     'user' => Auth::user(),
                     'company' => Company::where('user_id', Auth::id())->first(),
+                    'students' => FollowerList::where('company_id', Auth::id())->orderBy('created_at', 'desc')->take(5)->get(),
+                    'all_followers' => FollowerList::where('company_id', Auth::id())->count(),
+                    'monthly_followers' => FollowerList::where('company_id', Auth::id())->whereBetween('created_at', [date('Y-m-d', strtotime('-1 month')), date('Y-m-d')])->count(),
+                    'weekly_followers' => FollowerList::where('company_id', Auth::id())->whereBetween('created_at', [date('Y-m-d', strtotime('-1 week')), date('Y-m-d')])->count(),
                 ];
                 break;
             case 'student':
