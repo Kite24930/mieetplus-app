@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap");
+:root {
+  --mieet-color: #B5DECC;
+  --green-background: #F2FAF6;
+  --green-color: #73CF98;
+  --default-font-color: #586C61;
+}
+
+* {
+  font-family: "Noto Sans JP", sans-serif;
+  color: var(--default-font-color);
+}
+
+.noto-sans {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.text-mieetcolor {
+  color: var(--mieet-color);
+}
+
+.green-btn {
+  background-color: var(--green-color);
+  color: white;
+  border-radius: 5px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border: none;
+  cursor: pointer;
+}
+.green-btn:hover {
+  background-color: #5DCB8E;
+}
+
+.green-background {
+  background-color: var(--green-background);
+}
+
+.flex-center-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disabled {
+  background-color: lightgrey;
+  color: #6B7280;
+}
+
+header {
+  height: 100dvh;
+  width: 250px;
+}
+
+body {
+  padding-top: 0;
+  padding-left: 250px;
+  background-color: var(--green-background);
+}
+
+.green-background {
+  background-color: var(--green-color);
+  color: white;
+}
+
+.badge {
+  font-size: 10px;
+}
+
+.text-grey-900 {
+  color: #111928;
+}
+
+.text-grey-500 {
+  color: #6B7280;
+}
+
+.back-grey-50 {
+  background-color: #F9FAFB;
+}
+
+.bg-red {
+  background-color: #FF6C75;
+}
+
+.search-box {
+  border-radius: 8px;
+  background-color: #F9FAFB;
+  border: 1px solid #D1D5DB;
+}
+.search-box input:focus {
+  box-shadow: none;
+}
+
+.rounded-badge {
+  background-color: #DEF7EC;
+  color: #03543F;
+}
+
+input::placeholder {
+  color: #ACB6BE;
+}
+
+header .link:hover {
+  background-color: rgba(88, 108, 97, 0.2);
+}
+
+/*# sourceMappingURL=companySetting.css.map */

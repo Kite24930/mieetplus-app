@@ -319,4 +319,11 @@ class CompanyController extends Controller
         ];
         return view('dashboard.followers-list', $data);
     }
+
+    public function setting() {
+        $data = [
+            'company' => Company::where('user_id', Auth::id())->first()
+        ];
+        return view('dashboard.company-setting', $data);
+    }
 }

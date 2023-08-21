@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,21 @@ class ApiController extends Controller
             ];
             return response()->json($data, 500);
         }
+    }
 
+    public function companyMailPermissionChange(Request $request) {
+        try {
+            $target = Company::where('user_id', $request->id)->first();
+            $target->update([
+                'mail_permission' => $request->permission,
+            ]);
+        } catch (\Exception $e) {
+            $data = [
+                'msg' => 'error',
+                'err' => $e->getMessage(),
+            ];
+            return response()->json($data, 500);
+        }
+        return response()->json(['msg' => 'ok'], 200);
     }
 }

@@ -26,6 +26,7 @@ export default defineConfig({
                 companyAdd: 'resources/js/dashboard/companyAdd.js',
                 companyDetailEdit: 'resources/js/dashboard/company/companyDetailEdit.js',
                 followersList: 'resources/js/dashboard/company/followersList.js',
+                companySetting: 'resources/js/dashboard/company/companySetting.js',
             }
         }
     }
