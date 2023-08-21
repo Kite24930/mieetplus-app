@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap");
+:root {
+  --mieet-color: #B5DECC;
+  --green-background: #F2FAF6;
+  --green-color: #73CF98;
+  --default-font-color: #586C61;
+}
+
+* {
+  font-family: "Noto Sans JP", sans-serif;
+  color: var(--default-font-color);
+}
+
+.noto-sans {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.text-mieetcolor {
+  color: var(--mieet-color);
+}
+
+.green-btn {
+  background-color: var(--green-color);
+  color: white;
+  border-radius: 5px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border: none;
+  cursor: pointer;
+}
+.green-btn:hover {
+  background-color: #5DCB8E;
+}
+
+.green-background {
+  background-color: var(--green-background);
+}
+
+.flex-center-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disabled {
+  background-color: lightgrey;
+  color: #6B7280;
+}
+
+header {
+  height: 100dvh;
+  width: 250px;
+}
+
+body {
+  padding-top: 0;
+  padding-left: 250px;
+  background-color: var(--green-background);
+}
+
+.green-background {
+  background-color: var(--green-color);
+  color: white;
+}
+
+.badge {
+  font-size: 10px;
+}
+
+.text-grey-900 {
+  color: #111928;
+}
+
+.text-grey-500 {
+  color: #6B7280;
+}
+
+.back-grey-50 {
+  background-color: #F9FAFB;
+}
+
+.bg-red {
+  background-color: #FF6C75;
+}
+
+.search-box {
+  border-radius: 8px;
+  background-color: #F9FAFB;
+  border: 1px solid #D1D5DB;
+}
+.search-box input:focus {
+  box-shadow: none;
+}
+
+.rounded-badge {
+  background-color: #DEF7EC;
+  color: #03543F;
+}
+
+input::placeholder {
+  color: #ACB6BE;
+}
+
+header .link:hover {
+  background-color: rgba(88, 108, 97, 0.2);
+}
+
+.text-2xs {
+  font-size: 0.53rem;
+  line-height: 0.75rem;
+}
+
+main table tr {
+  border-bottom: #6B7280 solid 1px;
+}
+main table td:first-child {
+  width: 0;
+  white-space: nowrap;
+}
+main table .no-spin::-webkit-inner-spin-button,
+main table .no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin-right: 0;
+  -moz-appearance: textfield;
+}
+main .omission {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+main #top_img_check {
+  position: relative;
+  width: 240px;
+}
+main #top_img_check:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+main #top_img_check img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+main .editor {
+  width: calc(100dvw - 580px);
+}
+main .tellers-editor {
+  width: calc(100dvw - 560px);
+}
+main .toastui-editor-tooltip .text {
+  color: white;
+}
+main .tellers .preview {
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
+}
+main .tellers .container * {
+  color: white;
+}
+main .tellers .omission {
+  width: calc(100dvw - 560px);
+}
+
+footer {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+/*# sourceMappingURL=companyDetail.css.map */
