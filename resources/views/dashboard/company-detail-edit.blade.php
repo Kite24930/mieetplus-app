@@ -533,7 +533,7 @@
                                 <div class="badge bg-red text-white p-1 rounded">必須</div>
                             </div>
                         </td>
-                        <td class="p-4 flex justify-between">
+                        <td class="p-4 flex justify-start gap-5">
                             <div>
                                 <input id="top_img" name="top_img" type="file" accept="image/jpeg,image/png" class="hidden">
                                 <div>
@@ -581,7 +581,7 @@
                                 <div class="badge bg-gray-400 text-white p-1 rounded">任意</div>
                             </div>
                         </td>
-                        <td class="p-4 flex justify-between">
+                        <td class="p-4 flex justify-start">
                             <div>
                                 <input id="logo" name="logo" type="file" accept="image/jpeg,image/png" class="hidden">
                                 <div>
@@ -604,12 +604,12 @@
                             @if(isset($company))
                             <div class="text-right">
                                 アイコン表示
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full">
+                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
                             </div>
                             @else
                             <div class="text-right">
                                 アイコン表示
-                                <img src="http://via.placeholder.com/100x100" alt="placeholder" class="w-24 h-24 logo object-cover rounded-full">
+                                <img src="http://via.placeholder.com/100x100" alt="placeholder" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
                             </div>
                             @endif
                         </td>
