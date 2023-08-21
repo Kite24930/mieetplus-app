@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\FollowerList;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -308,5 +309,14 @@ class CompanyController extends Controller
             return redirect()->route('companyDetailEdit')->with('msg', '企業情報の更新に失敗しました。');
         }
         return redirect()->route('companyDetailEdit')->with('msg', '企業情報を更新しました。');
+    }
+
+    public function followers() {
+        $followers = FollowerList::where('company_id', Auth::id())->orderBy('created_at', 'desc');
+        $data = [
+            'followers' => $followers->get(),
+            'count' => $followers->count(),
+        ];
+        return view('dashboard.followers-list', $data);
     }
 }
