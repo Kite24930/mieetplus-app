@@ -6,11 +6,13 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\FollowerList;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 
 class CompanyController extends Controller
 {
@@ -325,5 +327,26 @@ class CompanyController extends Controller
             'company' => Company::where('user_id', Auth::id())->first()
         ];
         return view('dashboard.company-setting', $data);
+    }
+
+    public function passwordUpdate(Request $request): RedirectResponse {
+        $validated = $request->validateWithBag('updatePassword', [
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+        ],
+        [
+            'current_password.required' => '現在のパスワードを入力してください。',
+            'current_password.current_password' => '現在のパスワードが正しくありません。',
+            'password.required' => '新しいパスワードを入力してください。',
+            'password.confirmed' => '新しいパスワードが一致しません。',
+            'password.min' => '新しいパスワードは8文字以上である必要があります。',
+            'password.regex' => '新しいパスワードは半角英数字である必要があります。',
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return back()->with('status', 'password-updated');
     }
 }

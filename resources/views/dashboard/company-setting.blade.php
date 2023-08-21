@@ -21,30 +21,38 @@
             </div>
         </div>
         <div class="w-full bg-white rounded flex flex-col my-9">
-            <form method="POST" action="{{ route('password.store') }}">
+            <form method="POST" action="{{ route('companyPasswordUpdate') }}">
                 @csrf
+                @method('put')
                 <div class="w-full font-bold text-lg p-4 border-b">パスワード変更</div>
                 <div class="w-full flex border-b">
                     <div class="w-[300px] bg-gray-50 p-4 flex items-center">
-                        パスワード
+                        現在のパスワード
                     </div>
                     <div class="p-4 flex items-center w-full">
-                        <!-- Password -->
-                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        <!-- Current Password -->
+                        <x-text-input hidden="current_password" class="block mt-1 w-full" type="password" name="current_password" required autocomplete="current_password" placeholder="現在のパスワード" />
+                        <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
                     </div>
                 </div>
                 <div class="w-full flex border-b">
                     <div class="w-[300px] bg-gray-50 p-4 flex items-center">
-                        パスワード確認用
+                        新しいパスワード
+                    </div>
+                    <div class="p-4 flex items-center w-full">
+                        <!-- Password -->
+                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" placeholder="新しいパスワード" />
+                        <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+                    </div>
+                </div>
+                <div class="w-full flex border-b">
+                    <div class="w-[300px] bg-gray-50 p-4 flex items-center">
+                        新しいパスワード確認用
                     </div>
                     <div class="p-4 flex items-center w-full">
                         <!-- Confirm Password -->
-                        <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                      type="password"
-                                      name="password_confirmation" required autocomplete="new-password" />
-
-                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                        <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="新しいパスワード確認用" />
+                        <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
                     </div>
                 </div>
                 <div class="w-full flex justify-center">
@@ -52,8 +60,16 @@
                         <x-primary-button class="px-5">
                             {{ __('パスワード再設定') }}
                         </x-primary-button>
+                        @if(session('status') === 'password-updated')
+                            <p
+                                x-data="{ show: true }"
+                                x-show="show"
+                                x-transition
+                                x-init="setTimeout(() => show = false, 5000)"
+                                class="text-sm text-gray-600"
+                            >{{ __('パスワードが更新されました。') }}</p>
+                        @endif
                     </div>
-
                 </div>
             </form>
         </div>
