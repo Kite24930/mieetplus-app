@@ -8,8 +8,5 @@
 
 </x-recruit.header>
 {{ $slot }}
-<x-recruit.footer>
-
-</x-recruit.footer>
 </body>
 </html>

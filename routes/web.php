@@ -19,7 +19,10 @@ use App\Http\Controllers\CompanyController;
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/recruit', [MainController::class, 'recruit'])->name('recruit');
-Route::get('/recruit/company/{id}', [MainController::class, 'companyDetail'])->name('companyDetail');
+Route::get('/recruit/company/{id}', [MainController::class, 'companyDetail'])->name('companyDetailPage');
+Route::get('/recruit/search', [MainController::class, 'search'])->name('search');
+Route::get('/recruit/followed', [MainController::class, 'followed'])->name('followed');
+Route::get('/account', [MainController::class, 'account'])->name('account');
 
 Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
