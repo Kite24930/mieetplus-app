@@ -59,7 +59,11 @@ class MainController extends Controller
     public function companyDetail($id) {
         $data = [
             'company' => Company::where('user_id', $id)->first(),
+            'auth' => Auth::check() ? Auth::user()->getRoleNames()[0] : 'guest',
         ];
+        if (Auth::check()) {
+            $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
+        }
         return view('recruit.detail', $data);
     }
 

@@ -1,0 +1,106 @@
+@import "common";
+
+#container {
+    padding-bottom: 52px;
+}
+
+.mieet-border {
+    border: solid var(--mieet-color) 3px;
+}
+
+.content-img {
+    width: 33.3%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid var(--mieet-color) 3px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+    &::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    .text-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.modal {
+    height: 100dvh;
+    .bg-blend-darken {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .content {
+        max-height: calc(100dvh - 120px);
+        overflow-y: auto;
+        * {
+            color: white;
+        }
+    }
+}
+.profile {
+    background-image: url("/storage/profile.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.company-content {
+    background-image: url("/storage/company-content.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.job-description {
+    background-image: url("/storage/job-description.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.culture {
+    background-image: url("/storage/culture.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.environment {
+    background-image: url("/storage/environment.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.feature {
+    background-image: url("/storage/feature.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.career-path {
+    background-image: url("/storage/career-path.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.desired-person {
+    background-image: url("/storage/desired-person.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.transfer {
+    background-image: url("/storage/transfer.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.pr {
+    background-image: url("/storage/pr.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.movie {
+    background-image: url("/storage/movie.jpg");
+    background-position: center;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
