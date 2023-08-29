@@ -509,4 +509,12 @@ body {
   border: solid var(--mieet-color) 3px;
 }
 
+#container {
+  padding-bottom: 52px;
+}
+
+.disabled {
+  background-color: lightgrey;
+}
+
 /*# sourceMappingURL=studentProfile.css.map */

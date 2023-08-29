@@ -10,9 +10,38 @@ use App\Models\StudentList;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
+    private $faculties = [
+        '人文学部',
+        '教育学部',
+        '医学部',
+        '工学部',
+        '生物資源学部',
+        '人文社会科学研究科',
+        '教育学研究科',
+        '医学系研究科',
+        '工学研究科',
+        '生物資源学研究科',
+        '地域イノベーション学研究科',
+    ];
+
+    private $glade = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        'M1',
+        'M2',
+        'M3',
+        'M4',
+    ];
+
     public function index() {
         return view('index');
     }
@@ -68,8 +97,9 @@ class MainController extends Controller
         return view('recruit.followed', $data);
     }
 
-    public function profile() {
+    public function profile(Request $request) {
         $data = [
+            'request' => $request,
             'account' => StudentList::where('user_id', Auth::id())->first(),
         ];
         if (Auth::check()) {
@@ -77,6 +107,84 @@ class MainController extends Controller
             $data['user'] = Auth::user();
         }
         return view('profile.show', $data);
+    }
+
+    public function profileEdit(Request $request) {
+        $data = [
+            'request' => $request,
+            'account' => StudentList::where('user_id', Auth::id())->first(),
+            'faculties' => $this->faculties,
+            'glades' => $this->glade,
+        ];
+        if (Auth::check()) {
+            $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
+            $data['user'] = Auth::user();
+        }
+        return view('profile.edit', $data);
+    }
+
+    public function profileEditPost(Request $request) {
+        $target = Student::where('user_id', Auth::id())->first();
+        $request->validate([
+            'email' => ['required', 'string', 'email:filter,dns', 'max:255', 'ends_with:@m.mie-u.ac.jp'],
+            'faculty' => ['required', 'string', 'max:255'],
+            'glade' => ['required', 'string', 'max:255'],
+            'screen_name' => ['nullable', 'string', 'max:255'],
+            'img' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ],
+        [
+            'email.ends_with' => 'メールアドレスは @m.mie-u.ac.jp で終わる必要があります。',
+            'img.mimes' => '画像はjpeg,png,jpg形式でアップロードしてください。',
+            'img.max' => '画像は2MB以下でアップロードしてください。',
+        ]);
+
+        function img_save($file, $id) {
+            $target = Student::where('user_id', $id)->first();
+            if ($target->img !== null) {
+                if (Storage::disk('public')->exists('student/'.$id.'/'.$target->img)) {
+                    Storage::disk('public')->delete('student/'.$id.'/'.$target->img);
+                }
+            }
+            $fileName = $file->getClientOriginalName();
+            $file->storeAs('public/student/'.$id, $fileName);
+            return $fileName;
+        }
+
+        try {
+            DB::beginTransaction();
+            if (isset($request->img)) {
+                $fileName = img_save($request->file('img'), Auth::id());
+                $target->update([
+                    'img' => $fileName,
+                ]);
+            }
+            $notice = 0;
+            if (isset($request->notice)) {
+                $notice = 1;
+            }
+            $history = 0;
+            if (isset($request->history)) {
+                $history = 1;
+            }
+            if ($request->email !== $target->univ_email) {
+                $target->update([
+                    'univ_email' => $request->email,
+                    'email_verified_at' => null,
+                ]);
+            }
+            $target->update([
+                'faculty' => $request->faculty,
+                'glade' => $request->glade,
+                'screen_name' => $request->screen_name,
+                'notice' => $notice,
+                'history' => $history,
+            ]);
+            DB::commit();
+            return redirect()->route('profile.show')->with('success', 'プロフィールの編集に成功しました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('profile.edit')->with('error', 'プロフィールの編集に失敗しました。');
+        }
     }
 
     public function dashboard() {
