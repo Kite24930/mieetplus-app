@@ -50,6 +50,10 @@ class MainController extends Controller
         $data = [
             'companies' => Company::all(),
         ];
+        if (Auth::check()) {
+            $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
+            $data['user'] = Auth::user();
+        }
         return view('recruit.search', $data);
     }
 
@@ -57,13 +61,21 @@ class MainController extends Controller
         $data = [
             'followed' => FollowerList::where('student_id', Auth::id())->get(),
         ];
+        if (Auth::check()) {
+            $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
+            $data['user'] = Auth::user();
+        }
         return view('recruit.followed', $data);
     }
 
     public function profile() {
         $data = [
-            'user' => StudentList::where('user_id', Auth::id())->first(),
+            'account' => StudentList::where('user_id', Auth::id())->first(),
         ];
+        if (Auth::check()) {
+            $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
+            $data['user'] = Auth::user();
+        }
         return view('profile.show', $data);
     }
 

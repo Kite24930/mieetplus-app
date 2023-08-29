@@ -505,12 +505,12 @@ body {
   color: rgb(107, 114, 128);
 }
 
-#container {
-  padding-bottom: 52px;
-}
-
 .mieet-border {
   border: solid var(--mieet-color) 3px;
+}
+
+#container {
+  padding-bottom: 52px;
 }
 
 .content-img {

@@ -28,6 +28,7 @@ export default defineConfig({
                 companyDetailEdit: 'resources/js/dashboard/company/companyDetailEdit.js',
                 followersList: 'resources/js/dashboard/company/followersList.js',
                 companySetting: 'resources/js/dashboard/company/companySetting.js',
+                studentProfile: 'resources/js/profile/studentProfile.js',
             }
         }
     }

@@ -15,6 +15,7 @@ class Student extends Model
         'faculty',
         'glade',
         'screen_name',
+        'img',
         'name_type',
         'notice',
         'history',

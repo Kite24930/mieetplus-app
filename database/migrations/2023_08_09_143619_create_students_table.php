@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('faculty');
             $table->integer('glade');
             $table->text('screen_name')->nullable();
+            $table->text('img')->nullable();
             $table->tinyInteger('name_type')->default(0);
             $table->tinyInteger('notice')->default(0);
             $table->tinyInteger('history')->default(0);
