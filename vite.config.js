@@ -30,6 +30,7 @@ export default defineConfig({
                 companySetting: 'resources/js/dashboard/company/companySetting.js',
                 studentProfile: 'resources/js/profile/studentProfile.js',
                 studentProfileEdit: 'resources/js/profile/studentProfileEdit.js',
+                followed: 'resources/js/recruit/followed.js',
             }
         }
     }

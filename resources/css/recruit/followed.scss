@@ -1,0 +1,14 @@
+@import "common";
+
+.follow-btn {
+    cursor: pointer;
+    &.followed {
+        background-color: hotpink;
+        color: white;
+        border: none;
+    }
+}
+
+.company-link {
+    max-width: calc(100% - 130px);
+}

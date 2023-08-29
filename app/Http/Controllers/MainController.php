@@ -91,7 +91,6 @@ class MainController extends Controller
             'followed' => FollowerList::where('student_id', Auth::id())->get(),
         ];
         if (Auth::check()) {
-            $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
             $data['user'] = Auth::user();
         }
         return view('recruit.followed', $data);
