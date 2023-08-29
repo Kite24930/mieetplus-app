@@ -160,7 +160,7 @@
                                         </button>
                                     @endif
                                 @else
-                                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->user_id }}">
                                         <i class="bi bi-balloon-heart-fill"></i>フォローする
                                     </button>
                                 @endif
