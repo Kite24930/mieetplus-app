@@ -556,10 +556,10 @@ body {
   display: flex;
 }
 #modalEl .content-container {
-  height: calc(100dvh - 150px);
+  height: calc(100dvh - 250px);
 }
 #modalEl .content-container .content {
-  height: calc(100dvh - 190px - 0.7rem);
+  height: calc(100dvh - 290px - 0.7rem);
   overflow: auto;
 }
 
@@ -589,6 +589,9 @@ body {
   white-space: nowrap;
 }
 
+.follow-btn {
+  cursor: pointer;
+}
 .follow-btn.followed {
   background-color: hotpink;
   color: white;

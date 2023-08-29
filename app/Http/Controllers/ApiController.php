@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Follower;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -88,6 +89,50 @@ class ApiController extends Controller
             ];
             return response()->json($data, 200);
         } catch (\Exception $e) {
+            $data = [
+                'msg' => 'error',
+                'err' => $e->getMessage(),
+            ];
+            return response()->json($data, 500);
+        }
+    }
+
+    public function followedAdd(Request $request) {
+        $values = [
+            'company_id' => $request->company_id,
+            'student_id' => $request->student_id,
+        ];
+        try {
+            DB::beginTransaction();
+            $followed = Follower::create($values);
+            DB::commit();
+            $data = [
+                'msg' => 'ok',
+                'followed' => $followed,
+            ];
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = [
+                'msg' => 'error',
+                'err' => $e->getMessage(),
+            ];
+            return response()->json($data, 500);
+        }
+    }
+
+    public function followedDelete($company_id, $student_id) {
+        $target = Follower::where('company_id', $company_id)->where('student_id', $student_id)->first();
+        try {
+            DB::beginTransaction();
+            $target->delete();
+            DB::commit();
+            $data = [
+                'msg' => 'ok',
+            ];
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
             $data = [
                 'msg' => 'error',
                 'err' => $e->getMessage(),

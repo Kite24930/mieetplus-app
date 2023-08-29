@@ -18,29 +18,6 @@ class MainController extends Controller
     }
 
     public function recruit() {
-//        $faker = \Faker\Factory::create('ja_JP');
-//
-//        $companyData = [];
-//
-//        for ($i = 1; $i <= 10; $i++) {
-//            $companyData[] = [
-//                'id' => $i,
-//                'company_name' => $faker->company,
-//                'business_description' => $faker->realText(400),
-//                'company_pr' => $faker->realText(400),
-//                'business_details' => $faker->realText(400),
-//                'photo1' => $faker->imageUrl(480, 640, 'cats'),
-//                'photo2' => $faker->imageUrl(480, 640, 'cats'),
-//                'photo3' => $faker->imageUrl(480, 640, 'cats'),
-//                'followed' => $faker->boolean,
-//            ];
-//            $postData[] =[
-//                'id' => $i,
-//                'company_name' => $faker->company,
-//                'introduction' => $faker->realText(400),
-//                'photo' => $faker->imageUrl(640, 640, 'cats'),
-//            ];
-//        }
         $companyData = Company::inRandomOrder()->take(10);
         $postData = Company::inRandomOrder()->take(10);
         $data = [
@@ -52,6 +29,7 @@ class MainController extends Controller
         ];
         if (Auth::check()) {
             $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
+            $data['user'] = Auth::user();
         }
         return view('recruit.recruit', $data);
     }
@@ -63,6 +41,7 @@ class MainController extends Controller
         ];
         if (Auth::check()) {
             $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
+            $data['user'] = Auth::user();
         }
         return view('recruit.detail', $data);
     }
@@ -81,11 +60,11 @@ class MainController extends Controller
         return view('recruit.followed', $data);
     }
 
-    public function account() {
+    public function profile() {
         $data = [
             'user' => StudentList::where('user_id', Auth::id())->first(),
         ];
-        return view('account.account', $data);
+        return view('profile.show', $data);
     }
 
     public function dashboard() {

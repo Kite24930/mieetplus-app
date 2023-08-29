@@ -104,3 +104,11 @@
     background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: darken;
 }
+.follow-btn {
+    cursor: pointer;
+    &.followed {
+        background-color: hotpink;
+        color: white;
+        border: none;
+    }
+}

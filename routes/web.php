@@ -21,9 +21,6 @@ Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/recruit', [MainController::class, 'recruit'])->name('recruit');
 Route::get('/recruit/company/{id}', [MainController::class, 'companyDetail'])->name('companyDetailPage');
 Route::get('/recruit/search', [MainController::class, 'search'])->name('search');
-Route::get('/recruit/followed', [MainController::class, 'followed'])->name('followed');
-Route::get('/account', [MainController::class, 'account'])->name('account');
-
 Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -44,6 +41,8 @@ Route::middleware('auth')->group(function () {
         Route::get('company/setting', [CompanyController::class, 'setting'])->name('companySetting');
         Route::put('company/passwordUpdate', [CompanyController::class, 'passwordUpdate'])->name('companyPasswordUpdate');
     });
+    Route::get('/recruit/followed', [MainController::class, 'followed'])->name('followed');
+    Route::get('/student/profile', [MainController::class, 'profile'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

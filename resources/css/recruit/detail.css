@@ -622,4 +622,13 @@ body {
   background-blend-mode: darken;
 }
 
+.follow-btn {
+  cursor: pointer;
+}
+.follow-btn.followed {
+  background-color: hotpink;
+  color: white;
+  border: none;
+}
+
 /*# sourceMappingURL=detail.css.map */

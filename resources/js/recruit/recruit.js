@@ -9,6 +9,7 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import '../app.js';
 import '../../css/recruit/recruit.css';
 import axios from "axios";
+import followChange from "../module/followed.js";
 
 const root = window.location.protocol + '//' + window.location.hostname + '/';
 const loading = document.getElementById('loading');
@@ -506,4 +507,16 @@ window.addEventListener('scroll', () => {
     if (window.scrollY + window.innerHeight >= document.body.clientHeight) {
         postsAdd();
     }
+});
+
+document.querySelectorAll('.follow-btn').forEach((el) => {
+    el.addEventListener('click', () => {
+        followChange(el);
+    });
+});
+
+document.querySelectorAll('.not-login').forEach((el) => {
+    el.addEventListener('click', () => {
+        alert('ログインしてください。');
+    });
 });

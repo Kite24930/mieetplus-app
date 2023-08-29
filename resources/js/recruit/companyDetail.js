@@ -6,6 +6,7 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import '../app.js';
 import '../../css/recruit/detail.css';
 import axios from "axios";
+import followChange from "../module/followed.js";
 
 const loading = document.getElementById('loading');
 const container = document.getElementById('container');
@@ -46,3 +47,15 @@ const windowInit = () => {
     contentSet();
 }
 window.addEventListener('load', windowInit);
+
+document.querySelectorAll('.follow-btn').forEach(el => {
+    el.addEventListener('click', () => {
+        followChange(el);
+    })
+});
+
+document.querySelectorAll('.not-login').forEach(el => {
+    el.addEventListener('click', () => {
+        alert('ログインしてください');
+    })
+});

@@ -22,16 +22,16 @@
             <div class="px-4">
                 @if($auth == 'student')
                     @if(in_array($company->user_id, $followed))
-                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->user_id }}">
-                            <i class="bi bi-balloon-heart-fill"></i>フォロー中
+                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                            <i class="bi bi-balloon-heart-fill text-white"></i>フォロー中
                         </button>
                     @else
-                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->user_id }}">
+                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
                             <i class="bi bi-balloon-heart-fill"></i>フォローする
                         </button>
                     @endif
                 @elseif($auth == 'guest')
-                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->user_id }}">
+                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
                         <i class="bi bi-balloon-heart-fill"></i>フォローする
                     </button>
                 @endif

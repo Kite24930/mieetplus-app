@@ -55,9 +55,9 @@
         }
     }
     .content-container {
-        height: calc(100dvh - 150px);
+        height: calc(100dvh - 250px);
         .content {
-            height: calc(100dvh - 190px - 0.7rem);
+            height: calc(100dvh - 290px - 0.7rem);
             overflow: auto;
         }
     }
@@ -96,6 +96,7 @@
 }
 
 .follow-btn {
+    cursor: pointer;
     &.followed {
         background-color: hotpink;
         color: white;
