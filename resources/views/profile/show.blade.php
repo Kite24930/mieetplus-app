@@ -16,7 +16,7 @@
                 <img src="@if(isset($account->img)){{ asset('storage/student/'.$account->user_id.'/'.$account->img) }}@else{{ asset('storage/account_default.png') }}@endif" alt="{{ $account->name }}" class="w-16 h-16 object-cover rounded-full mieet-border">
                 <div class="flex flex-col justify-center items-start gap-3">
                     <div class="pl-2">{{ $account->name }}</div>
-                    <a href="{{ route('profile.edit') }}" class="px-4 py-2 rounded bg-gray-50">アカウントを編集</a>
+                    <a href="{{ route('profile.edit') }}" class="px-4 py-2 rounded bg-gray-100">アカウントを編集</a>
                 </div>
             </div>
             <div class="w-full border-t py-2 px-4">
