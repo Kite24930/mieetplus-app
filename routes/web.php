@@ -19,8 +19,10 @@ use App\Http\Controllers\CompanyController;
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/recruit', [MainController::class, 'recruit'])->name('recruit');
+Route::post('/recruit/filter', [MainController::class, 'filter'])->name('filter');
 Route::get('/recruit/company/{id}', [MainController::class, 'companyDetail'])->name('companyDetailPage');
 Route::get('/recruit/search', [MainController::class, 'search'])->name('search');
+Route::get('/recruit/search/result', [MainController::class, 'searchResult'])->name('searchResult');
 Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

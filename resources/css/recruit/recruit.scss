@@ -4,6 +4,10 @@
     padding-bottom: 52px;
 }
 
+#filter {
+    height: calc(100dvh - 112px);
+}
+
 #tellers {
     .swiper-slide {
         width: 66px;

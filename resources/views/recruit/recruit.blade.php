@@ -1,8 +1,10 @@
-<x-recruit.template title="Mieet Plus 就活部">
+<x-recruit.template title="Mieet Plus 就活部" >
     <script>
         window.Laravel = {};
         window.Laravel.tellers_list = @json($tellers_companies_list);
+        window.Laravel.tellers_num = 10;
         window.Laravel.posts_list = @json($posts_companies_list);
+        window.Laravel.posts_num = 10;
         @if(isset($followed))
             window.Laravel.followed = @json($followed);
         @endif
@@ -13,6 +15,225 @@
             <span></span>
         </div>
     </div>
+    <div class="fixed top-0 right-0 z-510 h-[60px] px-4 flex items-center">
+        <button id="filterDropdownBtn" data-dropdown-toggle="filter">
+            <i class="bi bi-filter-left text-3xl"></i>
+        </button>
+        <div id="filter" class="w-[100dvw] max-w-[550px] hidden bg-white mieet-border rounded overflow-y-auto">
+            <div class="flex flex-col w-full">
+                <div class="text-center py-3 text-2xl">
+                    企業を絞り込む
+                </div>
+                <div class="py-2 px-4">
+                    <a href="{{ route('recruit', ['filter', 0]) }}" class="inline-block w-full py-2 rounded bg-greencolor text-white text-center">
+                        絞り込みを解除
+                    </a>
+                </div>
+                <div class="border w-full flex flex-col">
+                    <form action="{{ route('filter') }}" method="POST">
+                        @csrf
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                業種
+                                <label class="ml-3">
+                                    <input type="checkbox" id="category_activate" name="category_activate" @if(isset($request->category)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="h-28 w-full overflow-y-auto p-3 border">
+                                @foreach($categories as $category)
+                                    <label>
+                                        <input type="checkbox" value="{{ $category->name }}" @if(str_contains($request->category, $category->name)) checked @endif class="filter-category">
+                                        {{ $category->name }}
+                                    </label>
+                                    <br>
+                                @endforeach
+                            </div>
+                            <input type="hidden" id="filter_category" name="filter_category" @if(isset($request->category)) value="{{ $request->category }}" @endif>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                本社所在地
+                                <label class="ml-3">
+                                    <input type="checkbox" id="location_activate" name="location_activate" @if(isset($request->location)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="h-28 w-full overflow-y-auto p-3 border">
+                                @foreach($prefectures as $prefecture)
+                                    <label>
+                                        <input type="checkbox" value="{{ $prefecture }}" @if(str_contains($request->location, $prefecture)) checked @endif class="filter-location">
+                                        {{ $prefecture }}
+                                    </label>
+                                    <br>
+                                @endforeach
+                            </div>
+                            <input type="hidden" id="filter_location" name="filter_location" @if(isset($request->locaiton)) value="{{ $request->location }}" @endif>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                勤務地
+                                <label class="ml-3">
+                                    <input type="checkbox" id="work_location_activate" name="work_location_activate" @if(isset($request->work_location)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="h-28 w-full overflow-y-auto p-3 border">
+                                @foreach($prefectures as $prefecture)
+                                    <label>
+                                        <input type="checkbox" value="{{ $prefecture }}" @if(str_contains($request->work_location, $prefecture)) checked @endif class="filter-work_location">
+                                        {{ $prefecture }}
+                                    </label>
+                                    <br>
+                                @endforeach
+                            </div>
+                            <input type="hidden" id="filter_work_location" name="filter_work_location" @if(isset($request->work_locaiton)) value="{{ $request->work_locaiton }}" @endif>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                設立年月
+                                <label class="ml-3">
+                                    <input type="checkbox" id="establishment_activate" name="establishment_activate" @if(isset($request->establishment_date)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="w-full overflow-y-auto px-3">
+                                <input type="month" id="filter_establishment_date" name="filter_establishment_date" class="mt-1 h-12 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-[150px] inline-block" @if(isset($request->establishment_date)) value="{{ date('Y-m', strtotime($request->establishment_date)) }}" @else value="{{ date('Y-m') }}" @endif>
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_establishment_type_before" name="filter_establishment_date_type" value="before" @if(isset($request->establishment_date_type)) @if($request->establishment_date_type === 'before') checked @endif @else checked @endif>
+                                    以前
+                                </label>
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_establishment_type_after" name="filter_establishment_date_type" value="after" @if(isset($request->establishment_date_type)) @if($request->establishment_date_type === 'after') checked @endif @endif>
+                                    以降
+                                </label>
+                            </div>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                資本金
+                                <label class="ml-3">
+                                    <input type="checkbox" id="capital_activate" name="capital_activate" @if(isset($request->capital)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="w-full overflow-y-auto px-3">
+                                <input type="number" id="filter_capital" name="filter_capital" class="mt-1 h-12 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-[100px] inline-block" @if(isset($request->capital)) value="{{ $request->capital }}" @else value="0" @endif>
+                                百万円
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_capital_type_more" name="filter_capital_type" value="more" @if(isset($request->capital_type)) @if($request->capital_type === 'more') checked @endif @else checked @endif>
+                                    以上
+                                </label>
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_capital_type_less" name="filter_capital_type" value="less" @if(isset($request->capital_type)) @if($request->capital_type === 'less') checked @endif @endif>
+                                    以下
+                                </label>
+                            </div>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                売上金
+                                <label class="ml-3">
+                                    <input type="checkbox" id="sales_activate" name="sales_activate" @if(isset($request->sales)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="w-full overflow-y-auto px-3">
+                                <input type="number" id="filter_sales" name="filter_sales" class="mt-1 h-12 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-[100px] inline-block" @if(isset($request->sales)) value="{{ $request->sales }}" @else value="0" @endif>
+                                百万円
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_sales_type_more" name="filter_sales_type" value="more" @if(isset($request->sales_type)) @if($request->sales_type === 'more') checked @endif @else checked @endif>
+                                    以上
+                                </label>
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_sales_type_less" name="filter_sales_type" value="less" @if(isset($request->sales_type)) @if($request->sales_type === 'less') checked @endif @endif>
+                                    以下
+                                </label>
+                            </div>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                従業員数
+                                <label class="ml-3">
+                                    <input type="checkbox" id="employee_activate" name="employee_activate" @if(isset($request->employee_number)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="w-full overflow-y-auto px-3">
+                                <input type="number" id="filter_employee_number" name="filter_employee_number" class="mt-1 h-12 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-[100px] inline-block" @if(isset($request->employee_number)) value="{{ $request->employee_number }}" @else value="0" @endif>
+                                人
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_employee_number_type_more" name="filter_employee_number_type" value="more" @if(isset($request->employee_number_type)) @if($request->employee_number_type === 'more') checked @endif @else checked @endif>
+                                    以上
+                                </label>
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_employee_number_type_less" name="filter_employee_number_type" value="less" @if(isset($request->employee_number_type)) @if($request->employee_number_type === 'less') checked @endif @endif>
+                                    以下
+                                </label>
+                            </div>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                三重大学生OB・OG数
+                                <label class="ml-3">
+                                    <input type="checkbox" id="graduated_activate" name="graduated_activate" @if(isset($request->graduated_number)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="w-full overflow-y-auto px-3">
+                                <input type="number" id="filter_graduated_number" name="filter_graduated_number" class="mt-1 h-12 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-[100px] inline-block" @if(isset($request->graduated_number)) value="{{ $request->graduated_number }}" @else value="0" @endif>
+                                人
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_graduated_number_type_more" name="filter_graduated_number_type" value="more" @if(isset($request->graduated_number_type)) @if($request->graduated_number_type === 'more') checked @endif @else checked @endif>
+                                    以上
+                                </label>
+                                <label class="mx-2">
+                                    <input type="radio" id="filter_graduated_number_type_less" name="filter_graduated_number_type" value="less" @if(isset($request->graduated_number_type)) @if($request->graduated_number_type === 'less') checked @endif @endif>
+                                    以下
+                                </label>
+                            </div>
+                        </div>
+                        <div class="py-2 px-4">
+                            <div class="text-sm text-grey-500">
+                                対象学部
+                                <label class="ml-3">
+                                    <input type="checkbox" id="faculty_activate" name="faculty_activate" @if(isset($request->faculty)) checked @endif>
+                                    有効化
+                                </label>
+                            </div>
+                            <div class="h-28 w-full overflow-y-auto p-3 border">
+                                @foreach($faculties as $faculty)
+                                    <label>
+                                        <input type="checkbox" value="{{ $faculty }}" @if(str_contains($request->faculties, $faculty)) checked @endif class="filter-faculty">
+                                        {{ $faculty }}
+                                    </label>
+                                    <br>
+                                @endforeach
+                            </div>
+                            <input type="hidden" id="filter_faculty" name="filter_faculty" @if(isset($request->faculty)) value="{{ $request->faculty }}" @endif>
+                        </div>
+                        @if($auth === 'student')
+                            <div class="py-2 px-4 flex justify-center items-center">
+                                <label>
+                                    <input type="checkbox" id="save" name="save">
+                                    この絞り込み条件を保存する
+                                </label>
+                            </div>
+                        @endif
+                        <div class="py-2 px-4">
+                            <button id="filterBtn" class="w-full py-2 rounded bg-greencolor text-white" type="submit">
+                                絞り込む
+                            </button>
+                        </div>
+                        <div class="py-2 px-4 text-sm text-grey-500">
+                            絞り込み条件を保存すると、ホーム画面を開くと初期状態からこの条件で絞り込まれます。
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="container" class="w-full justify-center bg-mieetcolor hidden">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             {{-- テラーズ表示範囲 start --}}
@@ -41,7 +262,7 @@
                 </div>
             </div>
             <div id="modalEl" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-600 hidden justify-center w-full p-0 overflow-x-hidden overflow-y-auto text-white">
-                <div class="relative w-full h-full max-w-screen-sm">
+                <div class="relative w-full h-full max-w-[550px]">
                     <div class="absolute top-0 left-0 w-full z-700 flex flex-col mt-3">
                         <div class="progress-wrapper w-full flex justify-evenly">
                             <div id="progress-1" class="progress-bar mx-1"></div>

@@ -63,40 +63,6 @@ class ApiController extends Controller
         return response()->json(['msg' => 'ok'], 200);
     }
 
-    public function tellersAdd(Request $request) {
-        try {
-            $company = Company::whereNotIn('user_id', $request->exist_tellers)->inRandomOrder()->take(10)->get();
-            $data = [
-                'msg' => 'ok',
-                'company' => $company,
-            ];
-            return response()->json($data, 200);
-        } catch (\Exception $e) {
-            $data = [
-                'msg' => 'error',
-                'err' => $e->getMessage(),
-            ];
-            return response()->json($data, 500);
-        }
-    }
-
-    public function postsAdd(Request $request) {
-        try {
-            $company = Company::whereNotIn('user_id', $request->exist_posts)->inRandomOrder()->take(10)->get();
-            $data = [
-                'msg' => 'ok',
-                'company' => $company,
-            ];
-            return response()->json($data, 200);
-        } catch (\Exception $e) {
-            $data = [
-                'msg' => 'error',
-                'err' => $e->getMessage(),
-            ];
-            return response()->json($data, 500);
-        }
-    }
-
     public function followedAdd(Request $request) {
         $values = [
             'company_id' => $request->company_id,

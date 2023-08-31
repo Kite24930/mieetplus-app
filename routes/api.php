@@ -20,7 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/company/mailPermission', [ApiController::class, 'companyMailPermissionChange'])->name('companyMailPermissionChange');
-Route::get('tellers/add', [ApiController::class, 'tellersAdd'])->name('tellersAdd');
-Route::get('posts/add', [ApiController::class, 'postsAdd'])->name('postsAdd');
 Route::post('follow', [ApiController::class, 'followedAdd'])->name('followedAdd');
 Route::delete('follow/{company_id}/{student_id}', [ApiController::class, 'followedDelete'])->name('followedDelete');
