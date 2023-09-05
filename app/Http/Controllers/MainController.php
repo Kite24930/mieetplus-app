@@ -103,10 +103,9 @@ class MainController extends Controller
         $postsCompany = Company::where('status', 1)->inRandomOrder();
         $tellersCompanyList = Company::pluck('user_id')->toArray();
         $postsCompanyList = Company::pluck('user_id')->toArray();
-        $searchResult = [];
         if ($request->has('filter')) {
             if ($request->filter === '1') {
-                if ($request->has('category')) {
+                if ($request->has('category') && isset($request->category)) {
                     $category = explode(',', $request->category);
                     $tellersCategoryList = Company::whereIn('category', $category)->pluck('user_id')->toArray();
                     $postsCategoryList = Company::whereIn('category', $category)->pluck('user_id')->toArray();
@@ -448,9 +447,162 @@ class MainController extends Controller
         return view('recruit.detail', $data);
     }
 
-    public function search() {
+    public function search(Request $request) {
+        $company = Company::where('status', 1)->inRandomOrder();
+        $companyNumList = Company::pluck('user_id')->toArray();
+        if ($request->has('search')) {
+            if ($request->search === '1') {
+                if ($request->has('free_word') && isset($request->free_word)) {
+                   $nameList = Company::where('name', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                   $job_description_tellersList = Company::where('job_description_tellers', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                   $job_descriptionList = Company::where('job_description', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                   $culture_tellersList = Company::where('culture_tellers', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                   $cultureList = Company::where('culture', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                   $environment_tellersList = Company::where('environment_tellers', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $environmentList = Company::where('environment', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $featureList = Company::where('feature', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $career_pathList = Company::where('career_path', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $desired_personList = Company::where('desired_person', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $transferList = Company::where('transfer', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $contentList = Company::where('content', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $prList = Company::where('pr', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                     $free_wordList = array_unique(array_merge($nameList, $job_description_tellersList, $job_descriptionList, $culture_tellersList, $cultureList, $environment_tellersList, $environmentList, $featureList, $career_pathList, $desired_personList, $transferList, $contentList, $prList));
+                        $companyNumList = array_intersect($companyNumList, $free_wordList);
+                }
+                if ($request->has('name') && isset($request->name)) {
+                    $nameList = Company::where('name', 'like', '%'.$request->name.'%')->pluck('user_id')->toArray();
+                    $companyNumList = array_intersect($companyNumList, $nameList);
+                }
+                if ($request->has('category') && isset($request->category)) {
+                    $category = explode(',', $request->category);
+                    $categoryList = Company::whereIn('category', $category)->pluck('user_id')->toArray();
+                    $companyNumList = array_intersect($companyNumList, $categoryList);
+                }
+                if ($request->has('location') && isset($request->location)) {
+                    $location = explode(',', $request->location);
+                    $locationArray = [];
+                    foreach ($location as $prefecture) {
+                        $locationList = Company::where('location', 'like', '%'.$prefecture.'%')->pluck('user_id')->toArray();
+                        $locationArray = array_merge($locationArray, $locationList);
+                    }
+                    $companyNumList = array_intersect($companyNumList, $locationArray);
+                }
+                if ($request->has('work_location') && isset($request->work_location)) {
+                    $work_location = explode(',', $request->work_location);
+                    $work_locationArray = [];
+                    foreach ($work_location as $prefecture) {
+                        $work_locationList = Company::where('work_location', 'like', '%'.$prefecture.'%')->pluck('user_id')->toArray();
+                        $work_locationArray = array_merge($work_locationArray, $work_locationList);
+                    }
+                    $companyNumList = array_intersect($companyNumList, $work_locationArray);
+                }
+                if ($request->has('establishment_date') && isset($request->establishment_date)) {
+                    switch ($request->establishment_date_type) {
+                        case 'before':
+                            $establishment_dateList = Company::where('establishment_date', '<=', $request->establishment_date)->pluck('user_id')->toArray();
+                            break;
+                        case 'after':
+                            $establishment_dateList = Company::where('establishment_date', '>=', $request->establishment_date)->pluck('user_id')->toArray();
+                            break;
+                        case 'equal':
+                            $establishment_dateList = Company::where('establishment_date', $request->establishment_date)->pluck('user_id')->toArray();
+                            break;
+                        default:
+                            break;
+                    }
+                    $companyNumList = array_intersect($companyNumList, $establishment_dateList);
+                }
+                if ($request->has('capital') && isset($request->capital)) {
+                    switch ($request->capital_type) {
+                        case 'more':
+                            $capitalList = Company::where('capital', '>=', $request->capital)->pluck('user_id')->toArray();
+                            break;
+                        case 'less':
+                            $capitalList = Company::where('capital', '<=', $request->capital)->pluck('user_id')->toArray();
+                            break;
+                        case 'equal':
+                            $capitalList = Company::where('capital', $request->capital)->pluck('user_id')->toArray();
+                            break;
+                        default:
+                            break;
+                    }
+                    $companyNumList = array_intersect($companyNumList, $capitalList);
+                }
+                if ($request->has('sales') && isset($request->sales)) {
+                    switch ($request->sales_type) {
+                        case 'more':
+                            $salesList = Company::where('sales', '>=', $request->sales)->pluck('user_id')->toArray();
+                            break;
+                        case 'less':
+                            $salesList = Company::where('sales', '<=', $request->sales)->pluck('user_id')->toArray();
+                            break;
+                        case 'equal':
+                            $salesList = Company::where('sales', $request->sales)->pluck('user_id')->toArray();
+                            break;
+                        default:
+                            break;
+                    }
+                    $companyNumList = array_intersect($companyNumList, $salesList);
+                }
+                if ($request->has('employee_number') && isset($request->employee_number)) {
+                    switch ($request->employee_number_type) {
+                        case 'more':
+                            $employee_numberList = Company::where('employee_number', '>=', $request->employee_number)->pluck('user_id')->toArray();
+                            break;
+                        case 'less':
+                            $employee_numberList = Company::where('employee_number', '<=', $request->employee_number)->pluck('user_id')->toArray();
+                            break;
+                        case 'equal':
+                            $employee_numberList = Company::where('employee_number', $request->employee_number)->pluck('user_id')->toArray();
+                            break;
+                        default:
+                            break;
+                    }
+                    $companyNumList = array_intersect($companyNumList, $employee_numberList);
+                }
+                if ($request->has('graduated_number') && isset($request->graduated_number)) {
+                    switch ($request->graduated_number_type) {
+                        case 'more':
+                            $graduated_numberList = Company::where('graduated_number', '>=', $request->graduated_number)->pluck('user_id')->toArray();
+                            break;
+                        case 'less':
+                            $graduated_numberList = Company::where('graduated_number', '<=', $request->graduated_number)->pluck('user_id')->toArray();
+                            break;
+                        case 'equal':
+                            $graduated_numberList = Company::where('graduated_number', $request->graduated_number)->pluck('user_id')->toArray();
+                            break;
+                        default:
+                            break;
+                    }
+                    $companyNumList = array_intersect($companyNumList, $graduated_numberList);
+                }
+                if ($request->has('faculties') && isset($request->faculties)) {
+                    $faculties = explode(',', $request->faculties);
+                    $facultiesArray = [];
+                    foreach ($faculties as $faculty) {
+                        $facultiesList = Company::where('faculties', 'like', '%'.$faculty.'%')->pluck('user_id')->toArray();
+                        $facultiesArray = array_merge($facultiesArray, $facultiesList);
+                    }
+                    $companyNumList = array_intersect($companyNumList, $facultiesArray);
+                }
+                if ($request->has('occupations') && isset($request->occupations)) {
+                    $occupationList = Company::where('occupations', 'like', '%'.$request->occupations.'%')->pluck('user_id')->toArray();
+                    $companyNumList = array_intersect($companyNumList, $occupationList);
+                }
+                $companyList = $company->whereIn('user_id', $companyNumList)->get();
+            } else {
+                $companyList = $company->get();
+            }
+        } else {
+            $companyList = $company->get();
+        }
         $data = [
-            'companies' => Company::all(),
+            'companies' => $companyList,
+            'auth' => Auth::check() ? Auth::user()->getRoleNames()[0] : 'guest',
+            'request' => $request,
+            'categories' => Category::all(),
+            'prefectures' => $this->prefectures,
+            'faculties' => $this->faculties,
         ];
         if (Auth::check()) {
             $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
@@ -459,11 +611,65 @@ class MainController extends Controller
         return view('recruit.search', $data);
     }
 
-    public function searchResult(Request $request) {
-        $data = [
-
+    public function searchPost(Request $request) {
+        $activate = false;
+        $param = [
+            'search' => 0,
         ];
-        return view('recruit.searchResult', $data);
+        if ($request->free_word_activate) {
+            $activate = true;
+            $param['free_word'] = $request->free_word;
+        }
+        if ($request->name_activate) {
+            $activate = true;
+            $param['name'] = $request->name;
+        }
+        if ($request->category_activate) {
+            $activate = true;
+            $param['category'] = $request->category;
+        }
+        if ($request->location_activate) {
+            $activate = true;
+            $param['location'] = $request->location;
+        }
+        if ($request->work_location_activate) {
+            $activate = true;
+            $param['work_location'] = $request->work_location;
+        }
+        if ($request->establishment_activate) {
+            $activate = true;
+            $param['establishment_date'] = $request->establishment_date.'-01';
+            $param['establishment_date_type'] = $request->establishment_date_type;
+        }
+        if ($request->capital_activate) {
+            $activate = true;
+            $param['capital'] = $request->capital;
+            $param['capital_type'] = $request->capital_type;
+        }
+        if ($request->sales_activate) {
+            $activate = true;
+            $param['sales'] = $request->sales;
+            $param['sales_type'] = $request->sales_type;
+        }
+        if ($request->employee_activate) {
+            $activate = true;
+            $param['employee_number'] = $request->employee_number;
+            $param['employee_number_type'] = $request->employee_number_type;
+        }
+        if ($request->graduated_activate) {
+            $activate = true;
+            $param['graduated_number'] = $request->graduated_number;
+            $param['graduated_number_type'] = $request->graduated_number_type;
+        }
+        if ($request->faculty_activate) {
+            $activate = true;
+            $param['faculties'] = $request->faculty;
+        }
+        if ($activate) {
+            $param['search'] = 1;
+            return redirect()->route('search', $param);
+        }
+        return redirect()->route('search',$param);
     }
 
     public function followed() {

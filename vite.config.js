@@ -31,6 +31,7 @@ export default defineConfig({
                 studentProfile: 'resources/js/profile/studentProfile.js',
                 studentProfileEdit: 'resources/js/profile/studentProfileEdit.js',
                 followed: 'resources/js/recruit/followed.js',
+                search: 'resources/js/recruit/search.js',
             }
         }
     }

@@ -22,7 +22,7 @@ Route::get('/recruit', [MainController::class, 'recruit'])->name('recruit');
 Route::post('/recruit/filter', [MainController::class, 'filter'])->name('filter');
 Route::get('/recruit/company/{id}', [MainController::class, 'companyDetail'])->name('companyDetailPage');
 Route::get('/recruit/search', [MainController::class, 'search'])->name('search');
-Route::get('/recruit/search/result', [MainController::class, 'searchResult'])->name('searchResult');
+Route::post('/recruit/search', [MainController::class, 'searchPost'])->name('searchPost');
 Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

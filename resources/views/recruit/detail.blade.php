@@ -6,9 +6,9 @@
         </div>
     </div>
     <div class="fixed top-0 left-0 z-510 p-2 h-[60px] flex items-center">
-        <a href="{{ url()->previous() }}">
+        <button type="button" onclick="history.back()">
             <i class="bi bi-caret-left-fill"></i>戻る
-        </a>
+        </button>
     </div>
     <div id="container" class="w-full justify-center bg-mieetcolor hidden">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">

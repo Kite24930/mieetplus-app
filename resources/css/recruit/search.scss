@@ -1,0 +1,24 @@
+@import "detail";
+
+body {
+    padding-top: 125px;
+}
+
+.content-img {
+    background-color: rgba(255, 255, 255, 0.85);
+    background-blend-mode: lighten;
+    background-size: cover;
+    background-position: center;
+}
+
+.company-name {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+#searchBox {
+    top: 60px;
+}
+
+#filter {
+    height: calc(100dvh - 172px);
+}
