@@ -141,7 +141,7 @@
                             <div class="flex justify-start items-center">
                                 <x-text-input id="capital" class="w-32 text-right no-spin" placeholder="資本金" type="number" name="capital" :value="isset($company) ? $company->capital : old('capital')" required />
                                 <div>
-                                    00,000円
+                                    百万円
                                 </div>
                             </div>
                             <label for="capital" class="text-sm">
@@ -161,7 +161,7 @@
                             <div class="flex justify-start items-center">
                                 <x-text-input id="sales" class="w-32 text-right no-spin" placeholder="売上金" type="number" name="sales" :value="isset($company) ? $company->sales : old('sales')" />
                                 <div>
-                                    00,000円
+                                    百万円
                                 </div>
                             </div>
                             <label for="sales" class="text-sm">

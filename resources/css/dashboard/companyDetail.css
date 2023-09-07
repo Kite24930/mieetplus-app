@@ -158,6 +158,9 @@ main .editor {
 main .tellers-editor {
   width: calc(100dvw - 560px);
 }
+main .viewer:not(.container) {
+  width: calc(100dvw - 580px);
+}
 main .toastui-editor-tooltip .text {
   color: white;
 }
