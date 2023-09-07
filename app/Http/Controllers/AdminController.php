@@ -19,6 +19,83 @@ use Illuminate\Validation\Rules;
 
 class AdminController extends Controller
 {
+    private $faculties = [
+        '人文学部',
+        '教育学部',
+        '医学部',
+        '工学部',
+        '生物資源学部',
+        '人文社会科学研究科',
+        '教育学研究科',
+        '医学系研究科',
+        '工学研究科',
+        '生物資源学研究科',
+        '地域イノベーション学研究科',
+    ];
+
+    private $glade = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        'M1',
+        'M2',
+        'M3',
+        'M4',
+    ];
+
+    private $prefectures = [
+        '北海道',
+        '青森県',
+        '岩手県',
+        '宮城県',
+        '秋田県',
+        '山形県',
+        '福島県',
+        '茨城県',
+        '栃木県',
+        '群馬県',
+        '埼玉県',
+        '千葉県',
+        '東京都',
+        '神奈川県',
+        '新潟県',
+        '富山県',
+        '石川県',
+        '福井県',
+        '山梨県',
+        '長野県',
+        '岐阜県',
+        '静岡県',
+        '愛知県',
+        '三重県',
+        '滋賀県',
+        '京都府',
+        '大阪府',
+        '兵庫県',
+        '奈良県',
+        '和歌山県',
+        '鳥取県',
+        '島根県',
+        '岡山県',
+        '広島県',
+        '山口県',
+        '徳島県',
+        '香川県',
+        '愛媛県',
+        '高知県',
+        '福岡県',
+        '佐賀県',
+        '長崎県',
+        '熊本県',
+        '大分県',
+        '宮崎県',
+        '鹿児島県',
+        '沖縄県',
+    ];
+
     public function companyList() {
         $data = [
             'companies' => Company::all(),
@@ -301,5 +378,12 @@ class AdminController extends Controller
             'count' => StudentList::count(),
         ];
         return view('dashboard.student-list', $data);
+    }
+
+    public function studentDetail($id) {
+        $data = [
+            'student' => StudentList::find($id),
+        ];
+        return view('dashboard.student-detail', $data);
     }
 }

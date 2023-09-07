@@ -21,11 +21,11 @@
                     <thead class="back-grey-50 border-b">
                         <tr class="text-left">
                             <th class="p-4">ID</th>
+                            <th class="p-4">USER ID</th>
                             <th class="p-4">生徒名</th>
                             <th class="p-4">学部</th>
                             <th class="p-4">学年</th>
                             <th class="p-4">登録日</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,5 +37,5 @@
             </div>
         </div>
     </main>
-    @vite(['resources/js/dashboard/dashboard.js'])
+    @vite(['resources/js/dashboard/studentList.js'])
 </x-dashboard-template>
