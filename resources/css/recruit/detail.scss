@@ -29,6 +29,9 @@
         justify-content: center;
         align-items: center;
     }
+    &.company-pr {
+        width: 100%;
+    }
 }
 .modal {
     height: 100dvh;

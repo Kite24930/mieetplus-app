@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Follower;
+use App\Models\History;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -105,5 +106,24 @@ class ApiController extends Controller
             ];
             return response()->json($data, 500);
         }
+    }
+
+    public function historyAdd(Request $request) {
+        $target = History::where('company_id', $request->company_id)->where('student_id', $request->student_id)->whereDate('created_at', date('Y-m-d'))->first();
+        if (!isset($target)) {
+            $db = History::create([
+                'company_id' => $request->company_id,
+                'student_id' => $request->student_id,
+            ]);
+            $data = [
+                'msg' => 'ok',
+                'history' => $db,
+            ];
+        } else {
+            $data = [
+                'msg' => 'exist',
+            ];
+        }
+        return response()->json($data, 200);
     }
 }

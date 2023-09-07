@@ -10,6 +10,19 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CompanyFactory extends Factory
 {
+    private $faculties = [
+        '人文学部',
+        '教育学部',
+        '医学部',
+        '工学部',
+        '生物資源学部',
+        '人文社会科学研究科',
+        '教育学研究科',
+        '医学系研究科',
+        '工学研究科',
+        '生物資源学研究科',
+        '地域イノベーション学研究科',
+    ];
     /**
      * Define the model's default state.
      *
@@ -48,8 +61,8 @@ class CompanyFactory extends Factory
             'sales' => fake()->numberBetween(1000, 100000),
             'employee_number' => fake()->numberBetween(1, 100),
             'graduated_number' => fake()->numberBetween(1, 100),
-            'faculties' => fake()->realText(450),
-            'occupations' => fake()->realText(450),
+            'faculties' => $this->faculties[fake()->numberBetween(0, 10)],
+            'occupations' => fake()->realText(10),
             'recruit_name' => fake()->name(),
             'recruit_ruby' => fake()->name(),
             'recruit_email' => fake()->email(),

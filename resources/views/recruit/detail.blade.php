@@ -1,4 +1,11 @@
 <x-recruit.template :title="$company->name">
+    <script>
+        window.Laravel = {};
+        window.Laravel.company_id = {{ $company->user_id }};
+        @if(isset($user))
+            window.Laravel.user_id = {{ $user->id }};
+        @endif
+    </script>
     <div id="loading" class="w-full h-full fixed top-0 left-0 flex justify-center items-center z-1000">
         <div class="ring absolute">
             loading
@@ -54,7 +61,7 @@
                 @endif
             </div>
             @if(isset($company->notice))
-                <div class="w-full px-4 border border-green-600">
+                <div class="w-full pb-2 px-4 border border-green-600">
                     <div>
                         [お知らせ]
                     </div>
@@ -62,6 +69,33 @@
 
                     </div>
                     <textarea class="viewer-content" data-target="notice">{{ $company->notice }}</textarea>
+                </div>
+            @endif
+            @if($company->pr)
+                <div class="content-img company-pr w-full h-16 flex justify-center items-center" data-bs-target="companyPr">
+                    <div class="text-container">
+                        <div class="text-white text-center text-lg">
+                            会社PR
+                        </div>
+                    </div>
+                </div>
+                <div id="companyPr" tabindex="-1" aria-hidden="true" class="modal fixed top-0 left-0 right-0 z-600 hidden w-full bg-black">
+                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken company-content">
+                        <div class="absolute top-0 right-0 z-700 m-4">
+                            <button id="companyPrClose" type="button" class="p-3 text-3xl">
+                                <i class="bi bi-x-lg text-white"></i>
+                            </button>
+                        </div>
+                        <div class="w-full h-full flex flex-col justify-center items-start z-650 p-4">
+                            <div class="text-2xl font-bold text-white">
+                                【会社PR】
+                            </div>
+                            <div id="companyPrBox" class="content text-white p-2 w-full">
+
+                            </div>
+                            <textarea class="viewer-content" data-target="companyPrBox">{{ $company->pr }}</textarea>
+                        </div>
+                    </div>
                 </div>
             @endif
             @if($company->movie)

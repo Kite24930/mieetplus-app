@@ -35,6 +35,20 @@ const contentSet = () => {
     })
 }
 
+function historyAdd() {
+    const sendData = new URLSearchParams({
+        student_id: Laravel.user_id,
+        company_id: Laravel.company_id,
+    });
+    axios.post('/api/history', sendData)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
+
 const windowInit = () => {
     container.classList.add('flex');
     container.classList.remove('hidden');
@@ -45,6 +59,9 @@ const windowInit = () => {
         loading.classList.add('hidden');
     }, 1500);
     contentSet();
+    if (typeof Laravel.user_id !== 'undefined') {
+        historyAdd();
+    }
 }
 window.addEventListener('load', windowInit);
 

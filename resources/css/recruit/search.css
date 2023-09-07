@@ -539,6 +539,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+.content-img.company-pr {
+  width: 100%;
+}
 
 .modal {
   height: 100dvh;

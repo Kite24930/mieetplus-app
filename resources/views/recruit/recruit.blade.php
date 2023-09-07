@@ -15,7 +15,14 @@
             <span></span>
         </div>
     </div>
-    <div class="fixed top-0 right-0 z-510 h-[60px] px-4 flex items-center">
+    <div class="fixed top-0 right-0 z-510 w-full h-[60px] px-4 flex justify-between items-center">
+        <div>
+            @if($auth === 'admin' || $auth === 'company')
+                <a href="{{ route('dashboard') }}" class="bg-mieetcolor text-white rounded py-2 px-4">
+                    ダッシュボード
+                </a>
+            @endif
+        </div>
         <button id="filterDropdownBtn" data-dropdown-toggle="filter">
             <i class="bi bi-filter-left text-3xl"></i>
         </button>
