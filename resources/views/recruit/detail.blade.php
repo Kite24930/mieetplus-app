@@ -72,7 +72,7 @@
                 </div>
             @endif
             @if($company->pr)
-                <div class="content-img company-pr w-full h-16 flex justify-center items-center" data-bs-target="companyPr">
+                <div class="content-img pr w-full h-16 flex justify-center items-center" data-bs-target="companyPr">
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             会社PR
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div id="companyPr" tabindex="-1" aria-hidden="true" class="modal fixed top-0 left-0 right-0 z-600 hidden w-full bg-black">
-                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken company-content">
+                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken pr">
                         <div class="absolute top-0 right-0 z-700 m-4">
                             <button id="companyPrClose" type="button" class="p-3 text-3xl">
                                 <i class="bi bi-x-lg text-white"></i>
