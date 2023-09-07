@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\StudentList;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -296,7 +297,8 @@ class AdminController extends Controller
 
     public function studentList() {
         $data = [
-            'users' => User::all(),
+            'students' => StudentList::all(),
+            'count' => StudentList::count(),
         ];
         return view('dashboard.student-list', $data);
     }
