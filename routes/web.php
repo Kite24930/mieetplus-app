@@ -31,7 +31,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/studentList', [AdminController::class, 'studentList'])->name('studentList');
         Route::get('/company/add', [AdminController::class, 'companyAdd'])->name('companyAdd');
         Route::post('/company/add', [AdminController::class, 'companyAddPost'])->name('companyAddPost');
-        Route::get('/company/edit/{id}', [AdminController::class, 'companyEdit'])->name('companyEdit');
+        Route::get('/company/admin/detail/{id}', [AdminController::class, 'companyDetail'])->name('adminCompanyDetail');
+        Route::get('/company/admin/edit/{id}', [AdminController::class, 'companyEdit'])->name('adminCompanyEdit');
+        Route::post('/company/admin/edit/{id}', [AdminController::class, 'adminCompanyEditPost'])->name('adminCompanyEditPost');
     });
     Route::group(['permission:company'], function () {
         Route::get('/company/firstLogin', [CompanyController::class, 'firstLogin'])->name('companyFirstLogin');

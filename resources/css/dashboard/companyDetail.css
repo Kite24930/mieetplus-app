@@ -160,6 +160,7 @@ main .tellers-editor {
 }
 main .viewer:not(.container) {
   width: calc(100dvw - 580px);
+  text-wrap: wrap;
 }
 main .toastui-editor-tooltip .text {
   color: white;

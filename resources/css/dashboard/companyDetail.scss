@@ -58,6 +58,7 @@ main {
     }
     .viewer:not(.container) {
         width: calc(100dvw - 580px);
+        text-wrap: wrap;
     }
     .toastui-editor-tooltip .text {
         color: white;

@@ -24,6 +24,8 @@ export default defineConfig({
                 dashboard: 'resources/js/dashboard/dashboard.js',
                 companyList: 'resources/js/dashboard/companyList.js',
                 companyAdd: 'resources/js/dashboard/companyAdd.js',
+                adminCompanyDetail: 'resources/js/dashboard/adminCompanyDetail.js',
+                adminCompanyEdit: 'resources/js/dashboard/adminCompanyEdit.js',
                 companyDashboardDetail: 'resources/js/dashboard/company/companyDetail.js',
                 companyDetailEdit: 'resources/js/dashboard/company/companyDetailEdit.js',
                 followersList: 'resources/js/dashboard/company/followersList.js',

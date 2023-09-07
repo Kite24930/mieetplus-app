@@ -11,7 +11,7 @@
     </td>
     <td class="p-4">{{ explode(' ', $data->created_at)[0] }}</td>
     <td class="p-4">
-        <a href="{{ route('companyDetail', $data->id) }}" class="detail underline">
+        <a href="{{ route('adminCompanyDetail', $data->id) }}" class="detail underline">
             詳細
         </a>
     </td>
