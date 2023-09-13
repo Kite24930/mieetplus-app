@@ -99,7 +99,11 @@ class MainController extends Controller
         $data = [
             'top_service' => Service::find(1),
             'services' => Service::where('id', '<>', 1)->get(),
+            'auth' => Auth::check() ? Auth::user()->getRoleNames()[0] : 'guest',
         ];
+        if (Auth::check()) {
+            $data['user'] = Auth::user();
+        }
         return view('index', $data);
     }
 
@@ -809,7 +813,7 @@ class MainController extends Controller
                 $data = [
                     'user' => Auth::user(),
                 ];
-                break;
+                return redirect()->route('profile.show');
             default:
                 $data = [];
                 break;

@@ -8,8 +8,12 @@
                 </a>
             </div>
             <div class="h-[40px] flex justify-center items-center gap-9">
-                <a href="{{ route('login') }}" class="mieet-btn rounded w-[100px] md:w-[150px] h-full text-white text-sm md:text-base flex justify-center items-center">ログイン</a>
-                <a href="{{ route('register') }}" class="mieet-btn rounded w-[100px] md:w-[150px] h-full text-white text-sm md:text-base flex justify-center items-center">新規登録</a>
+                @if($auth === 'guest')
+                    <a href="{{ route('login') }}" class="mieet-btn rounded w-[100px] md:w-[150px] h-full text-white text-sm md:text-base flex justify-center items-center">ログイン</a>
+                    <a href="{{ route('register') }}" class="mieet-btn rounded w-[100px] md:w-[150px] h-full text-white text-sm md:text-base flex justify-center items-center">新規登録</a>
+                @else
+                    <a href="{{ route('dashboard') }}" class="mieet-btn rounded w-[100px] md:w-[150px] h-full text-white text-sm md:text-base flex justify-center items-center"><i class="bi bi-person-circle text-white"></i> {{ $user->name }}</a>
+                @endif
             </div>
         </div>
     </header>
