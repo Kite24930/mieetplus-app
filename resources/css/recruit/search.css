@@ -618,6 +618,8 @@ body {
 }
 
 .movie {
+  border: solid var(--mieet-color) 3px;
+  cursor: pointer;
   background-image: url("/storage/movie.jpg");
   background-position: center;
   background-size: cover;

@@ -158,6 +158,16 @@
                                             【募集職種】{{ $company->occupations }}
                                         </li>
                                     @endif
+                                    @if(isset($company->recruit_name))
+                                        <li>
+                                            【採用担当者】{{ $company->recruit_name }}({{ $company->recruit_ruby }})
+                                        </li>
+                                    @endif
+                                    @if(isset($company->recruit_email))
+                                        <li>
+                                            【採用担当者メールアドレス】<a href="mailto:{{ $company->recruit_email }}">{{ $company->recruit_email }}</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -370,6 +380,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <x-recruit.navbar></x-recruit.navbar>
     </div>
