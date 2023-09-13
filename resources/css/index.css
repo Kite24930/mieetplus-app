@@ -55,62 +55,41 @@
   color: #6B7280;
 }
 
-header {
-  height: 100dvh;
-  width: 250px;
+.mieet-btn {
+  background: linear-gradient(270deg, #A4EAC0 0%, #56D3B5 96.67%);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.mieet-btn:hover {
+  background: linear-gradient(270deg, #5fe894 0%, #30efc2 96.67%);
 }
 
-body {
-  padding-top: 0;
-  padding-left: 250px;
-  background-color: var(--green-background);
+#main-visual {
+  background: linear-gradient(291deg, #F4EBFF -3.27%, #E5FAF3 32.46%, #E9FFF7 47.83%, #EBFBF5 98.89%);
 }
 
-.green-background {
-  background-color: var(--green-color);
-  color: white;
+.bg-mieet-green {
+  background-color: #73CF98;
 }
 
-.badge {
-  font-size: 10px;
+.text-mieet-green {
+  color: #73CF98;
 }
 
-.text-grey-900 {
-  color: #111928;
+.text-color {
+  color: #4F5E57;
 }
 
-.text-grey-500 {
-  color: #6B7280;
+.catch-text {
+  border-left: 4px solid var(--green-color);
+}
+.catch-text * {
+  color: var(--green-color);
+  text-decoration: underline;
 }
 
-.back-grey-50 {
-  background-color: #F9FAFB;
+#company {
+  background: linear-gradient(115deg, #CAD7CB 4.66%, #B9CCCD 62.75%, #E8E8E8 97.6%);
 }
 
-.bg-red {
-  background-color: #FF6C75;
-}
-
-.search-box {
-  border-radius: 8px;
-  background-color: #F9FAFB;
-  border: 1px solid #D1D5DB;
-}
-.search-box input:focus {
-  box-shadow: none;
-}
-
-.rounded-badge {
-  background-color: #DEF7EC;
-  color: #03543F;
-}
-
-input::placeholder {
-  color: #ACB6BE;
-}
-
-header .link:hover {
-  background-color: rgba(88, 108, 97, 0.2);
-}
-
-/*# sourceMappingURL=companySetting.css.map */
+/*# sourceMappingURL=index.css.map */

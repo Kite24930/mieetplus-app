@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Filter;
 use App\Models\Follower;
 use App\Models\FollowerList;
+use App\Models\Service;
 use App\Models\Student;
 use App\Models\StudentList;
 use App\Models\User;
@@ -95,7 +96,11 @@ class MainController extends Controller
     ];
 
     public function index() {
-        return view('index');
+        $data = [
+            'top_service' => Service::find(1),
+            'services' => Service::where('id', '<>', 1)->get(),
+        ];
+        return view('index', $data);
     }
 
     public function recruit(Request $request) {

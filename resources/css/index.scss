@@ -1,0 +1,38 @@
+@import "common";
+
+.mieet-btn {
+    background: linear-gradient(270deg, #A4EAC0 0%, #56D3B5 96.67%);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+    cursor: pointer;
+    &:hover {
+        background: linear-gradient(270deg, #5fe894 0%, #30efc2 96.67%);
+    }
+}
+
+#main-visual {
+    background: linear-gradient(291deg, #F4EBFF -3.27%, #E5FAF3 32.46%, #E9FFF7 47.83%, #EBFBF5 98.89%);
+}
+
+.bg-mieet-green {
+    background-color: #73CF98;
+}
+
+.text-mieet-green {
+    color: #73CF98;
+}
+
+.text-color {
+    color: #4F5E57
+}
+
+.catch-text {
+    border-left: 4px solid var(--green-color);
+    * {
+        color: var(--green-color);
+        text-decoration: underline;
+    }
+}
+
+#company {
+    background: linear-gradient(115deg, #CAD7CB 4.66%, #B9CCCD 62.75%, #E8E8E8 97.6%);
+}
