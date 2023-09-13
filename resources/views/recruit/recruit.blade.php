@@ -309,6 +309,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="company-footer w-full absolute left-0 bottom-8 flex justify-center z-750">
+                                        <a href="{{ route('companyDetailPage', $company->user_id) }}" class="py-2 px-4 bg-white rounded-full">企業ページへ</a>
+                                    </div>
                                     <div class="insideSwiper w-full h-full">
                                         <div class="relative w-5/6 swiper-wrapper">
                                             <div class="swiper-slide flex flex-col justify-center items-center" style="background-image: url('@if(isset($company->tellers_img_1)){{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }}@else{{ asset('storage/office.jpg') }}@endif')">
@@ -353,8 +356,10 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="absolute bottom-0 left-0 right-0 w-full z-700 flex justify-between text-4xl p-4 text-mieetcolor">
+                    <div class="absolute bottom-0 left-0 w-auto z-700 flex justify-center text-4xl p-4 text-mieetcolor">
                         <i id="modalLeft" class="bi bi-arrow-left-circle-fill"></i>
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-auto z-700 flex justify-center text-4xl p-4 text-mieetcolor">
                         <i id="modalRight" class="bi bi-arrow-right-circle-fill"></i>
                     </div>
                 </div>
