@@ -394,10 +394,19 @@
                                 @endif
                             </div>
                             <div class="text-sm">
-                                <div id="posts-content-{{ $company->user_id }}" class="posts-content content folded px-3">
+                                <div class="font-bold">
+                                    @if(isset($company->notice))
+                                        【お知らせ】
+                                    @elseif(isset($company->pr))
+                                        【PR】
+                                    @elseif(isset($company->content))
+                                        【事業内容】
+                                    @endif
+                                </div>
+                                <div id="posts-content-{{ $company->user_id }}" class="posts-content content folded px-3 h-10">
 
                                 </div>
-                                <textarea class="viewer-content hidden" data-target="posts-content-{{ $company->user_id }}">@if(isset($company->pr)){{ $company->pr }}@else{{ $company->content }}@endif</textarea>
+                                <textarea class="viewer-content hidden" data-target="posts-content-{{ $company->user_id }}">@if(isset($company->notice)){{ $company->notice }}@elseif(isset($company->pr)){{ $company->pr }}@elseif(isset($company->content)){{ $company->content }}@endif</textarea>
                                 <div class="p-3 text-grey-500">
                                     <button type="button" class="posts-expand" data-bs-target="posts-content-{{ $company->user_id }}">
                                         続きを読む

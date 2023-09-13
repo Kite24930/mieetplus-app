@@ -389,7 +389,7 @@ const postsExpand = (el) => {
     el.addEventListener('click', () => {
         const target = el.getAttribute('data-bs-target');
         const targetEl = document.getElementById(target);
-        targetEl.classList.remove('folded');
+        targetEl.classList.remove('folded', 'h-10');
         el.remove();
     });
 }
@@ -456,13 +456,25 @@ const postsAdd = () => {
             postsBody.appendChild(postsContent);
             const postsText = document.createElement('div');
             postsText.classList.add('text-sm');
+            const postsContentType = document.createElement('div');
+            postsContentType.classList.add('font-bold');
+            if (data.notice !== null) {
+                postsContentType.textContent = '【お知らせ】';
+            } else if (data.pr !== null) {
+                postsContentType.textContent = '【PR】';
+            } else if (data.content !== null) {
+                postsContentType.textContent = '【事業内容】';
+            }
+            postsText.appendChild(postsContentType);
             const postsContentText = document.createElement('div');
-            postsContentText.classList.add('posts-content', 'content', 'folded', 'px-3');
+            postsContentText.classList.add('posts-content', 'content', 'folded', 'px-3', 'h-10');
             postsContentText.setAttribute('id', 'posts-content-' + data.user_id)
             let content;
-            if (data.pr !== null) {
+            if (data.notice !== null) {
+                content = data.notice;
+            } else if (data.pr !== null) {
                 content = data.pr;
-            } else {
+            } else if (data.content !== null) {
                 content = data.content;
             }
             const viewer = new Editor.factory({

@@ -591,6 +591,9 @@ body {
 #posts .posts-body .posts-content {
   width: 100%;
 }
+#posts .posts-body .posts-content div {
+  text-wrap: wrap;
+}
 #posts .posts-body .posts-content.folded {
   overflow: hidden;
   text-overflow: ellipsis;

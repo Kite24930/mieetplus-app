@@ -90,6 +90,9 @@
         }
         .posts-content {
             width: 100%;
+            div {
+                text-wrap: wrap;
+            }
             &.folded {
                 overflow: hidden;
                 text-overflow: ellipsis;
