@@ -68,7 +68,7 @@ class CompanyFactory extends Factory
             'recruit_email' => fake()->email(),
             'top_img' => fake()->imageUrl(640, 480, 'cats'),
             'movie' => fake()->url(),
-            'logo' => fake()->randomElement(['jpg', 'png', 'gif']),
+            'logo' => fake()->url(),
             'mail_permission' => fake()->numberBetween(0, 1),
             'status' => 1,
         ];
