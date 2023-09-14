@@ -418,6 +418,9 @@
 header {
   height: 60px;
 }
+header a {
+  width: fit-content;
+}
 
 body {
   padding-top: 60px;
