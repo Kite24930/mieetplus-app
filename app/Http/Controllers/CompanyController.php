@@ -198,7 +198,8 @@ class CompanyController extends Controller
                 }
             }
             $fileName = $file->getClientOriginalName();
-            $file->storeAs('public/company/'.$id, $fileName);
+//            $file->storeAs('public/company/'.$id, $fileName);
+            Storage::putFileAs('public/company/'.$id, $file, $fileName);
             return $fileName;
         }
 
