@@ -8,13 +8,13 @@
             <div><i class="bi bi-search text-2xl"></i></div>
             <div class="text-sm">検索</div>
         </a>
-        <a href="{{ route('followed') }}" class="flex flex-col justify-center items-center w-1/4">
-            <div><i class="bi bi-list-stars text-2xl"></i></div>
-            <div class="text-sm">フォロー中</div>
-        </a>
-        <a href="{{ route('profile.show') }}" class="flex flex-col justify-center items-center w-1/4">
-            <div><i class="bi bi-person-circle text-2xl"></i></div>
-            <div class="text-sm">アカウント</div>
-        </a>
+{{--        <a href="{{ route('followed') }}" class="flex flex-col justify-center items-center w-1/4">--}}
+{{--            <div><i class="bi bi-list-stars text-2xl"></i></div>--}}
+{{--            <div class="text-sm">フォロー中</div>--}}
+{{--        </a>--}}
+{{--        <a href="{{ route('profile.show') }}" class="flex flex-col justify-center items-center w-1/4">--}}
+{{--            <div><i class="bi bi-person-circle text-2xl"></i></div>--}}
+{{--            <div class="text-sm">アカウント</div>--}}
+{{--        </a>--}}
     </div>
 </div>
