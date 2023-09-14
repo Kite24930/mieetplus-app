@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
-            $table->tinyInteger('fist_login')->default(1);
+            $table->tinyInteger('first_login')->default(1);
         });
     }
 
