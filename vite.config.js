@@ -22,6 +22,7 @@ export default defineConfig({
                 app: 'resources/js/app.js',
                 auth: 'resources/js/auth.js',
                 index: 'resources/js/index.js',
+                termsPolicy: 'resources/js/terms_policy.js',
                 recruit: 'resources/js/recruit/recruit.js',
                 companyDetail: 'resources/js/recruit/companyDetail.js',
                 dashboard: 'resources/js/dashboard/dashboard.js',

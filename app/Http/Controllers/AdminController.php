@@ -132,7 +132,7 @@ class AdminController extends Controller
 
             event(new Registered($user));
 
-            $contact = 'contact@mie-projectm.com';
+            $contact = 'info@mieet-plus.com';
 
             $body = $request->name."様%0D%0A%0D%0A平素より大変お世話になっております。%0D%0Aこの度はMieet Plus 就活部にご登録いただきまして誠にありがとうございます。%0D%0Aお手続きよりお時間をいただきまして、ありがとうございました。%0D%0A%0D%0AMieet Plus 就活部への登録が完了致しました。%0D%0A%0D%0A以下のURLからログインしてください。%0D%0Ahttps://mieet-plus.com/login%0D%0A%0D%0Aアカウント情報のメールアドレスはこのお送りしているメールアドレスをご使用ください。%0D%0Aパスワード：".$password."%0D%0A※初回ログイン時に任意のパスワードに変更する必要があります。%0D%0A%0D%0A%0D%0Aご不明な点等ありましたら、お手数をおかけいたしますが、下記の問い合わせ先もしくは弊社の担当までご連絡ください。%0D%0A%0D%0A今後ともどうぞよろしくお願い致します。%0D%0A%0D%0A※このメールに心当たりがない場合は、お手数ですが破棄してください。%0D%0A%0D%0A問い合わせ先%0D%0AMieet Plus 運営事務局(株式会社プロジェクトM)%0D%0AEmail：".$contact;
 

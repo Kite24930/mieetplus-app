@@ -820,4 +820,12 @@ class MainController extends Controller
         }
         return view('dashboard.dashboard', $data);
     }
+
+    public function terms() {
+        return view('terms');
+    }
+
+    public function privacyPolicy() {
+        return view('privacy-policy');
+    }
 }

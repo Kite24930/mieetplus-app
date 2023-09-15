@@ -203,6 +203,7 @@
             <div>
                 <ul>
                     <li><a href="{{ __('https://www.mie-projectm.com') }}">運営企業</a></li>
+                    <li><a href="{{ route('terms') }}">利用規約</a></li>
                     <li><a href="{{ route('privacyPolicy') }}">プライバシーポリシー</a></li>
                 </ul>
             </div>
