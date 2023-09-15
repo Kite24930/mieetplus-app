@@ -17,13 +17,7 @@
             <i class="bi bi-caret-left-fill"></i>戻る
         </button>
     </div>
-    <div class="w-full flex justify-center items-center bg-yellow-500">
-        <div class="text-red-500 p-4 text-xl">
-            このページはデモページです。
-            <br>
-            表示されている企業情報はデモ用のデータであり、実際の企業情報は登録されていません。
-        </div>
-    </div>
+    <x-demo></x-demo>
     <div id="container" class="w-full justify-center bg-mieetcolor hidden">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="top-img w-full h-32 object-cover">
