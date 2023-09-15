@@ -1,0 +1,15 @@
+@import "common";
+
+body {
+    padding-top: 80px;
+    background: linear-gradient(291deg, #F4EBFF -3.27%, #E5FAF3 32.46%, #E9FFF7 47.83%, #EBFBF5 98.89%);
+    background-attachment: fixed;
+}
+
+.indent {
+    text-indent: 1rem;
+}
+
+.list-lower-roman {
+    list-style-type: lower-roman;
+}

@@ -24,6 +24,7 @@ Route::get('/recruit/company/{id}', [MainController::class, 'companyDetail'])->n
 Route::get('/recruit/search', [MainController::class, 'search'])->name('search');
 Route::post('/recruit/search', [MainController::class, 'searchPost'])->name('searchPost');
 Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/terms', [MainController::class, 'terms'])->name('terms');
 Route::get('/privacy-policy', [MainController::class, 'privacyPolicy'])->name('privacyPolicy');
 
 Route::middleware('auth')->group(function () {
