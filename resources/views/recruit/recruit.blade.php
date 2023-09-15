@@ -240,11 +240,17 @@
             </div>
         </div>
     </div>
-
+    <div class="w-full flex justify-center items-center bg-yellow-500">
+        <div class="text-red-500 p-4 text-xl">
+            このページはデモページです。
+            <br>
+            表示されている企業情報はデモ用のデータであり、実際の企業情報は登録されていません。
+        </div>
+    </div>
     <div id="container" class="w-full justify-center bg-mieetcolor hidden">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             {{-- テラーズ表示範囲 start --}}
-            <div id="tellers" class="swiper mySwiper container z-0 bg-white">
+            <div id="tellers" class="swiper mySwiper container z-0 bg-white pt-2">
                 <div class="swiper-wrapper">
                     @foreach($tellers_companies as $i => $company)
                         <div class="swiper-slide flex flex-col">
