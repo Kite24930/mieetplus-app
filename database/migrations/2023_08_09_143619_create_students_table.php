@@ -16,6 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->text('univ_email')->nullable();
+            $table->tinyInteger('sex', 2);
+            $table->date('birthday');
             $table->text('faculty');
             $table->integer('glade');
             $table->text('screen_name')->nullable();

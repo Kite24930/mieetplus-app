@@ -20,24 +20,92 @@
                 </div>
             </div>
             <div class="w-full border-t py-2 px-4">
+                <div class="text-grey-500 text-sm">[性別]</div>
+                <div class="pl-2">
+                    @switch($account->sex)
+                        @case(0) 男性 @break
+                        @case(1) 女性 @break
+                        @case(2) その他 @break
+                        @case(3) 非回答 @break
+                    @endswitch
+                </div>
+            </div>
+            <div class="w-full border-t py-2 px-4">
+                <div class="text-grey-500 text-sm">[誕生日]</div>
+                <div class="pl-2">
+                    {{ date('Y年m月d日', strtotime($account->birthday)) }}
+                </div>
+            </div>
+            <div class="w-full border-t py-2 px-4">
                 <div class="text-grey-500 text-sm">[学部・学年]</div>
-                <div class="pl-2">{{ $account->faculty }}  {{ $account->glade }}年</div>
+                <div class="pl-2">
+                    {{ $account->faculty }}  {{ $account->glade }}年
+                </div>
             </div>
             <div class="w-full border-t py-2 px-4">
                 <div class="text-grey-500 text-sm">[登録メールアドレス]</div>
-                <div class="pl-2">@if(isset($as->univ_email)){{ $account->univ_email }}@else{{ $account->email }}@endif</div>
+                <div class="pl-2">
+                    @if(isset($account->univ_email))
+                        {{ $account->univ_email }}
+                    @else
+                        {{ $account->email }}
+                    @endif
+                </div>
+            </div>
+            <div class="w-full border-t py-2 px-4">
+                <div class="text-grey-500 text-sm">[メールアドレス認証]</div>
+                @if($request->session()->has('status'))
+                    <div class="text-xs text-grey-500 pl-2">
+                        {{ $request->session()->get('status') }}
+                    </div>
+                @endif
+                <div class="pl-2 flex items-center gap-4">
+                    @if(isset($account->email_verified_at))
+                        認証済み
+                    @elseif(isset($account->univ_email))
+                        未認証
+                        <form action="{{ route('verification.send') }}" method="POST">
+                            @csrf
+                            <a href="{{ route('verification.send') }}" class="my-3" onclick="event.preventDefault();this.closest('form').submit();">
+                                <div class="flex justify-start items-center link rounded p-2 bg-greencolor">
+                                    認証用メールを送信
+                                </div>
+                            </a>
+                        </form>
+                    @else
+                        登録メールアドレスを学籍メールに変更してください。
+                    @endif
+                </div>
             </div>
             <div class="w-full border-t py-2 px-4">
                 <div class="text-grey-500 text-sm">[表示名]</div>
-                <div class="pl-2">@if(isset($account->screen_name)){{ $account->screen_name }}@else{{ $account->name }}@endif</div>
+                <div class="pl-2">
+                    @if(isset($account->screen_name))
+                        {{ $account->screen_name }}
+                    @else
+                        {{ $account->name }}
+                    @endif
+                </div>
             </div>
             <div class="w-full border-t py-2 px-4">
                 <div class="text-grey-500 text-sm">[通知メールの許可]</div>
-                <div class="pl-2">@if($account->notice == 0) 許可しない @else 許可する @endif</div>
+                <div class="pl-2">
+                    @if($account->notice == 0)
+                        許可しない
+                    @else
+                        許可する
+                    @endif
+                </div>
             </div>
             <div class="w-full border-t py-2 px-4">
                 <div class="text-grey-500 text-sm">[閲覧履歴データの利用]</div>
-                <div class="pl-2">@if($account->history == 0) 許可しない @else 許可する @endif</div>
+                <div class="pl-2">
+                    @if($account->history == 0)
+                        許可しない
+                    @else
+                        許可する
+                    @endif
+                </div>
             </div>
             <div class="w-full border-t py-2 px-4 flex justify-center">
                 <form action="{{ route('logout') }}" method="POST">
