@@ -110,7 +110,21 @@
                                   name="password_confirmation" required autocomplete="new-password" />
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
-                <x-primary-button class="mb-9">
+                <div class="my-8 flex flex-col justify-center items-start">
+                    <div class="flex items-center">
+                        <x-text-input type="checkbox" id="terms_check" class="mr-2" />
+                        <label for="terms_check">
+                            <a href="{{ route('terms') }}" target="_blank" class="underline text-black">利用規約</a>の内容を理解し、同意します。
+                        </label>
+                    </div>
+                    <div class="flex items-center">
+                        <x-text-input type="checkbox" id="privacy_check" class="mr-2" />
+                        <label for="privacy_check">
+                            <a href="{{ route('privacyPolicy') }}" target="_blank" class="underline text-black">プライバシーポリシー</a>の内容を理解し、同意します。
+                        </label>
+                    </div>
+                </div>
+                <x-primary-button id="register_btn" class="mb-9 disabled" disabled>
                     {{ __('新規登録') }}
                 </x-primary-button>
                 <div class="flex items-center justify-center mt-4">
@@ -121,4 +135,5 @@
             </form>
         </div>
     </div>
+    @vite(['resources/js/auth/register.js'])
 </x-auth-template>

@@ -21,6 +21,7 @@ export default defineConfig({
                 appCss: 'resources/css/app.css',
                 app: 'resources/js/app.js',
                 auth: 'resources/js/auth.js',
+                register: 'resources/js/auth/register.js',
                 index: 'resources/js/index.js',
                 termsPolicy: 'resources/js/terms_policy.js',
                 recruit: 'resources/js/recruit/recruit.js',
