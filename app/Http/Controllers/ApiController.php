@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Follower;
 use App\Models\History;
+use App\Models\StudentList;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,6 +66,7 @@ class ApiController extends Controller
     }
 
     public function followedAdd(Request $request) {
+        $student = StudentList::where('user_id', $request->student_id)->first();
         $values = [
             'company_id' => $request->company_id,
             'student_id' => $request->student_id,
@@ -73,11 +75,19 @@ class ApiController extends Controller
             DB::beginTransaction();
             $followed = Follower::create($values);
             DB::commit();
-            $data = [
-                'msg' => 'ok',
-                'followed' => $followed,
-            ];
-            return response()->json($data, 200);
+            if (isset($student->univ_email) && isset($student->email_verified_at)) {
+                $data = [
+                    'msg' => 'ok',
+                    'followed' => $followed,
+                ];
+                return response()->json($data, 200);
+            } else {
+                $data = [
+                    'msg' => 'not_verified',
+                    'followed' => $followed,
+                ];
+                return response()->json($data, 200);
+            }
         } catch (\Exception $e) {
             DB::rollBack();
             $data = [

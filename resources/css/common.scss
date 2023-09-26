@@ -39,7 +39,7 @@
     padding-bottom: 13px;
     border: none;
     cursor: pointer;
-    &:hover {
+    &:hover:not(.disabled) {
         background-color: #5DCB8E;
     }
 }

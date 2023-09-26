@@ -22,6 +22,9 @@ const followChange = (el) => {
             .then(res => {
                 el.classList.add('followed');
                 el.innerHTML = '<i class="bi bi-balloon-heart-fill text-white"></i>フォロー中';
+                if (res.data.msg === 'not_verified') {
+                    window.alert("メールアドレスの認証が完了していません。\nメールアドレスの認証が完了後にフォローリストの閲覧が可能になります。\nメールアドレスの認証はマイページから行えます。");
+                }
             })
             .catch(err => {
                 console.log(err);

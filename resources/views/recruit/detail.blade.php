@@ -107,7 +107,7 @@
                 </div>
             @endif
             <div class="flex justify-start items-center flex-wrap w-full m-0 p-0">
-                <div class="content-img profile" data-bs-target="profile">
+                <div class="content-img profile-icon" data-bs-target="profile">
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             会社概要
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img company-content" data-bs-target="companyContent">
+                <div class="content-img company-content-icon" data-bs-target="companyContent">
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             事業内容
@@ -199,7 +199,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img job-description" data-bs-target="jobDescription" @if(isset($company->tellers_img_1)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }})" @endif>
+                <div class="content-img job-description-icon" data-bs-target="jobDescription" @if(isset($company->tellers_img_1)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }})" @endif>
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             実際の
@@ -226,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img culture" data-bs-target="culture" @if(isset($company->tellers_img_2)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }})" @endif>
+                <div class="content-img culture-icon" data-bs-target="culture" @if(isset($company->tellers_img_2)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }})" @endif>
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             社内の雰囲気
@@ -253,7 +253,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img environment" data-bs-target="environment" @if(isset($company->tellers_img_3)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }})" @endif>
+                <div class="content-img environment-icon" data-bs-target="environment" @if(isset($company->tellers_img_3)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }})" @endif>
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             労働環境
@@ -278,7 +278,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img feature" data-bs-target="feature">
+                <div class="content-img feature-icon" data-bs-target="feature">
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             他社と比べた
@@ -305,7 +305,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img career-path" data-bs-target="careerPath">
+                <div class="content-img career-path-icon" data-bs-target="careerPath">
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             キャリアパス
@@ -330,7 +330,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img desired-person" data-bs-target="desiredPerson">
+                <div class="content-img desired-person-icon" data-bs-target="desiredPerson">
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             求める人物像
@@ -355,7 +355,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img transfer" data-bs-target="transfer">
+                <div class="content-img transfer-icon" data-bs-target="transfer">
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             異動・転勤

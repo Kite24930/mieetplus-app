@@ -28,10 +28,42 @@
                 </div>
                 <div class="w-full flex flex-col py-2 px-4">
                     <div class="text-sm">学籍メール</div>
-                    <div class="text-xs text-grey-500 pl-2">@m.mie-u.ac.jpのアドレスのみ登録できます。</div>
                     <div>
-                        <x-text-input id="email" class="block mt-1 w-full h-12" placeholder="学籍メール" type="text" name="email" :value="$account->univ_email" required autocomplete="email" />
+                        @if(isset($account->univ_email) && str_contains($account->univ_email, '@m.mie-u.ac.jp'))
+                            <x-text-input id="email" class="block mt-1 w-full h-12 disabled" placeholder="学籍メール" type="text" name="email" :value="$account->univ_email" required autocomplete="email" disabled />
+                        @else
+                            <div class="text-xs text-grey-500 pl-2">@m.mie-u.ac.jpのアドレスを登録していただけると全機能がご利用できます。</div>
+                            <x-text-input id="email" class="block mt-1 w-full h-12" placeholder="学籍メール" type="text" name="email" :value="$account->univ_email" required autocomplete="email" />
+                        @endif
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    </div>
+                </div>
+                <div class="w-full flex flex-col py-2 px-4">
+                    <div class="text-sm">性別</div>
+                    <div class="text-xs text-grey-500 pl-2">変更できません。</div>
+                    <div>
+                        @switch($account->sex)
+                            @case(0)
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="男性" disabled />
+                                @break
+                            @case(1)
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="女性" disabled />
+                                @break
+                            @case(2)
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="その他" disabled />
+                                @break
+                            @case(3)
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="非回答" disabled />
+                                @break
+                        @endswitch
+                    </div>
+                </div>
+                <div class="w-full flex flex-col py-2 px-4">
+                    <div class="text-sm">誕生日</div>
+                    <div class="text-xs text-grey-500 pl-2">変更できません。</div>
+                    <div>
+                        <x-text-input class="block mt-1 w-full h-12 disabled" type="text" :value="$account->birthday" disabled />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                 </div>
                 <div class="w-full flex flex-col py-2 px-4">
@@ -60,7 +92,11 @@
                     <div class="text-sm">表示名</div>
                     <div class="text-xs text-grey-500 pl-2">企業から見える表示名を設定できます(未設定の場合は氏名が表示されます)</div>
                     <div>
-                        <x-text-input id="screen_name" class="block mt-1 w-full h-12" placeholder="表示名" type="text" name="screen_name" :value="$account->screen_name" />
+                        @if(isset($account->screen_name))
+                            <x-text-input id="screen_name" class="block mt-1 w-full h-12" placeholder="表示名" type="text" name="screen_name" :value="$account->screen_name" />
+                        @else
+                            <x-text-input id="screen_name" class="block mt-1 w-full h-12" placeholder="表示名" type="text" name="screen_name" :value="$account->name" />
+                        @endif
                         <x-input-error :messages="$errors->get('screen_name')" class="mt-2" />
                     </div>
                 </div>

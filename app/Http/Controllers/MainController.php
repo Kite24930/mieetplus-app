@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\Filter;
 use App\Models\Follower;
 use App\Models\FollowerList;
@@ -14,6 +16,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
@@ -822,10 +825,86 @@ class MainController extends Controller
     }
 
     public function terms() {
-        return view('terms');
+        $data = [
+            'services' => Service::all(),
+        ];
+        return view('terms', $data);
     }
 
     public function privacyPolicy() {
-        return view('privacy-policy');
+        $data = [
+            'services' => Service::all(),
+        ];
+        return view('privacy-policy', $data);
+    }
+
+    public function contact(Request $request) {
+        $data = [
+            'services' => Service::all(),
+        ];
+        return view('contact', $data);
+    }
+
+    public function contactPost(Request $request) {
+        $validate = [
+            'types' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'tel' => ['nullable', 'string'],
+            'email' => ['required', 'string', 'email'],
+            'contents' => ['required', 'string'],
+        ];
+        $validateMsg = [
+            'types.required' => 'お問い合わせ種別を選択してください。',
+            'address.required' => '住所を入力してください。',
+            'tel.string' => '電話番号は数字で入力してください。',
+            'email.required' => 'メールアドレスを入力してください。',
+            'email.email' => 'メールアドレスの形式が正しくありません。',
+            'contents.required' => 'お問い合わせ内容を入力してください。',
+        ];
+        switch ($request->types) {
+            case 'corporation':
+                $validate['corporate_name'] = ['required', 'string'];
+                $validate['corporate_hp'] = ['nullable', 'url'];
+                $validate['corporate_parson'] = ['required', 'string'];
+                $validate['corporate_ruby'] = ['required', 'string'];
+                $validateMsg['corporate_name.required'] = '企業名を入力してください。';
+                $validateMsg['corporate_hp.url'] = 'URLの形式が正しくありません。';
+                $validateMsg['corporate_parson.required'] = '担当者名を入力してください。';
+                $validateMsg['corporate_ruby.required'] = '担当者名（ふりがな）を入力してください。';
+                break;
+            case 'individual':
+                $validate['individual_name'] = ['required', 'string'];
+                $validate['individual_ruby'] = ['required', 'string'];
+                $validateMsg['individual_name.required'] = '氏名を入力してください。';
+                $validateMsg['individual_ruby.required'] = '氏名（ふりがな）を入力してください。';
+                break;
+        }
+        $request->validate($validate, $validateMsg);
+        try {
+            Contact::create([
+                'types' => $request->types,
+                'corporate_name' => $request->corporate_name,
+                'corporate_hp' => $request->corporate_hp,
+                'corporate_parson' => $request->corporate_parson,
+                'corporate_ruby' => $request->corporate_ruby,
+                'individual_name' => $request->individual_name,
+                'individual_ruby' => $request->individual_ruby,
+                'address' => $request->address,
+                'tel' => $request->tel,
+                'email' => $request->email,
+                'contents' => $request->contents,
+            ]);
+            Mail::send(new ContactMail($request));
+            return redirect()->route('contactSuccess');
+        } catch (\Exception $e) {
+            return redirect()->route('contact')->with('error', 'お問い合わせに失敗しました。')->with('error_detail', $e->getMessage());
+        }
+    }
+
+    public function contactSuccess() {
+        $data = [
+            'services' => Service::all(),
+        ];
+        return view('contact-success', $data);
     }
 }
