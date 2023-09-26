@@ -27,6 +27,7 @@ class ContactMail extends Mailable
     public function build() {
         return $this->to($this->data->email)
             ->subject('【就活サイト】お問い合わせありがとうございます')
+            ->cc('info@mieet-plus.com')
             ->view('mails.contact')
             ->with([
                 'data' => $this->data,
