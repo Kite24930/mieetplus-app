@@ -46,8 +46,18 @@
         }
     }
 }
+.notice {
+    background-image: url("/storage/notice.jpg");
+    background-position: center;
+    background-size: cover;
+}
 .profile {
     background-image: url("/storage/profile.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.profile-icon {
+    background-image: url("/storage/icon/profile.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -56,8 +66,18 @@
     background-position: center;
     background-size: cover;
 }
+.company-content-icon {
+    background-image: url("/storage/icon/company-content.jpg");
+    background-position: center;
+    background-size: cover;
+}
 .job-description {
     background-image: url("/storage/job-description.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.job-description-icon {
+    background-image: url("/storage/icon/job-description.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -66,8 +86,18 @@
     background-position: center;
     background-size: cover;
 }
+.culture-icon {
+    background-image: url("/storage/icon/culture.jpg");
+    background-position: center;
+    background-size: cover;
+}
 .environment {
     background-image: url("/storage/environment.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.environment-icon {
+    background-image: url("/storage/icon/environment.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -76,8 +106,18 @@
     background-position: center;
     background-size: cover;
 }
+.feature-icon {
+    background-image: url("/storage/icon/feature.jpg");
+    background-position: center;
+    background-size: cover;
+}
 .career-path {
     background-image: url("/storage/career-path.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.career-path-icon {
+    background-image: url("/storage/icon/career-path.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -86,8 +126,18 @@
     background-position: center;
     background-size: cover;
 }
+.desired-person-icon {
+    background-image: url("/storage/icon/desired-person.jpg");
+    background-position: center;
+    background-size: cover;
+}
 .transfer {
     background-image: url("/storage/transfer.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.transfer-icon {
+    background-image: url("/storage/icon/transfer.jpg");
     background-position: center;
     background-size: cover;
 }
