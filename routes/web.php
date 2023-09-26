@@ -26,6 +26,9 @@ Route::post('/recruit/search', [MainController::class, 'searchPost'])->name('sea
 Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/terms', [MainController::class, 'terms'])->name('terms');
 Route::get('/privacy-policy', [MainController::class, 'privacyPolicy'])->name('privacyPolicy');
+Route::get('/contact', [MainController::class, 'contact'])->name('contact');
+Route::post('/contact', [MainController::class, 'contactPost'])->name('contactPost');
+Route::get('/contact-success', [MainController::class, 'contactSuccess'])->name('contactSuccess');
 
 Route::middleware('auth')->group(function () {
     Route::group(['permission:admin'], function () {

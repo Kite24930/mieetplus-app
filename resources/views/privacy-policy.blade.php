@@ -1,13 +1,5 @@
 <x-template title="Mieet Plus プライバシーポリシー">
-    <header class="fixed top-0 left-0 h-[80px] flex justify-center items-center px-2.5">
-        <div class="w-full max-w-[1200px] h-[60px] flex justify-start items-center">
-            <div class="h-full flex justify-center items-center">
-                <a href="{{ route('index') }}" class="h-full flex items-center bg-white p-2 rounded">
-                    <img src="{{ asset('storage/mieet_plus_logo.png') }}" alt="Mieet Plus" class="h-full w-auto object-cover">
-                </a>
-            </div>
-        </div>
-    </header>
+    <x-header></x-header>
     <main class="w-full flex flex-col items-center justify-center">
         <div class="w-full max-w-4xl p-4 flex flex-col items-start justify-center">
             <h2 class="text-3xl font-bold mb-2">プライバシーポリシー</h2>
@@ -256,19 +248,6 @@
         </div>
     </main>
     <hr class="w-full px-2 md:px-4">
-    <footer class="w-full pt-12 pb-6 px-4 md:px-16 flex justify-between items-start">
-        <div>
-
-        </div>
-        <div class="flex gap-6">
-            <div>
-                <ul>
-                    <li><a href="{{ __('https://www.mie-projectm.com') }}">運営企業</a></li>
-                    <li><a href="{{ route('terms') }}">利用規約</a></li>
-                    <li><a href="{{ route('privacyPolicy') }}">プライバシーポリシー</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    <x-footer :services="$services"></x-footer>
     @vite(['resources/js/terms_policy.js'])
 </x-template>

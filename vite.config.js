@@ -24,6 +24,8 @@ export default defineConfig({
                 register: 'resources/js/auth/register.js',
                 index: 'resources/js/index.js',
                 termsPolicy: 'resources/js/terms_policy.js',
+                contact: 'resources/js/contact.js',
+                contactSuccess: 'resources/js/contact-success.js',
                 recruit: 'resources/js/recruit/recruit.js',
                 companyDetail: 'resources/js/recruit/companyDetail.js',
                 dashboard: 'resources/js/dashboard/dashboard.js',
