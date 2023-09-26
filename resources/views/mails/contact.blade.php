@@ -1,11 +1,29 @@
 <html lang="ja">
 <body>
+<style>
+    * {
+        color: #586C61;
+    }
+    body {
+        background: linear-gradient(291deg, #F4EBFF -3.27%, #E5FAF3 32.46%, #E9FFF7 47.83%, #EBFBF5 98.89%);
+        padding: 20px;
+    }
+    main {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: start;
+        background-color: white;
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+</style>
 <main>
     @switch($data->types)
-        @case 'corporation'
+        @case('corporation')
             <h1>{{ $data->corporate_name.' '.$data->corporate_parson.'様' }}</h1>
             @break
-        @case 'individual'
+        @case('individual')
             <h1>{{ $data->individual_name.'様' }}</h1>
             @break
     @endswitch
@@ -14,7 +32,7 @@
     <p>内容を確認の上、担当者よりご連絡をさせていただきます。</p>
     <hr>
     @switch($data->types)
-        @case 'corporation'
+        @case('corporation')
             <p>【企業名】{{ $data->corporate_name }}</p>
             <hr>
             <p>【企業HP】{{ $data->corporate_hp }}</p>
@@ -23,7 +41,7 @@
             <hr>
             <p>【担当者名ふりがな】{{ $data->corporate_ruby }}</p>
             @break
-        @case 'individual'
+        @case('individual')
             <p>【氏名】{{ $data->individual_name }}</p>
             <hr>
             <p>【氏名ふりがな】{{ $data->individual_ruby }}</p>
