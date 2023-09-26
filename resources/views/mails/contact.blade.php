@@ -8,6 +8,18 @@
         background: linear-gradient(291deg, #F4EBFF -3.27%, #E5FAF3 32.46%, #E9FFF7 47.83%, #EBFBF5 98.89%);
         padding: 20px;
     }
+    header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+    }
+    header img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+    }
     main {
         display: flex;
         flex-flow: column;
@@ -18,6 +30,11 @@
         padding: 1rem;
     }
 </style>
+<header>
+    <a href="{{ route('index') }}">
+        <img src="{{ asset('storage/mieet-plus-logo.png') }}" alt="Mieet Plus">
+    </a>
+</header>
 <main>
     @switch($data->types)
         @case('corporation')
