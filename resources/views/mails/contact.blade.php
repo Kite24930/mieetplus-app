@@ -1,23 +1,5 @@
 <html lang="ja">
 <body>
-{{--<style>--}}
-{{--    * {--}}
-{{--        color: #586C61;--}}
-{{--    }--}}
-{{--    body {--}}
-{{--        background: linear-gradient(291deg, #F4EBFF -3.27%, #E5FAF3 32.46%, #E9FFF7 47.83%, #EBFBF5 98.89%);--}}
-{{--        padding: 20px;--}}
-{{--    }--}}
-{{--    main {--}}
-{{--        display: flex;--}}
-{{--        flex-flow: column;--}}
-{{--        justify-content: center;--}}
-{{--        align-items: start;--}}
-{{--        background-color: white;--}}
-{{--        border-radius: 1rem;--}}
-{{--        padding: 1rem;--}}
-{{--    }--}}
-{{--</style>--}}
 <main>
     @switch($data->types)
         @case 'corporation'
