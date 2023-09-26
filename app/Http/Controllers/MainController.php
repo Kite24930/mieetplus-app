@@ -838,7 +838,7 @@ class MainController extends Controller
         return view('privacy-policy', $data);
     }
 
-    public function contact() {
+    public function contact(Request $request) {
         $data = [
             'services' => Service::all(),
         ];
@@ -897,7 +897,7 @@ class MainController extends Controller
             Mail::send(new ContactMail($request));
             return redirect()->route('contactSuccess');
         } catch (\Exception $e) {
-            return redirect()->route('contact')->with('error', 'お問い合わせに失敗しました。');
+            return redirect()->route('contact')->with('error', 'お問い合わせに失敗しました。')->with('error_detail', $e->getMessage());
         }
     }
 

@@ -3,6 +3,9 @@
     <main class="w-full flex flex-col items-center justify-center">
         <div class="w-full max-w-4xl p-4 flex flex-col items-start justify-center">
             <h2 class="text-3xl font-bold mb-2">お問い合わせ</h2>
+            @if(\Illuminate\Support\Facades\Session::has('error'))
+                <div>{{ session('error_detail') }}</div>
+            @endif
             <div class="w-full flex bg-white rounded-xl px-2">
                 <form method="POST" action="{{ route('contactPost') }}" class="w-full">
                     @csrf
