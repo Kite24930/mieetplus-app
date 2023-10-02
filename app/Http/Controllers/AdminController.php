@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use InterventionImage;
 
 class AdminController extends Controller
 {
@@ -286,7 +287,21 @@ class AdminController extends Controller
                 'tellers_img_3.max' => 'Tellers[労働環境]画像3は2MB以内のファイルを選択してください。',
             ]);
 
-        function img_save($file, $column, $target_id) {
+        function img_save($file, $column, $target_id, $height = 1200) {
+            $saveFile = InterventionImage::make($file);
+            $saveFile->orientate();
+            $saveFile->resize(null, $height, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $fileName = $file->getClientOriginalName();
+            $filePath = storage_path('app/public/company/'.$target_id.'/'.$fileName);
+            $saveFile->save(storage_path('app/public/company/'.$target_id.'/'.$fileName));
+            $targetFile = InterventionImage::make($filePath);
+            $limitSize = 200000;
+            if ($targetFile->filesize() > $limitSize) {
+                img_save($file, $column, $target_id, $height - 100);
+            }
             $target = Company::where('user_id', $target_id)->first();
             if ($target !== null) {
                 if ($target->$column !== null) {
@@ -295,8 +310,6 @@ class AdminController extends Controller
                     }
                 }
             }
-            $fileName = $file->getClientOriginalName();
-            $file->storeAs('public/company/'.$target_id, $fileName);
             return $fileName;
         }
 
