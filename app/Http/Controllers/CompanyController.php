@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rules\Password;
+use InterventionImage;
 
 class CompanyController extends Controller
 {
@@ -188,18 +189,39 @@ class CompanyController extends Controller
             'tellers_img_3.max' => 'Tellers[労働環境]画像3は2MB以内のファイルを選択してください。',
         ]);
 
-        function img_save($file, $column, $id) {
+        function var_dump_text($data) {
+            ob_start();
+            var_dump($data);
+            $result = ob_get_contents();
+            ob_end_clean();
+            return $result;
+        }
+
+        function img_save($file, $column, $id, $height = 1200) {
+            $saveFile = InterventionImage::make($file);
+            $saveFile->orientate();
+            $saveFile->resize(null, $height, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $fileName = $file->getClientOriginalName();
+            $filePath = storage_path('app/public/company/'.$id.'/'.$fileName);
+            $saveFile->save(storage_path('app/public/company/'.$id.'/'.$fileName));
+            $targetFile = InterventionImage::make($filePath);
+            $limitSize = 200000;
+            if ($targetFile->filesize() > $limitSize) {
+                img_save($file, $column, $id, $height - 100);
+            }
             $target = Company::where('user_id', $id)->first();
             if ($target !== null) {
                 if ($target->$column !== null) {
-                    if (Storage::disk('public')->exists('company/'.$id.'/'.$target->$column)) {
+                    if (Storage::disk('public')->exists('company/'.$id.'/'.$target->$column) && $target->$column !== $fileName) {
                         Storage::disk('public')->delete('company/'.$id.'/'.$target->$column);
                     }
                 }
             }
-            $fileName = $file->getClientOriginalName();
 //            $file->storeAs('public/company/'.$id, $fileName);
-            Storage::putFileAs('public/company/'.$id, $file, $fileName);
+//            Storage::putFileAs('public/company/'.$id, $file, $fileName);
             return $fileName;
         }
 
