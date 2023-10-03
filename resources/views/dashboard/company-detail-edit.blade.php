@@ -17,7 +17,7 @@
                 </ul>
             </div>
         @endif
-        <form id="form" action="{{ route('companyDetailEditPost') }}" method="POST" class="w-full" enctype="multipart/form-data">
+        <form id="form" action="{{ route('companyDetailEditPost', $id) }}" method="POST" class="w-full" enctype="multipart/form-data">
             @csrf
             <h2 class="text-2xl m-3">企業情報</h2>
             <table class="bg-white w-full border border-green-600 rounded">

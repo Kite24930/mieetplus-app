@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Department;
 use App\Models\FollowerList;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
@@ -22,7 +24,7 @@ class CompanyController extends Controller
         $fistLogin = Auth::user()->first_login;
         if ($fistLogin === 1) {
             if ($company === null) {
-                return redirect()->route('companyDetailEdit');
+                return redirect()->route('companyDetailEdit', 0);
             }
             return redirect()->route('dashboard');
         }
@@ -51,20 +53,37 @@ class CompanyController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('companyFirstLogin')->with('error', 'ユーザー情報の取得に失敗しました。');
         }
-        return redirect()->route('companyDetailEdit');
+        return redirect()->route('companyDetailEdit', 0);
     }
 
-    public function companyDetail() {
-        $company = Company::where('user_id', Auth::id())->first();
+    public function companyDepartmentList() {
+        $companies = Company::where('user_id', Auth::id());
+        $limit = Department::where('user_id', Auth::id())->first();
+        $data = [
+            'companies' => $companies->get(),
+            'count' => $companies->count(),
+            'limit' => $limit,
+        ];
+        return view('dashboard.company-department-list', $data);
+    }
+
+    public function companyDetail($id) {
+        $company = Company::find($id);
         $data = [
             'company' => $company,
         ];
         return view('dashboard.company-detail', $data);
     }
 
-    public function companyDetailEdit(Request $request) {
-        $company = Company::where('user_id', Auth::id())->first();
+    public function companyDetailEdit(Request $request, $id) {
+        $company = Company::find($id);
+        if (isset($company)) {
+            $target = $id;
+        } else {
+            $target = 0;
+        }
         $data = [
+            'id' => $target,
             'company' => $company,
             'categories' => Category::all(),
         ];
@@ -74,8 +93,8 @@ class CompanyController extends Controller
         return view('dashboard.company-detail-edit', $data);
     }
 
-    public function companyDetailEditPost(Request $request) {
-        $target = Company::where('user_id', Auth::id())->first();
+    public function companyDetailEditPost(Request $request, $id) {
+        $target = Company::find($id);
         $top_img_validate = 'nullable|file|mimes:jpeg,png,jpg|max:2048';
         if ($target === null) {
             $top_img_validate = 'required|file|mimes:jpeg,png,jpg|max:2048';
@@ -189,14 +208,6 @@ class CompanyController extends Controller
             'tellers_img_3.max' => 'Tellers[労働環境]画像3は2MB以内のファイルを選択してください。',
         ]);
 
-        function var_dump_text($data) {
-            ob_start();
-            var_dump($data);
-            $result = ob_get_contents();
-            ob_end_clean();
-            return $result;
-        }
-
         function img_save($file, $column, $id, $height = 1200) {
             $saveFile = InterventionImage::make($file);
             $saveFile->orientate();
@@ -206,13 +217,16 @@ class CompanyController extends Controller
             });
             $fileName = $file->getClientOriginalName();
             $filePath = storage_path('app/public/company/'.$id.'/'.$fileName);
+            if (Storage::missing('public/company/'.$id)) {
+                Storage::makeDirectory('public/company/'.$id);
+            }
             $saveFile->save(storage_path('app/public/company/'.$id.'/'.$fileName));
             $targetFile = InterventionImage::make($filePath);
             $limitSize = 200000;
             if ($targetFile->filesize() > $limitSize) {
                 img_save($file, $column, $id, $height - 100);
             }
-            $target = Company::where('user_id', $id)->first();
+            $target = Company::find($id);
             if ($target !== null) {
                 if ($target->$column !== null) {
                     if (Storage::disk('public')->exists('company/'.$id.'/'.$target->$column) && $target->$column !== $fileName) {
@@ -220,8 +234,6 @@ class CompanyController extends Controller
                     }
                 }
             }
-//            $file->storeAs('public/company/'.$id, $fileName);
-//            Storage::putFileAs('public/company/'.$id, $file, $fileName);
             return $fileName;
         }
 
@@ -241,15 +253,21 @@ class CompanyController extends Controller
                 'tellers_img_2' => null,
                 'tellers_img_3' => null,
             ];
+            $file_id = $id;
+            if ($target === null) {
+                $file_id = DB::table('companies')->max('id') + 1;
+            }
             foreach ($files as $fileTarget) {
                 if ($request->file($fileTarget)) {
-                    $fileName[$fileTarget] = img_save($request->file($fileTarget), $fileTarget, Auth::id());
+                    $fileName[$fileTarget] = img_save($request->file($fileTarget), $fileTarget, $file_id);
                 } else {
                     if ($target) {
                         $fileName[$fileTarget] = $target->$fileTarget;
                     }
                 }
             }
+
+            DB::beginTransaction();
             if ($target !== null) {
                 $target->update([
                     'name' => $request->name,
@@ -290,7 +308,7 @@ class CompanyController extends Controller
                     'tellers_img_3' => $fileName['tellers_img_3'],
                 ]);
             } else {
-                Company::create([
+                $target = Company::create([
                     'user_id' => Auth::id(),
                     'name' => $request->name,
                     'ruby' => $request->ruby,
@@ -330,17 +348,25 @@ class CompanyController extends Controller
                     'tellers_img_3' => $fileName['tellers_img_3'],
                 ]);
             }
+            DB::commit();
         } catch (\Exception $e) {
-            return redirect()->route('companyDetailEdit')->with('msg', '企業情報の更新に失敗しました。');
+            DB::rollBack();
+            return redirect()->route('companyDetailEdit', $target->id)->with('msg', '企業情報の更新に失敗しました。\n'.$e->getMessage());
         }
-        return redirect()->route('companyDetailEdit')->with('msg', '企業情報を更新しました。');
+        return redirect()->route('companyDetailEdit', $target->id)->with('msg', '企業情報を更新しました。');
     }
 
     public function followers() {
-        $followers = FollowerList::where('company_id', Auth::id())->orderBy('created_at', 'desc');
+        $companies = Company::where('user_id', Auth::id())->get();
+        foreach ($companies as $company) {
+            $followList = FollowerList::where('company_id', $company->id)->orderBy('created_at', 'desc');
+            $followers[$company->id] = $followList->get();
+            $count[$company->id] = $followList->count();
+        }
         $data = [
-            'followers' => $followers->get(),
-            'count' => $followers->count(),
+            'companies' => $companies,
+            'followers' => $followers,
+            'count' => $count,
         ];
         return view('dashboard.followers-list', $data);
     }

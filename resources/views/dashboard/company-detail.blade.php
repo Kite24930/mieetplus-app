@@ -691,7 +691,7 @@
     </main>
     <footer class="flex flex-col justify-start items-center z-50">
         <div class="flex-center-box p-3 w-80 gap-3">
-            <a href="{{ route('companyDetailEdit') }}" class="green-btn w-full text-center">
+            <a href="{{ route('companyDetailEdit', $company->id) }}" class="green-btn w-full text-center">
                 編集する
             </a>
         </div>

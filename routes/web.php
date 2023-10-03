@@ -44,9 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::group(['permission:company'], function () {
         Route::get('/company/firstLogin', [CompanyController::class, 'firstLogin'])->name('companyFirstLogin');
         Route::post('/company/firstLogin', [CompanyController::class, 'firstLoginPost'])->name('companyFirstLoginPost');
-        Route::get('/company/detail', [CompanyController::class, 'companyDetail'])->name('companyDetail');
-        Route::get('/company/detail/edit', [CompanyController::class, 'companyDetailEdit'])->name('companyDetailEdit');
-        Route::post('/company/detail/edit', [CompanyController::class, 'companyDetailEditPost'])->name('companyDetailEditPost');
+        Route::get('/company/list', [CompanyController::class, 'companyDepartmentList'])->name('companyDepartmentList');
+        Route::get('/company/detail/{id}', [CompanyController::class, 'companyDetail'])->name('companyDetail');
+        Route::get('/company/detail/edit/{id}', [CompanyController::class, 'companyDetailEdit'])->name('companyDetailEdit');
+        Route::post('/company/detail/edit/{id}', [CompanyController::class, 'companyDetailEditPost'])->name('companyDetailEditPost');
         Route::get('company/followers', [CompanyController::class, 'followers'])->name('companyFollowers');
         Route::get('company/setting', [CompanyController::class, 'setting'])->name('companySetting');
         Route::put('company/passwordUpdate', [CompanyController::class, 'passwordUpdate'])->name('companyPasswordUpdate');
