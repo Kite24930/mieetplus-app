@@ -210,11 +210,12 @@ const tellersAdd = () => {
             tellerBtn.setAttribute('data-bs-target', tellersNum);
             tellersBtnInit(tellerBtn);
             const tellerImg = document.createElement('img');
-            tellerImg.classList.add('rounded-full', 'w-20', 'h-20', 'object-cover');
+            tellerImg.classList.add('rounded-full');
+            tellerImg.setAttribute('alt', data.name);
             if (data.logo !== null) {
-                tellerImg.setAttribute('src', root + 'storage/company/' + data.user_id + '/' + data.logo);
+                tellerImg.setAttribute('src', root + 'storage/company/' + data.id + '/' + data.logo);
             } else {
-                tellerImg.setAttribute('src', root + 'storage/company/' + data.user_id + '/' + data.top_img);
+                tellerImg.setAttribute('src', root + 'storage/company/' + data.id + '/' + data.top_img);
             }
             tellerBtn.appendChild(tellerImg);
             const companyName = document.createElement('div');
@@ -223,6 +224,8 @@ const tellersAdd = () => {
             tellerBtn.appendChild(companyName);
             swiperSlide.appendChild(tellerBtn);
             moreBtn.before(swiperSlide);
+            swiper.update();
+
             const companyWrapper = document.createElement('div');
             companyWrapper.classList.add('company-wrapper', 'w-full', 'h-full', 'swiper-slide');
             const companyHeader = document.createElement('div');
@@ -234,10 +237,11 @@ const tellersAdd = () => {
             const companyImg = document.createElement('img');
             companyImg.classList.add('company-img', 'rounded-full');
             if (data.logo !== null) {
-                companyImg.setAttribute('src', root + 'storage/company/' + data.user_id + '/' + data.logo);
+                companyImg.setAttribute('src', root + 'storage/company/' + data.id + '/' + data.logo);
             } else {
-                companyImg.setAttribute('src', root + 'storage/company/' + data.user_id + '/' + data.top_img);
+                companyImg.setAttribute('src', root + 'storage/company/' + data.id + '/' + data.top_img);
             }
+            companyImg.setAttribute('alt', data.name);
             companyName2.appendChild(companyImg);
             const companyName3 = document.createElement('div');
             companyName3.classList.add('company-name', 'px-2');
@@ -249,11 +253,12 @@ const tellersAdd = () => {
             if (typeof Laravel.followed !== 'undefined') {
                 const followBtnIcon = document.createElement('button');
                 followBtnIcon.classList.add('follow-btn', 'border', 'rounded', 'px-2', 'py-1');
-                followBtnIcon.setAttribute('data-bs-target', data.user_id);
+                followBtnIcon.setAttribute('data-bs-target', data.id);
+                followBtnIcon.setAttribute('data-bs-student', Laravel.user.id);
                 const icon = document.createElement('i');
                 icon.classList.add('bi', 'bi-balloon-heart-fill');
                 followBtnIcon.appendChild(icon);
-                if (Laravel.followed.includes(data.user_id)) {
+                if (Laravel.followed.includes(data.id)) {
                     followBtnIcon.classList.add('followed');
                     followBtnIcon.innerHTML += 'フォロー中'
                 } else {
@@ -264,6 +269,14 @@ const tellersAdd = () => {
             companyInfo.appendChild(followBtn);
             companyHeader.appendChild(companyInfo);
             companyWrapper.appendChild(companyHeader);
+            const companyFooter = document.createElement('div');
+            companyFooter.classList.add('company-footer', 'w-full', 'absolute', 'left-0', 'bottom-8', 'flex', 'justify-center', 'z-750');
+            const companyBtn = document.createElement('a');
+            companyBtn.classList.add('py-2', 'px-4', 'bg-white', 'rounded-full');
+            companyBtn.setAttribute('href', root + 'recruit/company/' + data.id);
+            companyBtn.textContent = '企業ページへ';
+            companyFooter.appendChild(companyBtn);
+            companyWrapper.appendChild(companyFooter);
             const insideSwiper = document.createElement('div');
             insideSwiper.classList.add('insideSwiper', 'w-full', 'h-full');
             const swiperWrapper = document.createElement('div');
@@ -271,7 +284,7 @@ const tellersAdd = () => {
             const swiperSlide1 = document.createElement('div');
             swiperSlide1.classList.add('swiper-slide', 'flex', 'flex-col', 'justify-center', 'items-center');
             if (data.tellers_img_1 !== null) {
-                swiperSlide1.style.backgroundImage = 'url(' + root + 'storage/company/' + data.user_id + '/' + data.tellers_img_1 + ')';
+                swiperSlide1.style.backgroundImage = 'url(' + root + 'storage/company/' + data.id + '/' + data.tellers_img_1 + ')';
             } else {
                 swiperSlide1.style.backgroundImage = 'url(' + root + 'storage/office.jpg)';
             }
@@ -294,7 +307,7 @@ const tellersAdd = () => {
             const swiperSlide2 = document.createElement('div');
             swiperSlide2.classList.add('swiper-slide', 'flex', 'flex-col', 'justify-center', 'items-center');
             if (data.tellers_img_2 !== null) {
-                swiperSlide2.style.backgroundImage = 'url(' + root + 'storage/company/' + data.user_id + '/' + data.tellers_img_2 + ')';
+                swiperSlide2.style.backgroundImage = 'url(' + root + 'storage/company/' + data.id + '/' + data.tellers_img_2 + ')';
             } else {
                 swiperSlide2.style.backgroundImage = 'url(' + root + 'storage/meeting_room.jpg)';
             }
@@ -317,7 +330,7 @@ const tellersAdd = () => {
             const swiperSlide3 = document.createElement('div');
             swiperSlide3.classList.add('swiper-slide', 'flex', 'flex-col', 'justify-center', 'items-center');
             if (data.tellers_img_3 !== null) {
-                swiperSlide3.style.backgroundImage = 'url(' + root + 'storage/company/' + data.user_id + '/' + data.tellers_img_3 + ')';
+                swiperSlide3.style.backgroundImage = 'url(' + root + 'storage/company/' + data.id + '/' + data.tellers_img_3 + ')';
             } else {
                 swiperSlide3.style.backgroundImage = 'url(' + root + 'storage/building.jpg)';
             }
@@ -337,8 +350,8 @@ const tellersAdd = () => {
             contentContainer3.appendChild(content3);
             swiperSlide3.appendChild(contentContainer3);
             swiperWrapper.appendChild(swiperSlide3);
-            swiperWrapper.appendChild(swiperPagination.cloneNode(true));
             insideSwiper.appendChild(swiperWrapper);
+            insideSwiper.appendChild(swiperPagination.cloneNode(true));
             insideSwiperInit(insideSwiper);
             companyWrapper.appendChild(insideSwiper);
             tellerSwiperEl.appendChild(companyWrapper);
@@ -408,13 +421,13 @@ const postsAdd = () => {
             postsHeader.classList.add('posts-header', 'w-full', 'px-2', 'py-1');
             const postsCompanyLink = document.createElement('a');
             postsCompanyLink.classList.add('inline-flex', 'items-center');
-            postsCompanyLink.setAttribute('href', root + 'recruit/company/' + data.user_id);
+            postsCompanyLink.setAttribute('href', root + 'recruit/company/' + data.id);
             const postsCompanyImg = document.createElement('img');
             postsCompanyImg.classList.add('logo', 'rounded-full', 'w-[36px]', 'h-[36px]');
             if (data.logo !== null) {
-                postsCompanyImg.setAttribute('src', root + 'storage/company/' + data.user_id + '/' + data.logo);
+                postsCompanyImg.setAttribute('src', root + 'storage/company/' + data.id + '/' + data.logo);
             } else {
-                postsCompanyImg.setAttribute('src', root + 'storage/company/' + data.user_id + '/' + data.top_img);
+                postsCompanyImg.setAttribute('src', root + 'storage/company/' + data.id + '/' + data.top_img);
             }
             postsCompanyLink.appendChild(postsCompanyImg);
             const postsCompanyName = document.createElement('div');
@@ -429,19 +442,19 @@ const postsAdd = () => {
             postsImgContainer.classList.add('posts-img-container', 'relative');
             const postsImg = document.createElement('img');
             postsImg.classList.add('posts-img', 'w-full', 'h-full', 'absolute', 'top-0', 'left-0');
-            postsImg.setAttribute('src', root + 'storage/company/' + data.user_id + '/' + data.top_img);
+            postsImg.setAttribute('src', root + 'storage/company/' + data.id + '/' + data.top_img);
             postsImgContainer.appendChild(postsImg);
             postsBody.appendChild(postsImgContainer);
             const postsContent = document.createElement('div');
             postsContent.classList.add('flex', 'justify-between', 'items-center', 'p-3', 'text-sm');
             const followBtn = document.createElement('button');
             followBtn.classList.add('border', 'rounded', 'px-2', 'py-1');
-            followBtn.setAttribute('data-bs-target', data.user_id);
+            followBtn.setAttribute('data-bs-target', data.id);
             const icon = document.createElement('i');
             icon.classList.add('bi', 'bi-balloon-heart-fill');
             followBtn.appendChild(icon);
             if (typeof Laravel.followed !== 'undefined') {
-                if (Laravel.followed.includes(data.user_id)) {
+                if (Laravel.followed.includes(data.id)) {
                     followBtn.classList.add('follow-btn', 'followed');
                     followBtn.innerHTML += 'フォロー中'
                 } else {
@@ -468,7 +481,7 @@ const postsAdd = () => {
             postsText.appendChild(postsContentType);
             const postsContentText = document.createElement('div');
             postsContentText.classList.add('posts-content', 'content', 'folded', 'px-3', 'h-10');
-            postsContentText.setAttribute('id', 'posts-content-' + data.user_id)
+            postsContentText.setAttribute('id', 'posts-content-' + data.id)
             let content;
             if (data.notice !== null) {
                 content = data.notice;
@@ -487,7 +500,7 @@ const postsAdd = () => {
             expandBtnArea.classList.add('p-3', 'text-grey-500');
             const expandBtn = document.createElement('button');
             expandBtn.classList.add('posts-expand');
-            expandBtn.setAttribute('data-bs-target', 'posts-content-' + data.user_id);
+            expandBtn.setAttribute('data-bs-target', 'posts-content-' + data.id);
             expandBtn.innerHTML = '続きを読む';
             postsExpand(expandBtn);
             expandBtnArea.appendChild(expandBtn);

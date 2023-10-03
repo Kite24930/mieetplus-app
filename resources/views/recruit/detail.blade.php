@@ -1,7 +1,7 @@
 <x-recruit.template :title="$company->name">
     <script>
         window.Laravel = {};
-        window.Laravel.company_id = {{ $company->user_id }};
+        window.Laravel.company_id = {{ $company->id }};
         @if(isset($user))
             window.Laravel.user_id = {{ $user->id }};
         @endif
@@ -19,26 +19,26 @@
     </div>
     <div id="container" class="w-full justify-center bg-mieetcolor hidden">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
-            <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="top-img w-full h-32 object-cover">
+            <img src="{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="top-img w-full h-32 object-cover">
             <div class="flex items-center py-2 px-4">
-                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="w-16 h-16 rounded-full mieet-border">
+                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="w-16 h-16 rounded-full mieet-border">
                 <div class="flex justify-start items-center pl-2">
                     {{ $company->name }}
                 </div>
             </div>
             <div class="px-4">
                 @if($auth == 'student')
-                    @if(in_array($company->user_id, $followed))
-                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                    @if(in_array($company->id, $followed))
+                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->id }}" data-bs-student="{{ $user->id }}">
                             <i class="bi bi-balloon-heart-fill text-white"></i>フォロー中
                         </button>
                     @else
-                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->id }}" data-bs-student="{{ $user->id }}">
                             <i class="bi bi-balloon-heart-fill"></i>フォローする
                         </button>
                     @endif
                 @elseif($auth == 'guest')
-                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->user_id }}">
+                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->id }}">
                         <i class="bi bi-balloon-heart-fill"></i>フォローする
                     </button>
                 @endif
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img job-description-icon" data-bs-target="jobDescription" @if(isset($company->tellers_img_1)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }})" @endif>
+                <div class="content-img job-description-icon" data-bs-target="jobDescription" @if(isset($company->tellers_img_1)) style="background-image: url({{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_1) }})" @endif>
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             実際の
@@ -208,7 +208,7 @@
                     </div>
                 </div>
                 <div id="jobDescription" tabindex="-1" aria-hidden="true" class="modal fixed top-0 left-0 right-0 z-600 hidden w-full bg-black">
-                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken job-description" @if(isset($company->tellers_img_1)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }})" @endif>
+                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken job-description" @if(isset($company->tellers_img_1)) style="background-image: url({{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_1) }})" @endif>
                         <div class="absolute top-0 right-0 z-700 m-4">
                             <button id="jobDescriptionClose" type="button" class="p-3 text-3xl">
                                 <i class="bi bi-x-lg text-white"></i>
@@ -225,7 +225,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img culture-icon" data-bs-target="culture" @if(isset($company->tellers_img_2)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }})" @endif>
+                <div class="content-img culture-icon" data-bs-target="culture" @if(isset($company->tellers_img_2)) style="background-image: url({{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_2) }})" @endif>
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             社内の雰囲気
@@ -235,7 +235,7 @@
                     </div>
                 </div>
                 <div id="culture" tabindex="-1" aria-hidden="true" class="modal fixed top-0 left-0 right-0 z-600 hidden w-full bg-black">
-                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken culture" @if(isset($company->tellers_img_2)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }})" @endif>
+                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken culture" @if(isset($company->tellers_img_2)) style="background-image: url({{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_2) }})" @endif>
                         <div class="absolute top-0 right-0 z-700 m-4">
                             <button id="cultureClose" type="button" class="p-3 text-3xl">
                                 <i class="bi bi-x-lg text-white"></i>
@@ -252,7 +252,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-img environment-icon" data-bs-target="environment" @if(isset($company->tellers_img_3)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }})" @endif>
+                <div class="content-img environment-icon" data-bs-target="environment" @if(isset($company->tellers_img_3)) style="background-image: url({{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_3) }})" @endif>
                     <div class="text-container">
                         <div class="text-white text-center text-lg">
                             労働環境
@@ -260,7 +260,7 @@
                     </div>
                 </div>
                 <div id="environment" tabindex="-1" aria-hidden="true" class="modal fixed top-0 left-0 right-0 z-600 hidden w-full bg-black">
-                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken environment" @if(isset($company->tellers_img_3)) style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }})" @endif>
+                    <div class="relative w-full h-full max-w-[550px] bg-blend-darken environment" @if(isset($company->tellers_img_3)) style="background-image: url({{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_3) }})" @endif>
                         <div class="absolute top-0 right-0 z-700 m-4">
                             <button id="environmentClose" type="button" class="p-3 text-3xl">
                                 <i class="bi bi-x-lg text-white"></i>

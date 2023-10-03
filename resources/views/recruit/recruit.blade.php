@@ -5,6 +5,9 @@
         window.Laravel.tellers_num = 10;
         window.Laravel.posts_list = @json($posts_companies_list);
         window.Laravel.posts_num = 10;
+        @if(isset($user))
+            window.Laravel.user = @json($user);
+        @endif
         @if(isset($followed))
             window.Laravel.followed = @json($followed);
         @endif
@@ -249,7 +252,7 @@
                     @foreach($tellers_companies as $i => $company)
                         <div class="swiper-slide flex flex-col">
                             <div class="teller-btn flex flex-col justify-center items-center" data-bs-target="{{ $i }}">
-                                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="rounded-full">
+                                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="rounded-full">
                                 <div class="company-name text-center">
                                     {{ $company->name }}
                                 </div>
@@ -289,19 +292,19 @@
                                     <div class="company-header w-full absolute left-0 flex justify-between z-750 mt-7 ml-2">
                                         <div class="company-info flex flex-col items-center">
                                             <div class="flex items-center">
-                                                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="company-img rounded-full">
+                                                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="company-img rounded-full">
                                                 <div class="company-name px-2">
                                                     {{ $company->name }}
                                                 </div>
                                             </div>
                                             <div class="mt-3">
                                                 @if($auth == 'student')
-                                                    @if(in_array($company->user_id, $followed))
-                                                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                                                    @if(in_array($company->id, $followed))
+                                                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->id }}" data-bs-student="{{ $user->id }}">
                                                             <i class="bi bi-balloon-heart-fill text-white"></i>フォロー中
                                                         </button>
                                                     @else
-                                                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                                                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->id }}" data-bs-student="{{ $user->id }}">
                                                             <i class="bi bi-balloon-heart-fill"></i>フォローする
                                                         </button>
                                                     @endif
@@ -310,41 +313,41 @@
                                         </div>
                                     </div>
                                     <div class="company-footer w-full absolute left-0 bottom-8 flex justify-center z-750">
-                                        <a href="{{ route('companyDetailPage', $company->user_id) }}" class="py-2 px-4 bg-white rounded-full">企業ページへ</a>
+                                        <a href="{{ route('companyDetailPage', $company->id) }}" class="py-2 px-4 bg-white rounded-full">企業ページへ</a>
                                     </div>
                                     <div class="insideSwiper w-full h-full">
                                         <div class="relative w-5/6 swiper-wrapper">
-                                            <div class="swiper-slide flex flex-col justify-center items-center" style="background-image: url('@if(isset($company->tellers_img_1)){{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }}@else{{ asset('storage/office.jpg') }}@endif')">
+                                            <div class="swiper-slide flex flex-col justify-center items-center" style="background-image: url('@if(isset($company->tellers_img_1)){{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_1) }}@else{{ asset('storage/office.jpg') }}@endif')">
                                                 <div class="w-5/6 content-container">
                                                     <div class="title text-3xl my-4 font-bold">
                                                         [実際の仕事内容]
                                                     </div>
-                                                    <div id="job_{{ $company->user_id }}" class="content">
+                                                    <div id="job_{{ $company->id }}" class="content">
 
                                                     </div>
-                                                    <textarea class="viewer-content hidden" data-target="job_{{ $company->user_id }}">{{ $company->job_description_tellers }}</textarea>
+                                                    <textarea class="viewer-content hidden" data-target="job_{{ $company->id }}">{{ $company->job_description_tellers }}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide flex flex-col justify-center items-center" style="background-image: url('@if(isset($company->tellers_img_2)){{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }}@else{{ asset('storage/meeting_room.jpg') }}@endif')">
+                                            <div class="swiper-slide flex flex-col justify-center items-center" style="background-image: url('@if(isset($company->tellers_img_2)){{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_2) }}@else{{ asset('storage/meeting_room.jpg') }}@endif')">
                                                 <div class="w-5/6 content-container">
                                                     <div class="title text-3xl my-4 font-bold">
                                                         [社内の雰囲気・社風]
                                                     </div>
-                                                    <div id="culture_{{ $company->user_id }}" class="content">
+                                                    <div id="culture_{{ $company->id }}" class="content">
 
                                                     </div>
-                                                    <textarea class="viewer-content hidden" data-target="culture_{{ $company->user_id }}">{{ $company->culture_tellers }}</textarea>
+                                                    <textarea class="viewer-content hidden" data-target="culture_{{ $company->id }}">{{ $company->culture_tellers }}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide flex flex-col justify-center items-center" style="background-image: url('@if(isset($company->tellers_img_3)){{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }}@else{{ asset('storage/building.jpg') }}@endif')">
+                                            <div class="swiper-slide flex flex-col justify-center items-center" style="background-image: url('@if(isset($company->tellers_img_3)){{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_3) }}@else{{ asset('storage/building.jpg') }}@endif')">
                                                 <div class="w-5/6 content-container">
                                                     <div class="title text-3xl my-4 font-bold">
                                                         [労働環境]
                                                     </div>
-                                                    <div id="environment_{{ $company->user_id }}" class="content">
+                                                    <div id="environment_{{ $company->id }}" class="content">
 
                                                     </div>
-                                                    <textarea class="viewer-content hidden" data-target="environment_{{ $company->user_id }}">{{ $company->environment_tellers }}</textarea>
+                                                    <textarea class="viewer-content hidden" data-target="environment_{{ $company->id }}">{{ $company->environment_tellers }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -370,8 +373,8 @@
                 @foreach($posts_companies as $company)
                     <div class="w-full flex flex-col">
                         <div class="posts-header w-full px-2 py-1">
-                            <a href="{{ route('companyDetailPage', $company->user_id) }}" class="items-center inline-flex">
-                                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="logo rounded-full w-[36px] h-[36px]">
+                            <a href="{{ route('companyDetailPage', $company->id) }}" class="items-center inline-flex">
+                                <img src="@if(isset($company->logo)){{ asset('storage/company/'.$company->id.'/'.$company->logo) }}@else{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}@endif" alt="{{ $company->name }}" class="logo rounded-full w-[36px] h-[36px]">
                                 <div class="ml-3">
                                     {{ $company->name }}
                                 </div>
@@ -379,21 +382,21 @@
                         </div>
                         <div class="posts-body w-full flex flex-col">
                             <div class="posts-img-container relative">
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="posts-img w-full h-full absolute top-0 left-0">
+                                <img src="{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="posts-img w-full h-full absolute top-0 left-0">
                             </div>
                             <div class="flex justify-between items-center p-3 text-sm">
                                 @if(isset($followed))
-                                    @if(in_array($company->user_id, $followed))
-                                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                                    @if(in_array($company->id, $followed))
+                                        <button class="follow-btn border rounded px-2 py-1 followed" data-bs-target="{{ $company->id }}" data-bs-student="{{ $user->id }}">
                                             <i class="bi bi-balloon-heart-fill text-white"></i>フォロー中
                                         </button>
                                     @else
-                                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->user_id }}" data-bs-student="{{ $user->id }}">
+                                        <button class="follow-btn border rounded px-2 py-1" data-bs-target="{{ $company->id }}" data-bs-student="{{ $user->id }}">
                                             <i class="bi bi-balloon-heart-fill"></i>フォローする
                                         </button>
                                     @endif
                                 @else
-                                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->user_id }}">
+                                    <button class="border rounded px-2 py-1 not-login" data-bs-target="{{ $company->id }}">
                                         <i class="bi bi-balloon-heart-fill"></i>フォローする
                                     </button>
                                 @endif
@@ -408,12 +411,12 @@
                                         【事業内容】
                                     @endif
                                 </div>
-                                <div id="posts-content-{{ $company->user_id }}" class="posts-content content folded px-3 h-10">
+                                <div id="posts-content-{{ $company->id }}" class="posts-content content folded px-3 h-10">
 
                                 </div>
-                                <textarea class="viewer-content hidden" data-target="posts-content-{{ $company->user_id }}">@if(isset($company->notice)){{ $company->notice }}@elseif(isset($company->pr)){{ $company->pr }}@elseif(isset($company->content)){{ $company->content }}@endif</textarea>
+                                <textarea class="viewer-content hidden" data-target="posts-content-{{ $company->id }}">@if(isset($company->notice)){{ $company->notice }}@elseif(isset($company->pr)){{ $company->pr }}@elseif(isset($company->content)){{ $company->content }}@endif</textarea>
                                 <div class="p-3 text-grey-500">
-                                    <button type="button" class="posts-expand" data-bs-target="posts-content-{{ $company->user_id }}">
+                                    <button type="button" class="posts-expand" data-bs-target="posts-content-{{ $company->id }}">
                                         続きを読む
                                     </button>
                                 </div>

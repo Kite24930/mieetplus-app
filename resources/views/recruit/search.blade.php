@@ -257,7 +257,7 @@
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             <div class="w-full flex flex-wrap justify-start items-center m-0 p-0">
                 @foreach($companies as $company)
-                    <a href="{{ route('companyDetailPage', $company->user_id) }}" class="content-img relative" style="background-image: url({{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }})">
+                    <a href="{{ route('companyDetailPage', $company->id) }}" class="content-img relative" style="background-image: url({{ asset('storage/company/'.$company->id.'/'.$company->top_img) }})">
                         <div class="w-full h-full flex justify-center items-center text-sm p-2 text-center">
                             <span class="font-bold">
                                 {{ $company->name }}

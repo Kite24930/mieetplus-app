@@ -113,14 +113,14 @@ class MainController extends Controller
     public function recruit(Request $request) {
         $tellersCompany = Company::where('status', 1)->inRandomOrder();
         $postsCompany = Company::where('status', 1)->inRandomOrder();
-        $tellersCompanyList = Company::pluck('user_id')->toArray();
-        $postsCompanyList = Company::pluck('user_id')->toArray();
+        $tellersCompanyList = Company::pluck('id')->toArray();
+        $postsCompanyList = Company::pluck('id')->toArray();
         if ($request->has('filter')) {
             if ($request->filter === '1') {
                 if ($request->has('category') && isset($request->category)) {
                     $category = explode(',', $request->category);
-                    $tellersCategoryList = Company::whereIn('category', $category)->pluck('user_id')->toArray();
-                    $postsCategoryList = Company::whereIn('category', $category)->pluck('user_id')->toArray();
+                    $tellersCategoryList = Company::whereIn('category', $category)->pluck('id')->toArray();
+                    $postsCategoryList = Company::whereIn('category', $category)->pluck('id')->toArray();
                     $tellersCompanyList = array_intersect($tellersCompanyList, $tellersCategoryList);
                     $postsCompanyList = array_intersect($postsCompanyList, $postsCategoryList);
                 }
@@ -129,8 +129,8 @@ class MainController extends Controller
                     $tellersLocationArray = [];
                     $postsLocationArray = [];
                     foreach ($location as $i => $loc) {
-                        $tellersLocationList = Company::where('location', 'like', '%'.$loc.'%')->pluck('user_id')->toArray();
-                        $postsLocationList = Company::where('location', 'like', '%'.$loc.'%')->pluck('user_id')->toArray();
+                        $tellersLocationList = Company::where('location', 'like', '%'.$loc.'%')->pluck('id')->toArray();
+                        $postsLocationList = Company::where('location', 'like', '%'.$loc.'%')->pluck('id')->toArray();
                         $tellersLocationArray = array_merge($tellersLocationArray, $tellersLocationList);
                         $postsLocationArray = array_merge($postsLocationArray, $postsLocationList);
                     }
@@ -142,8 +142,8 @@ class MainController extends Controller
                     $tellersWorkLocationArray = [];
                     $postsWorkLocationArray = [];
                     foreach ($work_location as $wl) {
-                        $tellersWorkLocationList = Company::where('work_location', 'like', '%'.$wl.'%')->pluck('user_id')->toArray();
-                        $postsWorkLocationList = Company::where('work_location', 'like', '%'.$wl.'%')->pluck('user_id')->toArray();
+                        $tellersWorkLocationList = Company::where('work_location', 'like', '%'.$wl.'%')->pluck('id')->toArray();
+                        $postsWorkLocationList = Company::where('work_location', 'like', '%'.$wl.'%')->pluck('id')->toArray();
                         $tellersWorkLocationArray = array_merge($tellersWorkLocationArray, $tellersWorkLocationList);
                         $postsWorkLocationArray = array_merge($postsWorkLocationArray, $postsWorkLocationList);
                     }
@@ -153,16 +153,16 @@ class MainController extends Controller
                 if ($request->has('establishment_date') && isset($request->establishment_date)) {
                     switch ($request->establishment_date_type) {
                         case 'before':
-                            $tellersEstablishmentList = Company::where('establishment_date', '<=', $request->establishment_date)->pluck('user_id')->toArray();
-                            $postsEstablishmentList = Company::where('establishment_date', '<=', $request->establishment_date)->pluck('user_id')->toArray();
+                            $tellersEstablishmentList = Company::where('establishment_date', '<=', $request->establishment_date)->pluck('id')->toArray();
+                            $postsEstablishmentList = Company::where('establishment_date', '<=', $request->establishment_date)->pluck('id')->toArray();
                             break;
                         case 'after':
-                            $tellersEstablishmentList = Company::where('establishment_date', '>=', $request->establishment_date)->pluck('user_id')->toArray();
-                            $postsEstablishmentList = Company::where('establishment_date', '>=', $request->establishment_date)->pluck('user_id')->toArray();
+                            $tellersEstablishmentList = Company::where('establishment_date', '>=', $request->establishment_date)->pluck('id')->toArray();
+                            $postsEstablishmentList = Company::where('establishment_date', '>=', $request->establishment_date)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $tellersEstablishmentList = Company::where('establishment_date', $request->establishment_date)->pluck('user_id')->toArray();
-                            $postsEstablishmentList = Company::where('establishment_date', $request->establishment_date)->pluck('user_id')->toArray();
+                            $tellersEstablishmentList = Company::where('establishment_date', $request->establishment_date)->pluck('id')->toArray();
+                            $postsEstablishmentList = Company::where('establishment_date', $request->establishment_date)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -173,16 +173,16 @@ class MainController extends Controller
                 if ($request->has('capital') && isset($request->capital)) {
                     switch ($request->capital_type) {
                         case 'more':
-                            $tellersCapitalList = Company::where('capital', '>=', $request->capital)->pluck('user_id')->toArray();
-                            $postsCapitalList = Company::where('capital', '>=', $request->capital)->pluck('user_id')->toArray();
+                            $tellersCapitalList = Company::where('capital', '>=', $request->capital)->pluck('id')->toArray();
+                            $postsCapitalList = Company::where('capital', '>=', $request->capital)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $tellersCapitalList = Company::where('capital', '<=', $request->capital)->pluck('user_id')->toArray();
-                            $postsCapitalList = Company::where('capital', '<=', $request->capital)->pluck('user_id')->toArray();
+                            $tellersCapitalList = Company::where('capital', '<=', $request->capital)->pluck('id')->toArray();
+                            $postsCapitalList = Company::where('capital', '<=', $request->capital)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $tellersCapitalList = Company::where('capital', $request->capital)->pluck('user_id')->toArray();
-                            $postsCapitalList = Company::where('capital', $request->capital)->pluck('user_id')->toArray();
+                            $tellersCapitalList = Company::where('capital', $request->capital)->pluck('id')->toArray();
+                            $postsCapitalList = Company::where('capital', $request->capital)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -193,16 +193,16 @@ class MainController extends Controller
                 if ($request->has('sales') && isset($request->sales)) {
                     switch ($request->sales_type) {
                         case 'more':
-                            $tellersSalesList = Company::where('sales', '>=', $request->sales)->pluck('user_id')->toArray();
-                            $postsSalesList = Company::where('sales', '>=', $request->sales)->pluck('user_id')->toArray();
+                            $tellersSalesList = Company::where('sales', '>=', $request->sales)->pluck('id')->toArray();
+                            $postsSalesList = Company::where('sales', '>=', $request->sales)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $tellersSalesList = Company::where('sales', '<=', $request->sales)->pluck('user_id')->toArray();
-                            $postsSalesList = Company::where('sales', '<=', $request->sales)->pluck('user_id')->toArray();
+                            $tellersSalesList = Company::where('sales', '<=', $request->sales)->pluck('id')->toArray();
+                            $postsSalesList = Company::where('sales', '<=', $request->sales)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $tellersSalesList = Company::where('sales', $request->sales)->pluck('user_id')->toArray();
-                            $postsSalesList = Company::where('sales', $request->sales)->pluck('user_id')->toArray();
+                            $tellersSalesList = Company::where('sales', $request->sales)->pluck('id')->toArray();
+                            $postsSalesList = Company::where('sales', $request->sales)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -213,16 +213,16 @@ class MainController extends Controller
                 if ($request->has('employee_number') && isset($request->employee_number)) {
                     switch ($request->employee_number_type) {
                         case 'more':
-                            $tellersEmployeeList = Company::where('employee_number', '>=', $request->employee_number)->pluck('user_id')->toArray();
-                            $postsEmployeeList = Company::where('employee_number', '>=', $request->employee_number)->pluck('user_id')->toArray();
+                            $tellersEmployeeList = Company::where('employee_number', '>=', $request->employee_number)->pluck('id')->toArray();
+                            $postsEmployeeList = Company::where('employee_number', '>=', $request->employee_number)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $tellersEmployeeList = Company::where('employee_number', '<=', $request->employee_number)->pluck('user_id')->toArray();
-                            $postsEmployeeList = Company::where('employee_number', '<=', $request->employee_number)->pluck('user_id')->toArray();
+                            $tellersEmployeeList = Company::where('employee_number', '<=', $request->employee_number)->pluck('id')->toArray();
+                            $postsEmployeeList = Company::where('employee_number', '<=', $request->employee_number)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $tellersEmployeeList = Company::where('employee_number', $request->employee_number)->pluck('user_id')->toArray();
-                            $postsEmployeeList = Company::where('employee_number', $request->employee_number)->pluck('user_id')->toArray();
+                            $tellersEmployeeList = Company::where('employee_number', $request->employee_number)->pluck('id')->toArray();
+                            $postsEmployeeList = Company::where('employee_number', $request->employee_number)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -233,16 +233,16 @@ class MainController extends Controller
                 if ($request->has('graduated_number') && isset($request->graduated_number)) {
                     switch ($request->graduated_number_type) {
                         case 'more':
-                            $tellersGraduatedList = Company::where('graduated_number', '>=', $request->graduated_number)->pluck('user_id')->toArray();
-                            $postsGraduatedList = Company::where('graduated_number', '>=', $request->graduated_number)->pluck('user_id')->toArray();
+                            $tellersGraduatedList = Company::where('graduated_number', '>=', $request->graduated_number)->pluck('id')->toArray();
+                            $postsGraduatedList = Company::where('graduated_number', '>=', $request->graduated_number)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $tellersGraduatedList = Company::where('graduated_number', '<=', $request->graduated_number)->pluck('user_id')->toArray();
-                            $postsGraduatedList = Company::where('graduated_number', '<=', $request->graduated_number)->pluck('user_id')->toArray();
+                            $tellersGraduatedList = Company::where('graduated_number', '<=', $request->graduated_number)->pluck('id')->toArray();
+                            $postsGraduatedList = Company::where('graduated_number', '<=', $request->graduated_number)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $tellersGraduatedList = Company::where('graduated_number', $request->graduated_number)->pluck('user_id')->toArray();
-                            $postsGraduatedList = Company::where('graduated_number', $request->graduated_number)->pluck('user_id')->toArray();
+                            $tellersGraduatedList = Company::where('graduated_number', $request->graduated_number)->pluck('id')->toArray();
+                            $postsGraduatedList = Company::where('graduated_number', $request->graduated_number)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -255,16 +255,16 @@ class MainController extends Controller
                     $tellersFacultyArray = [];
                     $postsFacultyArray = [];
                     foreach ($faculties as $faculty) {
-                        $tellersFacultyList = Company::where('faculties', 'like', '%'.$faculty.'%')->pluck('user_id')->toArray();
-                        $postsFacultyList = Company::where('faculties', 'like', '%'.$faculty.'%')->pluck('user_id')->toArray();
+                        $tellersFacultyList = Company::where('faculties', 'like', '%'.$faculty.'%')->pluck('id')->toArray();
+                        $postsFacultyList = Company::where('faculties', 'like', '%'.$faculty.'%')->pluck('id')->toArray();
                         $tellersFacultyArray = array_merge($tellersFacultyArray, $tellersFacultyList);
                         $postsFacultyArray = array_merge($postsFacultyArray, $postsFacultyList);
                     }
                     $tellersCompanyList = array_intersect($tellersCompanyList, $tellersFacultyArray);
                     $postsCompanyList = array_intersect($postsCompanyList, $postsFacultyArray);
                 }
-                $tellersCompanyList = $tellersCompany->whereIn('user_id', $tellersCompanyList)->get();
-                $postsCompanyList = $postsCompany->whereIn('user_id', $postsCompanyList)->get();
+                $tellersCompanyList = $tellersCompany->whereIn('id', $tellersCompanyList)->get();
+                $postsCompanyList = $postsCompany->whereIn('id', $postsCompanyList)->get();
             } else {
                 $tellersCompanyList = $tellersCompany->get();
                 $postsCompanyList = $postsCompany->get();
@@ -449,7 +449,7 @@ class MainController extends Controller
 
     public function companyDetail($id) {
         $data = [
-            'company' => Company::where('user_id', $id)->first(),
+            'company' => Company::find($id),
             'auth' => Auth::check() ? Auth::user()->getRoleNames()[0] : 'guest',
         ];
         if (Auth::check()) {
@@ -461,40 +461,40 @@ class MainController extends Controller
 
     public function search(Request $request) {
         $company = Company::where('status', 1)->inRandomOrder();
-        $companyNumList = Company::pluck('user_id')->toArray();
+        $companyNumList = Company::pluck('id')->toArray();
         if ($request->has('search')) {
             if ($request->search === '1') {
                 if ($request->has('free_word') && isset($request->free_word)) {
-                   $nameList = Company::where('name', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                   $job_description_tellersList = Company::where('job_description_tellers', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                   $job_descriptionList = Company::where('job_description', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                   $culture_tellersList = Company::where('culture_tellers', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                   $cultureList = Company::where('culture', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                   $environment_tellersList = Company::where('environment_tellers', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                     $environmentList = Company::where('environment', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                     $featureList = Company::where('feature', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                     $career_pathList = Company::where('career_path', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                     $desired_personList = Company::where('desired_person', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                     $transferList = Company::where('transfer', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                     $contentList = Company::where('content', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
-                     $prList = Company::where('pr', 'like', '%'.$request->free_word.'%')->pluck('user_id')->toArray();
+                   $nameList = Company::where('name', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                   $job_description_tellersList = Company::where('job_description_tellers', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                   $job_descriptionList = Company::where('job_description', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                   $culture_tellersList = Company::where('culture_tellers', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                   $cultureList = Company::where('culture', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                   $environment_tellersList = Company::where('environment_tellers', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                     $environmentList = Company::where('environment', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                     $featureList = Company::where('feature', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                     $career_pathList = Company::where('career_path', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                     $desired_personList = Company::where('desired_person', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                     $transferList = Company::where('transfer', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                     $contentList = Company::where('content', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
+                     $prList = Company::where('pr', 'like', '%'.$request->free_word.'%')->pluck('id')->toArray();
                      $free_wordList = array_unique(array_merge($nameList, $job_description_tellersList, $job_descriptionList, $culture_tellersList, $cultureList, $environment_tellersList, $environmentList, $featureList, $career_pathList, $desired_personList, $transferList, $contentList, $prList));
                         $companyNumList = array_intersect($companyNumList, $free_wordList);
                 }
                 if ($request->has('name') && isset($request->name)) {
-                    $nameList = Company::where('name', 'like', '%'.$request->name.'%')->pluck('user_id')->toArray();
+                    $nameList = Company::where('name', 'like', '%'.$request->name.'%')->pluck('id')->toArray();
                     $companyNumList = array_intersect($companyNumList, $nameList);
                 }
                 if ($request->has('category') && isset($request->category)) {
                     $category = explode(',', $request->category);
-                    $categoryList = Company::whereIn('category', $category)->pluck('user_id')->toArray();
+                    $categoryList = Company::whereIn('category', $category)->pluck('id')->toArray();
                     $companyNumList = array_intersect($companyNumList, $categoryList);
                 }
                 if ($request->has('location') && isset($request->location)) {
                     $location = explode(',', $request->location);
                     $locationArray = [];
                     foreach ($location as $prefecture) {
-                        $locationList = Company::where('location', 'like', '%'.$prefecture.'%')->pluck('user_id')->toArray();
+                        $locationList = Company::where('location', 'like', '%'.$prefecture.'%')->pluck('id')->toArray();
                         $locationArray = array_merge($locationArray, $locationList);
                     }
                     $companyNumList = array_intersect($companyNumList, $locationArray);
@@ -503,7 +503,7 @@ class MainController extends Controller
                     $work_location = explode(',', $request->work_location);
                     $work_locationArray = [];
                     foreach ($work_location as $prefecture) {
-                        $work_locationList = Company::where('work_location', 'like', '%'.$prefecture.'%')->pluck('user_id')->toArray();
+                        $work_locationList = Company::where('work_location', 'like', '%'.$prefecture.'%')->pluck('id')->toArray();
                         $work_locationArray = array_merge($work_locationArray, $work_locationList);
                     }
                     $companyNumList = array_intersect($companyNumList, $work_locationArray);
@@ -511,13 +511,13 @@ class MainController extends Controller
                 if ($request->has('establishment_date') && isset($request->establishment_date)) {
                     switch ($request->establishment_date_type) {
                         case 'before':
-                            $establishment_dateList = Company::where('establishment_date', '<=', $request->establishment_date)->pluck('user_id')->toArray();
+                            $establishment_dateList = Company::where('establishment_date', '<=', $request->establishment_date)->pluck('id')->toArray();
                             break;
                         case 'after':
-                            $establishment_dateList = Company::where('establishment_date', '>=', $request->establishment_date)->pluck('user_id')->toArray();
+                            $establishment_dateList = Company::where('establishment_date', '>=', $request->establishment_date)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $establishment_dateList = Company::where('establishment_date', $request->establishment_date)->pluck('user_id')->toArray();
+                            $establishment_dateList = Company::where('establishment_date', $request->establishment_date)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -527,13 +527,13 @@ class MainController extends Controller
                 if ($request->has('capital') && isset($request->capital)) {
                     switch ($request->capital_type) {
                         case 'more':
-                            $capitalList = Company::where('capital', '>=', $request->capital)->pluck('user_id')->toArray();
+                            $capitalList = Company::where('capital', '>=', $request->capital)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $capitalList = Company::where('capital', '<=', $request->capital)->pluck('user_id')->toArray();
+                            $capitalList = Company::where('capital', '<=', $request->capital)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $capitalList = Company::where('capital', $request->capital)->pluck('user_id')->toArray();
+                            $capitalList = Company::where('capital', $request->capital)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -543,13 +543,13 @@ class MainController extends Controller
                 if ($request->has('sales') && isset($request->sales)) {
                     switch ($request->sales_type) {
                         case 'more':
-                            $salesList = Company::where('sales', '>=', $request->sales)->pluck('user_id')->toArray();
+                            $salesList = Company::where('sales', '>=', $request->sales)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $salesList = Company::where('sales', '<=', $request->sales)->pluck('user_id')->toArray();
+                            $salesList = Company::where('sales', '<=', $request->sales)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $salesList = Company::where('sales', $request->sales)->pluck('user_id')->toArray();
+                            $salesList = Company::where('sales', $request->sales)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -559,13 +559,13 @@ class MainController extends Controller
                 if ($request->has('employee_number') && isset($request->employee_number)) {
                     switch ($request->employee_number_type) {
                         case 'more':
-                            $employee_numberList = Company::where('employee_number', '>=', $request->employee_number)->pluck('user_id')->toArray();
+                            $employee_numberList = Company::where('employee_number', '>=', $request->employee_number)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $employee_numberList = Company::where('employee_number', '<=', $request->employee_number)->pluck('user_id')->toArray();
+                            $employee_numberList = Company::where('employee_number', '<=', $request->employee_number)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $employee_numberList = Company::where('employee_number', $request->employee_number)->pluck('user_id')->toArray();
+                            $employee_numberList = Company::where('employee_number', $request->employee_number)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -575,13 +575,13 @@ class MainController extends Controller
                 if ($request->has('graduated_number') && isset($request->graduated_number)) {
                     switch ($request->graduated_number_type) {
                         case 'more':
-                            $graduated_numberList = Company::where('graduated_number', '>=', $request->graduated_number)->pluck('user_id')->toArray();
+                            $graduated_numberList = Company::where('graduated_number', '>=', $request->graduated_number)->pluck('id')->toArray();
                             break;
                         case 'less':
-                            $graduated_numberList = Company::where('graduated_number', '<=', $request->graduated_number)->pluck('user_id')->toArray();
+                            $graduated_numberList = Company::where('graduated_number', '<=', $request->graduated_number)->pluck('id')->toArray();
                             break;
                         case 'equal':
-                            $graduated_numberList = Company::where('graduated_number', $request->graduated_number)->pluck('user_id')->toArray();
+                            $graduated_numberList = Company::where('graduated_number', $request->graduated_number)->pluck('id')->toArray();
                             break;
                         default:
                             break;
@@ -592,16 +592,16 @@ class MainController extends Controller
                     $faculties = explode(',', $request->faculties);
                     $facultiesArray = [];
                     foreach ($faculties as $faculty) {
-                        $facultiesList = Company::where('faculties', 'like', '%'.$faculty.'%')->pluck('user_id')->toArray();
+                        $facultiesList = Company::where('faculties', 'like', '%'.$faculty.'%')->pluck('id')->toArray();
                         $facultiesArray = array_merge($facultiesArray, $facultiesList);
                     }
                     $companyNumList = array_intersect($companyNumList, $facultiesArray);
                 }
                 if ($request->has('occupations') && isset($request->occupations)) {
-                    $occupationList = Company::where('occupations', 'like', '%'.$request->occupations.'%')->pluck('user_id')->toArray();
+                    $occupationList = Company::where('occupations', 'like', '%'.$request->occupations.'%')->pluck('id')->toArray();
                     $companyNumList = array_intersect($companyNumList, $occupationList);
                 }
-                $companyList = $company->whereIn('user_id', $companyNumList)->get();
+                $companyList = $company->whereIn('id', $companyNumList)->get();
             } else {
                 $companyList = $company->get();
             }
