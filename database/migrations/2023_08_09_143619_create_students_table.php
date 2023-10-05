@@ -19,7 +19,7 @@ return new class extends Migration
             $table->tinyInteger('sex', 2);
             $table->date('birthday');
             $table->text('faculty');
-            $table->integer('glade');
+            $table->integer('grade');
             $table->text('screen_name')->nullable();
             $table->text('img')->nullable();
             $table->tinyInteger('name_type')->default(0);

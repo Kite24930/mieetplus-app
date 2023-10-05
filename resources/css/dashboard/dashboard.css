@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto+Serif:opsz@8..144&family=Roboto:wght@400;700&display=swap");
 :root {
   --mieet-color: #B5DECC;
   --green-background: #F2FAF6;
@@ -19,6 +19,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+.roboto-serif {
+  font-family: "Roboto Serif", serif;
+}
+
 .text-mieetcolor {
   color: var(--mieet-color);
 }
@@ -32,7 +36,7 @@
   border: none;
   cursor: pointer;
 }
-.green-btn:hover {
+.green-btn:hover:not(.disabled) {
   background-color: #5DCB8E;
 }
 
@@ -46,15 +50,9 @@
   align-items: center;
 }
 
-:root {
-  --mieet-color: #B5DECC;
-  --green-background: #F2FAF6;
-  --green-color: #73CF98;
-  --default-font-color: #586C61;
-}
-
-* {
-  color: var(--default-font-color);
+.disabled {
+  background-color: lightgrey;
+  color: #6B7280;
 }
 
 header {
@@ -85,13 +83,39 @@ body {
   color: #6B7280;
 }
 
+.back-grey-50 {
+  background-color: #F9FAFB;
+}
+
+.bg-red {
+  background-color: #FF6C75;
+}
+
+.search-box {
+  border-radius: 8px;
+  background-color: #F9FAFB;
+  border: 1px solid #D1D5DB;
+}
+.search-box input:focus {
+  box-shadow: none;
+}
+
 .rounded-badge {
   background-color: #DEF7EC;
   color: #03543F;
 }
 
+input::placeholder {
+  color: #ACB6BE;
+}
+
 header .link:hover {
   background-color: rgba(88, 108, 97, 0.2);
+}
+
+.chart {
+  width: 250px;
+  height: auto;
 }
 
 /*# sourceMappingURL=dashboard.css.map */

@@ -34,7 +34,7 @@ class AdminController extends Controller
         '地域イノベーション学研究科',
     ];
 
-    private $glade = [
+    private $grade = [
         '1',
         '2',
         '3',

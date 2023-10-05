@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('CREATE VIEW student_lists AS SELECT x.id AS id, x.user_id AS user_id, y.name AS name, y.email AS email, x.univ_email AS univ_email, y.email_verified_at AS email_verified_at, x.sex AS sex, x.birthday AS birthday, x.faculty AS faculty, x.glade AS glade, x.screen_name AS screen_name, x.img AS img, x.name_type AS name_type, x.notice AS notice, x.history AS history, x.created_at as created_at FROM students AS x LEFT JOIN users AS y ON x.user_id = y.id;');
+        DB::statement('CREATE VIEW student_lists AS SELECT x.id AS id, x.user_id AS user_id, y.name AS name, y.email AS email, x.univ_email AS univ_email, y.email_verified_at AS email_verified_at, x.sex AS sex, x.birthday AS birthday, x.faculty AS faculty, x.grade AS grade, x.screen_name AS screen_name, x.img AS img, x.name_type AS name_type, x.notice AS notice, x.history AS history, x.created_at as created_at FROM students AS x LEFT JOIN users AS y ON x.user_id = y.id;');
     }
 
     /**

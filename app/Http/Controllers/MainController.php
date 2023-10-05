@@ -22,20 +22,37 @@ use Illuminate\Support\Facades\Storage;
 class MainController extends Controller
 {
     private $faculties = [
-        '人文学部',
-        '教育学部',
-        '医学部',
-        '工学部',
-        '生物資源学部',
-        '人文社会科学研究科',
-        '教育学研究科',
-        '医学系研究科',
-        '工学研究科',
-        '生物資源学研究科',
-        '地域イノベーション学研究科',
+        '人文学部' => 'humanities',
+        '教育学部' => 'education',
+        '医学部' => 'medicine',
+        '工学部' => 'engineering',
+        '生物資源学部' => 'bioresources',
+        '人文社会科学研究科' => 'graduate_humanities',
+        '教育学研究科' => 'graduate_education',
+        '医学系研究科' => 'graduate_medicine',
+        '工学研究科' => 'graduate_engineering',
+        '生物資源学研究科' => 'graduate_bioresources',
+        '地域イノベーション学研究科' => 'graduate_innovation',
     ];
 
-    private $glade = [
+    private $bachelor = [
+        '人文学部' => 'humanities',
+        '教育学部' => 'education',
+        '医学部' => 'medicine',
+        '工学部' => 'engineering',
+        '生物資源学部' => 'bioresources',
+    ];
+
+    private $master = [
+        '人文社会科学研究科' => 'graduate_humanities',
+        '教育学研究科' => 'graduate_education',
+        '医学系研究科' => 'graduate_medicine',
+        '工学研究科' => 'graduate_engineering',
+        '生物資源学研究科' => 'graduate_bioresources',
+        '地域イノベーション学研究科' => 'graduate_innovation',
+    ];
+
+    private $grade = [
         '1',
         '2',
         '3',
@@ -46,6 +63,13 @@ class MainController extends Controller
         'M2',
         'M3',
         'M4',
+    ];
+
+    private $sex = [
+        '男性',
+        '女性',
+        'その他',
+        '非回答',
     ];
 
     private $prefectures = [
@@ -695,6 +719,9 @@ class MainController extends Controller
     }
 
     public function profile(Request $request) {
+        if (Auth::user()->getRoleNames()[0] === 'company' || Auth::user()->getRoleNames()[0] === 'admin') {
+            return redirect()->route('dashboard');
+        }
         $data = [
             'request' => $request,
             'account' => StudentList::where('user_id', Auth::id())->first(),
@@ -711,7 +738,7 @@ class MainController extends Controller
             'request' => $request,
             'account' => StudentList::where('user_id', Auth::id())->first(),
             'faculties' => $this->faculties,
-            'glades' => $this->glade,
+            'grades' => $this->grade,
         ];
         if (Auth::check()) {
             $data['followed'] = FollowerList::where('student_id', Auth::id())->pluck('company_id')->toArray();
@@ -725,7 +752,7 @@ class MainController extends Controller
         $request->validate([
             'email' => ['required', 'string', 'email:filter,dns', 'max:255', 'ends_with:@m.mie-u.ac.jp'],
             'faculty' => ['required', 'string', 'max:255'],
-            'glade' => ['required', 'string', 'max:255'],
+            'grade' => ['required', 'string', 'max:255'],
             'screen_name' => ['nullable', 'string', 'max:255'],
             'img' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
         ],
@@ -771,7 +798,7 @@ class MainController extends Controller
             }
             $target->update([
                 'faculty' => $request->faculty,
-                'glade' => $request->glade,
+                'grade' => $request->grade,
                 'screen_name' => $request->screen_name,
                 'notice' => $notice,
                 'history' => $history,
@@ -803,13 +830,44 @@ class MainController extends Controller
                     }
                     return redirect()->route('companyFirstLogin');
                 }
+                $companies = Company::where('user_id', Auth::id())->get();
+                foreach ($companies as $company) {
+                    $followers[$company->id] = FollowerList::where('company_id', $company->id)->orderBy('created_at', 'desc')->take(5)->get();
+                    $followersCount[$company->id] = FollowerList::where('company_id', $company->id)->count();
+                    $all_followers[$company->id] = FollowerList::where('company_id', $company->id)->count();
+                    $monthly_followers[$company->id] = FollowerList::where('company_id', $company->id)->whereBetween('created_at', [date('Y-m-d', strtotime('-1 month')), date('Y-m-d')])->count();
+                    $weekly_followers[$company->id] = FollowerList::where('company_id', $company->id)->whereBetween('created_at', [date('Y-m-d', strtotime('-1 week')), date('Y-m-d')])->count();
+                    $all_followers_count[$company->id] = FollowerList::where('company_id', $company->id)->count();
+                    for ($i = 0; $i < 4; $i++) {
+                        $sex[$company->id][$this->sex[$i]] = StudentList::where('sex', $i)->count();
+                    }
+                    foreach ($this->faculties as $faculty => $faculty_en) {
+                        $faculties[$company->id][$faculty] = StudentList::where('faculty', $faculty)->count();
+                        for ($i = 0; $i < 4; $i++) {
+                            $faculty_sex[$company->id][$faculty][$this->sex[$i]] = StudentList::where('faculty', $faculty)->where('sex', $i)->count();
+                        }
+                        foreach ($this->grade as $grade) {
+                            $faculty_grades[$company->id][$faculty][$grade] = StudentList::where('faculty', $faculty)->where('grade', $grade)->count();
+                        }
+                    }
+                }
                 $data = [
                     'user' => Auth::user(),
-                    'company' => Company::where('user_id', Auth::id())->first(),
-                    'students' => FollowerList::where('company_id', Auth::id())->orderBy('created_at', 'desc')->take(5)->get(),
-                    'all_followers' => FollowerList::where('company_id', Auth::id())->count(),
-                    'monthly_followers' => FollowerList::where('company_id', Auth::id())->whereBetween('created_at', [date('Y-m-d', strtotime('-1 month')), date('Y-m-d')])->count(),
-                    'weekly_followers' => FollowerList::where('company_id', Auth::id())->whereBetween('created_at', [date('Y-m-d', strtotime('-1 week')), date('Y-m-d')])->count(),
+                    'companies' => $companies,
+                    'students' => $followers,
+                    'all_followers' => $followersCount,
+                    'monthly_followers' => $monthly_followers,
+                    'weekly_followers' => $weekly_followers,
+                    'all_followers_count' => $all_followers_count,
+                    'sex' => $sex,
+                    'faculties' => $faculties,
+                    'faculty_grades' => $faculty_grades,
+                    'faculty_sex' => $faculty_sex,
+                    'sex_list' => $this->sex,
+                    'faculties_list' => $this->faculties,
+                    'grades_list' => $this->grade,
+                    'bachelor_list' => $this->bachelor,
+                    'master_list' => $this->master,
                 ];
                 break;
             case 'student':

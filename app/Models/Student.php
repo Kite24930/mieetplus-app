@@ -15,7 +15,7 @@ class Student extends Model
         'sex',
         'birthday',
         'faculty',
-        'glade',
+        'grade',
         'screen_name',
         'img',
         'name_type',

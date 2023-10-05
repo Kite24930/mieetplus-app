@@ -70,7 +70,7 @@
                     <div class="text-sm">学部</div>
                     <div>
                         <x-input-select id="faculty" class="block mt-1 w-full h-12" placeholder="学部" name="faculty" required>
-                            @foreach($faculties as $faculty)
+                            @foreach($faculties as $faculty => $faculty_en)
                                 <option value="{{ $faculty }}" @if($account->faculty == $faculty) selected @endif>{{ $faculty }}</option>
                             @endforeach
                         </x-input-select>
@@ -80,12 +80,12 @@
                 <div class="w-full flex flex-col py-2 px-4">
                     <div class="text-sm">学年</div>
                     <div>
-                        <x-input-select id="glade" class="block mt-1 w-full h-12" placeholder="学年" name="glade" required>
-                            @foreach($glades as $glade)
-                                <option value="{{ $glade }}" @if($account->glade == $glade) selected @endif>{{ $glade }}年</option>
+                        <x-input-select id="grade" class="block mt-1 w-full h-12" placeholder="学年" name="grade" required>
+                            @foreach($grades as $grade)
+                                <option value="{{ $grade }}" @if($account->grade == $grade) selected @endif>{{ $grade }}年</option>
                             @endforeach
                         </x-input-select>
-                        <x-input-error :messages="$errors->get('glade')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('grade')" class="mt-2" />
                     </div>
                 </div>
                 <div class="w-full flex flex-col py-2 px-4">

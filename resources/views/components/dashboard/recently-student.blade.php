@@ -1,7 +1,11 @@
 <li>
     <a href="" class="flex justify-between items-center px-4 py-2.5">
         <div class="flex flex-col w-32">
-            <div class="text-grey-900 font-bold">{{ $data->name }}</div>
+            @if(isset($data->screen_name))
+                <div class="text-grey-900 font-bold">{{ $data->screen_name }}</div>
+            @else
+                <div class="text-grey-900 font-bold">{{ $data->name }}</div>
+            @endif
             <div class="text-grey-500 text-xs">{{ $data->faculty }}<br>{{ $data->glade }}年</div>
         </div>
         <div class="rounded-full rounded-badge flex justify-center items-center py-0.5 px-2.5">

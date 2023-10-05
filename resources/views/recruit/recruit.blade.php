@@ -212,7 +212,7 @@
                                 </label>
                             </div>
                             <div class="h-28 w-full overflow-y-auto p-3 border">
-                                @foreach($faculties as $faculty)
+                                @foreach($faculties as $faculty => $faculty_en)
                                     <label>
                                         <input type="checkbox" value="{{ $faculty }}" @if(str_contains($request->faculties, $faculty)) checked @endif class="filter-faculty">
                                         {{ $faculty }}

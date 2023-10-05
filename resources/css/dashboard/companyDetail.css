@@ -113,6 +113,11 @@ header .link:hover {
   background-color: rgba(88, 108, 97, 0.2);
 }
 
+.chart {
+  width: 250px;
+  height: auto;
+}
+
 .text-2xs {
   font-size: 0.53rem;
   line-height: 0.75rem;

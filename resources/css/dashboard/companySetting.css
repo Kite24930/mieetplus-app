@@ -113,4 +113,9 @@ header .link:hover {
   background-color: rgba(88, 108, 97, 0.2);
 }
 
+.chart {
+  width: 250px;
+  height: auto;
+}
+
 /*# sourceMappingURL=companySetting.css.map */

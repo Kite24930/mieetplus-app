@@ -39,7 +39,7 @@
             <div class="w-full border-t py-2 px-4">
                 <div class="text-grey-500 text-sm">[学部・学年]</div>
                 <div class="pl-2">
-                    {{ $account->faculty }}  {{ $account->glade }}年
+                    {{ $account->faculty }}  {{ $account->grade }}年
                 </div>
             </div>
             <div class="w-full border-t py-2 px-4">

@@ -73,7 +73,7 @@
 
                 <!-- Grade -->
                 <div class="my-8">
-                    <x-input-select id="glade" class="select block mt-1 w-full h-12 mr-3" placeholder="学年" name="glade" :value="old('glade')" required autofocus autocomplete="glade" style="color: #ACB6BE">
+                    <x-input-select id="grade" class="select block mt-1 w-full h-12 mr-3" placeholder="学年" name="grade" :value="old('grade')" required autofocus autocomplete="grade" style="color: #ACB6BE">
                         <option value="placeholder" disabled selected class="hidden">学年</option>
                         <optgroup label="学部">
                             <option value="1">1年</option>
@@ -90,7 +90,7 @@
                             <option value="M4">4年</option>
                         </optgroup>
                     </x-input-select>
-                    <x-input-error :messages="$errors->get('glade')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('grade')" class="mt-2" />
                 </div>
 
                 <!-- Password -->
