@@ -1,7 +1,4 @@
 <x-recruit.template title="フォローリスト">
-    <script>
-        console.log(@json($followed));
-    </script>
     <div id="loading" class="w-full h-full fixed top-0 left-0 flex justify-center items-center z-1000">
         <div class="ring absolute">
             loading
