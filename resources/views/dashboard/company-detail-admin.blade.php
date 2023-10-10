@@ -1,4 +1,4 @@
-<x-dashboard-template title="企業アカウント 詳細画面">
+<x-dashboard-template title="企業アカウント 詳細画面" css="dashboard/companyDetail.css">
     <x-dashboard.admin-header>
 
     </x-dashboard.admin-header>
@@ -365,12 +365,12 @@
                         <div class="flex flex-col justify-start items-center mt-5">
                             詳細画面TOP画像
                             @if(isset($company))
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="w-60 h-32 top_img object-cover border border-green-600">
+                                <img src="{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="w-60 h-32 top_img object-cover border border-green-600">
                         </div>
                         <div class="text-right ms-5 w-60">
                             投稿用表示
                             <div id="top_img_check">
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="border border-green-600 top_img">
+                                <img src="{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="border border-green-600 top_img">
                             </div>
                             @else
                                 <img src="http://via.placeholder.com/240x240" alt="placeholder" class="w-60 h-32 top_img object-cover border border-green-600">
@@ -395,12 +395,12 @@
                         @if(isset($company->logo))
                             <div class="text-right">
                                 アイコン表示
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
+                                <img src="{{ asset('storage/company/'.$company->id.'/'.$company->logo) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
                             </div>
                         @else
                             <div class="text-right">
                                 アイコン表示
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
+                                <img src="{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
                             </div>
                         @endif
                     </td>
@@ -448,7 +448,7 @@
                         <div id="tellers_img_1_file" class="ml-3 mt-4 omission">
                             @if($company->tellers_img_1)
                                 {{ $company->tellers_img_1 }}
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }}" alt="{{ $company->name }}" class="w-auto h-60 object-cover border border-green-600 tellers-img" data-bs-target="job_description_preview">
+                                <img src="{{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_1) }}" alt="{{ $company->name }}" class="w-auto h-60 object-cover border border-green-600 tellers-img" data-bs-target="job_description_preview">
                             @else
                                 ファイルが選択されていません
                             @endif
@@ -533,7 +533,7 @@
                             <div id="tellers_img_2_file" class="ml-3 mt-4 omission">
                                 @if($company->tellers_img_2)
                                     {{ $company->tellers_img_2 }}
-                                    <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }}" alt="{{ $company->name }}" class="w-auto h-60 object-cover border border-green-600 tellers-img" data-bs-target="culture_preview">
+                                    <img src="{{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_2) }}" alt="{{ $company->name }}" class="w-auto h-60 object-cover border border-green-600 tellers-img" data-bs-target="culture_preview">
                                 @else
                                     ファイルが選択されていません
                                 @endif
@@ -619,7 +619,7 @@
                             <div id="tellers_img_3_file" class="ml-3 mt-4 omission">
                                 @if($company->tellers_img_3)
                                     {{ $company->tellers_img_3 }}
-                                    <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }}" alt="{{ $company->name }}" class="w-auto h-60 object-cover border border-green-600 tellers-img" data-bs-target="environment_preview">
+                                    <img src="{{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_3) }}" alt="{{ $company->name }}" class="w-auto h-60 object-cover border border-green-600 tellers-img" data-bs-target="environment_preview">
                                 @else
                                     ファイルが選択されていません
                                 @endif

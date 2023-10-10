@@ -4,10 +4,7 @@ import { Editor } from "@toast-ui/editor";
 import '@toast-ui/editor/dist/i18n/ja-jp';
 import { Modal } from "flowbite";
 import ProgressBar from 'progressbar.js';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import '../app.js';
-import '../../css/recruit/recruit.css';
 import axios from "axios";
 import followChange from "../module/followed.js";
 
@@ -179,7 +176,7 @@ const windowInit = () => {
         loading.style.opacity = 0;
     }, 1000)
     setTimeout(() => {
-        loading.classList.add('hidden');
+        loading.style.display = 'none';
     }, 1500);
     frameFunction();
 }

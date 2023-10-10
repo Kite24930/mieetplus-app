@@ -1,4 +1,4 @@
-<x-template title="Mieet Plus 利用規約">
+<x-template title="Mieet Plus 利用規約" css="terms_policy.css">
     <x-header></x-header>
     <main class="w-full flex flex-col items-center justify-center">
         <div class="w-full max-w-4xl p-4 flex flex-col items-start justify-center">

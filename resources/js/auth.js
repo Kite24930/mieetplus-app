@@ -1,5 +1,4 @@
 import './app.js';
-import '../css/auth.css';
 
 document.querySelectorAll('select').forEach((select) => {
     select.addEventListener('change', (e) => {

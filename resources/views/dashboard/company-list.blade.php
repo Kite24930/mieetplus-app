@@ -1,4 +1,4 @@
-<x-dashboard-template title="企業アカウント">
+<x-dashboard-template title="企業アカウント" css="dashboard/companyList.css">
     <x-dashboard.admin-header>
 
     </x-dashboard.admin-header>

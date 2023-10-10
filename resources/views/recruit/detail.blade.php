@@ -1,12 +1,5 @@
-<x-recruit.template :title="$company->name">
-    <script>
-        window.Laravel = {};
-        window.Laravel.company_id = {{ $company->id }};
-        @if(isset($user))
-            window.Laravel.user_id = {{ $user->id }};
-        @endif
-    </script>
-    <div id="loading" class="w-full h-full fixed top-0 left-0 flex justify-center items-center z-1000">
+<x-recruit.template :title="$company->name" css="recruit/detail.css">
+    <div id="loading" style="width: 100dvw; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background-color: black;">
         <div class="ring absolute">
             loading
             <span></span>
@@ -380,9 +373,15 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <x-recruit.navbar></x-recruit.navbar>
     </div>
+    <script>
+        window.Laravel = {};
+        window.Laravel.company_id = {{ $company->id }};
+        @if(isset($user))
+            window.Laravel.user_id = {{ $user->id }};
+        @endif
+    </script>
     @vite(['resources/js/recruit/companyDetail.js'])
 </x-recruit.template>

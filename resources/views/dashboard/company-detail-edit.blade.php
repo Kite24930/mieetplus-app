@@ -1,4 +1,4 @@
-<x-dashboard-template title="管理画面">
+<x-dashboard-template title="管理画面" css="dashboard/companyDetail.css">
     <x-dashboard.company-header>
 
     </x-dashboard.company-header>
@@ -553,13 +553,13 @@
                                 <div class="flex flex-col items-end mt-5">
                                     詳細画面TOP画像
                             @if(isset($company))
-                                    <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="w-60 h-32 top_img object-cover border border-green-600">
+                                    <img src="{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="w-60 h-32 top_img object-cover border border-green-600">
                                 </div>
                             </div>
                             <div class="text-right ms-5 w-60">
                                 投稿用表示
                                 <div id="top_img_check">
-                                    <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="border border-green-600 top_img">
+                                    <img src="{{ asset('storage/company/'.$company->id.'/'.$company->top_img) }}" alt="{{ $company->name }}" class="border border-green-600 top_img">
                                 </div>
                             @else
                                     <img src="http://via.placeholder.com/240x240" alt="placeholder" class="w-60 h-32 top_img object-cover border border-green-600">
@@ -604,7 +604,7 @@
                             @if(isset($company))
                             <div class="text-right">
                                 アイコン表示
-                                <img src="{{ asset('storage/company/'.$company->user_id.'/'.$company->logo) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
+                                <img src="{{ asset('storage/company/'.$company->id.'/'.$company->logo) }}" alt="{{ $company->name }}" class="w-24 h-24 logo object-cover rounded-full border border-green-600">
                             </div>
                             @else
                             <div class="text-right">
@@ -684,7 +684,7 @@
                             <br>
                             ※2MB以上のファイルを選択するとアップロードできない場合があります。
                         </div>
-                        <input type="hidden" id="tellers_img_1_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_1) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
+                        <input type="hidden" id="tellers_img_1_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_1) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
                         <x-input-error :messages="$errors->get('tellers_img_1')" class="mt-2" />
                     </td>
                     <td class="flex-center-box flex-col p-4">
@@ -784,7 +784,7 @@
                             <br>
                             ※2MB以上のファイルを選択するとアップロードできない場合があります。
                         </div>
-                        <input type="hidden" id="tellers_img_2_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_2) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
+                        <input type="hidden" id="tellers_img_2_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_2) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
                         <x-input-error :messages="$errors->get('tellers_img_1')" class="mt-2" />
                     </td>
                     <td class="flex-center-box flex-col p-4">
@@ -886,7 +886,7 @@
                             <br>
                             ※2MB以上のファイルを選択するとアップロードできない場合があります。
                         </div>
-                        <input type="hidden" id="tellers_img_3_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->user_id.'/'.$company->tellers_img_3) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
+                        <input type="hidden" id="tellers_img_3_url" value="@if(isset($company)) {{ asset('storage/company/'.$company->id.'/'.$company->tellers_img_3) }} @else https://via.placeholder.com/480x640.png/007799?text=cats+perferendis @endif">
                         <x-input-error :messages="$errors->get('tellers_img_1')" class="mt-2" />
                     </td>
                     <td class="flex-center-box flex-col p-4">

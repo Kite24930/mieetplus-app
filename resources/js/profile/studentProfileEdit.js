@@ -13,7 +13,7 @@ const windowInit = () => {
         loading.style.opacity = 0;
     }, 1000);
     setTimeout(() => {
-        loading.classList.add('hidden');
+        loading.style.display = 'none';
     }, 1500);
 }
 window.addEventListener('load', windowInit);

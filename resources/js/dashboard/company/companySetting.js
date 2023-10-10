@@ -1,6 +1,4 @@
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../../app.js';
-import '../../../css/dashboard/companySetting.css';
 
 const id = document.getElementById('id').value;
 

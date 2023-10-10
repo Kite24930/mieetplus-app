@@ -2,10 +2,7 @@ import { Editor } from "@toast-ui/editor";
 import '@toast-ui/editor/dist/i18n/ja-jp';
 import ProgressBar from 'progressbar.js';
 import { loader } from "../../module/googlemap.js";
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import '../../app.js';
-import '../../../css/dashboard/companyDetail.css';
 
 let map, marker, geocoder;
 window.addEventListener('load', (e) => {

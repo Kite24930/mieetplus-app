@@ -1,5 +1,5 @@
-<x-recruit.template title="フォローリスト">
-    <div id="loading" class="w-full h-full fixed top-0 left-0 flex justify-center items-center z-1000">
+<x-recruit.template title="フォローリスト" css="recruit/followed.css">
+    <div id="loading" style="width: 100dvw; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background-color: black;">
         <div class="ring absolute">
             loading
             <span></span>

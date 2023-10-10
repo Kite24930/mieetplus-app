@@ -1,18 +1,5 @@
-<x-recruit.template title="Mieet Plus 就活部" >
-    <script>
-        window.Laravel = {};
-        window.Laravel.tellers_list = @json($tellers_companies_list);
-        window.Laravel.tellers_num = 10;
-        window.Laravel.posts_list = @json($posts_companies_list);
-        window.Laravel.posts_num = 10;
-        @if(isset($user))
-            window.Laravel.user = @json($user);
-        @endif
-        @if(isset($followed))
-            window.Laravel.followed = @json($followed);
-        @endif
-    </script>
-    <div id="loading" class="w-full h-full fixed top-0 left-0 flex justify-center items-center z-1000">
+<x-recruit.template title="Mieet Plus 就活部" css="recruit/recruit.css">
+    <div id="loading" style="width: 100dvw; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background-color: black;">
         <div class="ring absolute">
             loading
             <span></span>
@@ -430,5 +417,18 @@
             <x-recruit.navbar></x-recruit.navbar>
         </div>
     </div>
+    <script>
+        window.Laravel = {};
+        window.Laravel.tellers_list = @json($tellers_companies_list);
+        window.Laravel.tellers_num = 10;
+        window.Laravel.posts_list = @json($posts_companies_list);
+        window.Laravel.posts_num = 10;
+        @if(isset($user))
+            window.Laravel.user = @json($user);
+        @endif
+            @if(isset($followed))
+            window.Laravel.followed = @json($followed);
+        @endif
+    </script>
     @vite(['resources/js/recruit/recruit.js'])
 </x-recruit.template>

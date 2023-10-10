@@ -1,6 +1,4 @@
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../app.js';
-import '../../css/profile/studentProfile.css';
 
 const loading = document.getElementById('loading');
 const container = document.getElementById('container');
@@ -13,7 +11,7 @@ const windowInit = () => {
         loading.style.opacity = 0;
     }, 1000);
     setTimeout(() => {
-        loading.classList.add('hidden');
+        loading.style.display = 'none';
     }, 1500);
 }
 window.addEventListener('load', windowInit);

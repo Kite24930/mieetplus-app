@@ -4,10 +4,7 @@ import colorPlugin from "@toast-ui/editor-plugin-color-syntax";
 import tableMergedCellPlugin from "@toast-ui/editor-plugin-table-merged-cell";
 import ProgressBar from 'progressbar.js';
 import { loader } from "../module/googlemap.js";
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import '../app.js';
-import '../../css/dashboard/companyDetail.css';
 
 document.querySelectorAll('select').forEach((select) => {
     if (select.value !== 'placeholder') {

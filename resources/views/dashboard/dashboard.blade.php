@@ -1,4 +1,4 @@
-<x-dashboard-template title="管理画面">
+<x-dashboard-template title="管理画面" css="dashboard/dashboard.css">
     @can('admin')
         <x-dashboard.admin-header>
 
@@ -51,20 +51,6 @@
             </div>
         </main>
     @elsecan('company')
-        <script>
-            window.Laravel = {};
-            window.Laravel.companies = @json($companies);
-            window.Laravel.all_followers_count = @json($all_followers_count);
-            window.Laravel.sex = @json($sex);
-            window.Laravel.faculties = @json($faculties);
-            window.Laravel.faculty_grades = @json($faculty_grades);
-            window.Laravel.faculty_sex = @json($faculty_sex);
-            window.Laravel.sex_list = @json($sex_list);
-            window.Laravel.faculties_list = @json($faculties_list);
-            window.Laravel.grades_list = @json($grades_list);
-            window.Laravel.bachelor_list = @json($bachelor_list);
-            window.Laravel.master_list = @json($master_list);
-        </script>
         <x-dashboard.company-header>
 
         </x-dashboard.company-header>
@@ -327,6 +313,20 @@
                 @endforeach
             </div>
         </main>
+        <script>
+            window.Laravel = {};
+            window.Laravel.companies = @json($companies);
+            window.Laravel.all_followers_count = @json($all_followers_count);
+            window.Laravel.sex = @json($sex);
+            window.Laravel.faculties = @json($faculties);
+            window.Laravel.faculty_grades = @json($faculty_grades);
+            window.Laravel.faculty_sex = @json($faculty_sex);
+            window.Laravel.sex_list = @json($sex_list);
+            window.Laravel.faculties_list = @json($faculties_list);
+            window.Laravel.grades_list = @json($grades_list);
+            window.Laravel.bachelor_list = @json($bachelor_list);
+            window.Laravel.master_list = @json($master_list);
+        </script>
     @endcan
     @vite(['resources/js/dashboard/dashboard.js'])
 </x-dashboard-template>

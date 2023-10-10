@@ -1,4 +1,4 @@
-<x-dashboard-template title="管理画面">
+<x-dashboard-template title="管理画面" css="dashboard/companyDetail.css">
     <x-dashboard.company-header>
 
     </x-dashboard.company-header>

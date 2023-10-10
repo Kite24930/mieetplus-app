@@ -1,6 +1,4 @@
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import './app.js'
-import '../css/contact.css';
 
 const corporationRadio = document.getElementById('corporation');
 const individualRadio = document.getElementById('individual');

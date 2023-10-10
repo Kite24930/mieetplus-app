@@ -1,4 +1,4 @@
-<x-template title="Mieet Plus お問い合わせ">
+<x-template title="Mieet Plus お問い合わせ" css="contact.css">
     <x-header></x-header>
     <main class="w-full flex flex-col items-center justify-center">
         <div class="w-full max-w-4xl p-4 flex flex-col items-start justify-center">

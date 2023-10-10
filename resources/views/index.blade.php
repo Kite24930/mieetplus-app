@@ -1,4 +1,4 @@
-<x-template title="Mieet Plus">
+<x-template title="Mieet Plus" css="index.css" description="三重大学発学生ベンチャー企業が運営する三重大学生特化型情報発信サイトです。">
     <header class="fixed top-0 left-0 right-0 w-full h-[80px] flex justify-center items-center px-2.5">
         <div class="w-full max-w-[1200px] h-[60px] flex justify-between items-center">
             <div class="h-[40px] flex justify-center items-center">
