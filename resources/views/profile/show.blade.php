@@ -52,7 +52,7 @@
                     @endif
                 </div>
             </div>
-            <div class="w-full border-t py-2 px-4">
+            <div class="w-full border-t py-2 px-4 hidden">
                 <div class="text-grey-500 text-sm">[メールアドレス認証]</div>
                 @if($request->session()->has('status'))
                     <div class="text-xs text-grey-500 pl-2">
