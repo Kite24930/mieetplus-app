@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
             'birthday' => ['required', 'date'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'faculty' => ['required', 'string', 'max:255'],
-            'glade' => ['required', 'string', 'max:255'],
+            'grade' => ['required', 'string', 'max:255'],
         ],
         [
             'email.ends_with' => 'メールアドレスは @m.mie-u.ac.jp で終わる必要があります。',
@@ -54,35 +54,39 @@ class RegisteredUserController extends Controller
             'password.min' => 'パスワードは8文字以上である必要があります。',
             'password.regex' => 'パスワードは半角英数字である必要があります。',
             'faculty.required' => '学部は必須です。',
-            'glade.required' => '学科は必須です。',
+            'grade.required' => '学科は必須です。',
         ]);
 
         DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+            $student = Student::create([
+                'user_id' => $user->id,
+                'univ_email' => $request->email,
+                'sex' => $request->sex,
+                'birthday' => $request->birthday,
+                'faculty' => $request->faculty,
+                'grade' => $request->grade,
+                'screen_name' => $request->screen_name,
+            ]);
 
-        $student = Student::create([
-            'user_id' => $user->id,
-            'univ_email' => $request->email,
-            'sex' => $request->sex,
-            'birthday' => $request->birthday,
-            'faculty' => $request->faculty,
-            'glade' => $request->glade,
-            'screen_name' => $request->screen_name,
-        ]);
+            $user->assignRole('student');
 
-        $user->assignRole('student');
+            DB::commit();
 
-        DB::commit();
+            event(new Registered($user));
 
-        event(new Registered($user));
+            Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::HOME);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors(['error' => '登録に失敗しました。']);
+        }
     }
 }
