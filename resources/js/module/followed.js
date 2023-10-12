@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const followChange = (el) => {
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const company_id = el.getAttribute('data-bs-target');
     const student_id = el.getAttribute('data-bs-student');
     const classList = el.classList;
