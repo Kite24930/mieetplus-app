@@ -4,6 +4,11 @@
             <a href="{{ route('index') }}">
                 <img src="{{ asset('storage/mieet_plus_logo.png') }}" alt="Mieet Plus" class="w-72">
             </a>
+            @if(session('error'))
+                <div>
+                    <h1 class="text-3xl bg-yellow-500 underline p-3 inline-block rounded">{{ session('msg') }}</h1>
+                </div>
+            @endif
             <form method="POST" action="{{ route('register') }}" class="w-full">
                 @csrf
                 <!-- Email Address -->

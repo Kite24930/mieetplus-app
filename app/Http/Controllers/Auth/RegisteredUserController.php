@@ -89,7 +89,10 @@ class RegisteredUserController extends Controller
             return redirect(RouteServiceProvider::HOME);
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->withInput()->withErrors(['error' => '登録に失敗しました。']);
+            return redirect()
+                ->back()
+                ->with('msg', $e->getMessage())
+                ->withErrors(['error' => '登録に失敗しました。']);
         }
     }
 }
