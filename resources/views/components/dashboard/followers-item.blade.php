@@ -7,6 +7,6 @@
         @endif
     </td>
     <td class="p-4">{{ $data->faculty }}</td>
-    <td class="p-4">{{ $data->glade }}</td>
+    <td class="p-4">{{ $data->grade }}</td>
     <td class="p-4">{{ explode(' ', $data->created_at)[0] }}</td>
 </tr>
