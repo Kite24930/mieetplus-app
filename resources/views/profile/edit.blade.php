@@ -16,7 +16,7 @@
                 <div class="w-full flex flex-col py-2 px-4">
                     <div class="text-sm">氏名</div>
                     <div>
-                        <x-text-input id="name" class="block mt-1 w-full h-12 disabled" placeholder="氏名" type="text" name="name" :value="$account->name" disabled />
+                        <x-text-input id="name" class="block mt-1 w-full h-12 disabled" placeholder="氏名" type="text" name="name" :value="$account->name" readonly />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="text-sm">学籍メール</div>
                     <div>
                         @if(isset($account->univ_email) && str_contains($account->univ_email, '@m.mie-u.ac.jp'))
-                            <x-text-input id="email" class="block mt-1 w-full h-12 disabled" placeholder="学籍メール" type="text" name="email" :value="$account->univ_email" required autocomplete="email" disabled />
+                            <x-text-input id="email" class="block mt-1 w-full h-12 disabled" placeholder="学籍メール" type="text" name="email" :value="$account->univ_email" required autocomplete="email" readonly />
                         @else
                             <div class="text-xs text-grey-500 pl-2">@m.mie-u.ac.jpのアドレスを登録していただけると全機能がご利用できます。</div>
                             <x-text-input id="email" class="block mt-1 w-full h-12" placeholder="学籍メール" type="text" name="email" :value="$account->univ_email" required autocomplete="email" />
@@ -38,16 +38,16 @@
                     <div>
                         @switch($account->sex)
                             @case(0)
-                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="男性" disabled />
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="男性" readonly />
                                 @break
                             @case(1)
-                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="女性" disabled />
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="女性" readonly />
                                 @break
                             @case(2)
-                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="その他" disabled />
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="その他" readonly />
                                 @break
                             @case(3)
-                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="非回答" disabled />
+                                <x-text-input class="block mt-1 w-full h-12 disabled" type="text" value="非回答" readonly />
                                 @break
                         @endswitch
                     </div>
@@ -56,7 +56,7 @@
                     <div class="text-sm">誕生日</div>
                     <div class="text-xs text-grey-500 pl-2">変更できません。</div>
                     <div>
-                        <x-text-input class="block mt-1 w-full h-12 disabled" type="text" :value="$account->birthday" disabled />
+                        <x-text-input class="block mt-1 w-full h-12 disabled" type="text" :value="$account->birthday" readonly />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                 </div>
