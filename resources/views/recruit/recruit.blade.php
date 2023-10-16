@@ -1,8 +1,13 @@
 <x-recruit.template title="Mieet Plus 就活部" css="recruit/recruit.css">
-    <div id="loading" style="width: 100dvw; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background-color: black;">
-        <div class="ring absolute">
-            loading
-            <span></span>
+    <div id="loading">
+        <div class="wrapper">
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-shadow"></div>
+            <div class="loading-shadow"></div>
+            <div class="loading-shadow"></div>
+            <span class="text">Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span>
         </div>
     </div>
     @if($auth === 'admin' || $auth === 'company')
@@ -231,7 +236,7 @@
         </div>
     </div>
 
-    <div id="container" class="w-full justify-center bg-mieetcolor hidden">
+    <div id="container" class="w-full justify-center bg-mieetcolor flex">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             {{-- テラーズ表示範囲 start --}}
             <div id="tellers" class="swiper mySwiper container z-0 bg-white pt-2">

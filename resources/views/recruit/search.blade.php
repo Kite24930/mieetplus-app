@@ -1,8 +1,13 @@
 <x-recruit.template title="検索" css="recruit/search.css">
-    <div id="loading" style="width: 100dvw; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background-color: black;">
-        <div class="ring absolute">
-            loading
-            <span></span>
+    <div id="loading">
+        <div class="wrapper">
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-shadow"></div>
+            <div class="loading-shadow"></div>
+            <div class="loading-shadow"></div>
+            <span class="text">Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span>
         </div>
     </div>
     <div class="fixed top-0 left-0 z-510 p-2 h-[60px] flex items-center">
@@ -253,7 +258,7 @@
             </div>
         </div>
     </div>
-    <div id="container" class="w-full justify-center bg-mieetcolor hidden">
+    <div id="container" class="w-full justify-center bg-mieetcolor flex">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             <div class="w-full flex flex-wrap justify-start items-center m-0 p-0">
                 @foreach($companies as $company)

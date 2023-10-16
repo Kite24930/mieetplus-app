@@ -170,8 +170,8 @@ const frameFunction = () => {
 }
 const windowInit = () => {
     // console.log(Laravel);
-    container.classList.add('flex');
-    container.classList.remove('hidden');
+    // container.classList.add('flex');
+    // container.classList.remove('hidden');
     setTimeout(() => {
         loading.style.opacity = 0;
     }, 1000)

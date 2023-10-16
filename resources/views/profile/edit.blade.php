@@ -1,16 +1,10 @@
 <x-recruit.template title="My Page" css="profile/studentProfile.css">
-    <div id="loading" style="width: 100dvw; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background-color: black;">
-        <div class="ring absolute">
-            loading
-            <span></span>
-        </div>
-    </div>
     <div class="fixed top-0 left-0 z-510 p-2 h-[60px] flex items-center">
         <a href="{{ route('profile.show') }}">
             <i class="bi bi-caret-left-fill"></i><i class="bi bi-person-circle"></i>アカウント
         </a>
     </div>
-    <div id="container" class="w-full justify-center bg-mieetcolor hidden">
+    <div id="container" class="w-full justify-center bg-mieetcolor flex">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             @if($request->session()->has('error'))
                 <div class="p-4 text-xl text-red-500">

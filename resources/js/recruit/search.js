@@ -7,8 +7,8 @@ const loading = document.getElementById('loading');
 const container = document.getElementById('container');
 
 const windowInit = () => {
-    container.classList.add('flex');
-    container.classList.remove('hidden');
+    // container.classList.add('flex');
+    // container.classList.remove('hidden');
     setTimeout(() => {
         loading.style.opacity = 0;
     }, 1000)

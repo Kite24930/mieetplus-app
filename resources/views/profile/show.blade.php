@@ -1,16 +1,10 @@
 <x-recruit.template title="My Page" css="profile/studentProfile.css">
-    <div id="loading" style="width: 100dvw; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background-color: black;">
-        <div class="ring absolute">
-            loading
-            <span></span>
-        </div>
-    </div>
     <div class="fixed top-0 left-0 z-510 p-2 h-[60px] flex items-center">
         <a href="{{ route('recruit') }}">
             <i class="bi bi-caret-left-fill"></i><i class="bi bi-house"></i>HOME
         </a>
     </div>
-    <div id="container" class="w-full justify-center bg-mieetcolor hidden">
+    <div id="container" class="w-full justify-center bg-mieetcolor flex">
         <div class="container max-w-[550px] flex flex-col justify-center bg-white">
             <div class="w-full flex justify-center items-center gap-10 py-4">
                 <img src="@if(isset($account->img)){{ asset('storage/student/'.$account->user_id.'/'.$account->img) }}@else{{ asset('storage/account_default.png') }}@endif" alt="{{ $account->name }}" class="w-16 h-16 object-cover rounded-full mieet-border">

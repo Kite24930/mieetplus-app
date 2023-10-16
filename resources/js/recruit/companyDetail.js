@@ -5,7 +5,6 @@ import '../app.js';
 import axios from "axios";
 import followChange from "../module/followed.js";
 
-const loading = document.getElementById('loading');
 const container = document.getElementById('container');
 const root = window.location.protocol + '//' + window.location.hostname + '/';
 
@@ -49,12 +48,6 @@ function historyAdd() {
 const windowInit = () => {
     container.classList.add('flex');
     container.classList.remove('hidden');
-    setTimeout(() => {
-        loading.style.opacity = 0;
-    }, 1000);
-    setTimeout(() => {
-        loading.style.display = 'none';
-    }, 1500);
     contentSet();
     if (typeof Laravel.user_id !== 'undefined') {
         historyAdd();
