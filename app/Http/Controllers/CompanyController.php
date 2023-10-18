@@ -312,6 +312,7 @@ class CompanyController extends Controller
                 ]);
             } else {
                 $target = Company::create([
+                    'id' => $file_id,
                     'user_id' => Auth::id(),
                     'name' => $request->name,
                     'ruby' => $request->ruby,
