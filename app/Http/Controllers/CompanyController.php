@@ -217,9 +217,6 @@ class CompanyController extends Controller
             });
             $fileName = $file->getClientOriginalName();
             $filePath = storage_path('app/public/company/'.$id.'/'.$fileName);
-            if (Storage::missing('public/company/'.$id)) {
-                Storage::makeDirectory('public/company/'.$id);
-            }
             $saveFile->save(storage_path('app/public/company/'.$id.'/'.$fileName));
             $targetFile = InterventionImage::make($filePath);
             $limitSize = 200000;
@@ -256,7 +253,12 @@ class CompanyController extends Controller
             $file_id = $id;
             if ($target === null) {
                 $file_id = DB::table('companies')->max('id') + 1;
+            }
+            if (Storage::disk('public')->exists('company/'.$file_id)) {
                 Storage::disk('public')->makeDirectory('company/'.$file_id);
+                if (!str_ends_with(sprintf('%o', fileperms(storage_path('app/public/company/' . $file_id))), '0755')) {
+                    chmod(storage_path('app/public/company/'.$file_id), 0755);
+                }
             }
             foreach ($files as $fileTarget) {
                 if ($request->file($fileTarget)) {
