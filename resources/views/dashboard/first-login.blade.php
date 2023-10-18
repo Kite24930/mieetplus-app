@@ -1,4 +1,4 @@
-<x-auth-template title="学生会員 新規登録">
+<x-auth-template title="企業会員 新規登録">
     <div id="container" class="w-full flex-center-box my-12 px-4">
         <div class="w-full max-w-xl px-4 sm:px-16 py-8 sm:py-11 rounded-3xl bg-white flex-center-box flex-col">
             <a href="{{ route('index') }}">

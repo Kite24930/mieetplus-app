@@ -826,7 +826,7 @@ class MainController extends Controller
                 $fistLogin = Auth::user()->first_login;
                 if ($company === null) {
                     if ($fistLogin === 1) {
-                        return redirect()->route('companyDetailEdit');
+                        return redirect()->route('companyDetailEdit', 0);
                     }
                     return redirect()->route('companyFirstLogin');
                 }
