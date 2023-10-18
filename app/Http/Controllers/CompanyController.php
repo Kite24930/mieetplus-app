@@ -355,6 +355,9 @@ class CompanyController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+            if ($target === null) {
+                return redirect()->route('companyDetailEdit', 0)->with('msg', '企業情報の登録に失敗しました。\n'.$e->getMessage());
+            }
             return redirect()->route('companyDetailEdit', $target->id)->with('msg', '企業情報の更新に失敗しました。\n'.$e->getMessage());
         }
         return redirect()->route('companyDetailEdit', $target->id)->with('msg', '企業情報を更新しました。');
