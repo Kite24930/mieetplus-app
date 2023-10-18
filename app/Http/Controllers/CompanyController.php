@@ -256,6 +256,7 @@ class CompanyController extends Controller
             $file_id = $id;
             if ($target === null) {
                 $file_id = DB::table('companies')->max('id') + 1;
+                Storage::disk('public')->makeDirectory('company/'.$file_id);
             }
             foreach ($files as $fileTarget) {
                 if ($request->file($fileTarget)) {
