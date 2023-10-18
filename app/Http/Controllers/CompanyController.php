@@ -216,11 +216,9 @@ class CompanyController extends Controller
                 $constraint->upsize();
             });
             $fileName = $file->getClientOriginalName();
-            if (Storage::disk('public')->exists('company/'.$id)) {
-                Storage::disk('public')->makeDirectory('company/'.$id);
-                if (!str_ends_with(sprintf('%o', fileperms(storage_path('app/public/company/' . $id))), '0755')) {
-                    chmod(storage_path('app/public/company/'.$id), 0755);
-                }
+            Storage::disk('public')->makeDirectory('company/'.$id);
+            if (!str_ends_with(sprintf('%o', fileperms(storage_path('app/public/company/' . $id))), '0755')) {
+                chmod(storage_path('app/public/company/'.$id), 0755);
             }
             $filePath = storage_path('app/public/company/'.$id.'/'.$fileName);
             $saveFile->save($filePath);
