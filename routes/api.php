@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/company/mailPermission', [ApiController::class, 'companyMailPermissionChange'])->name('companyMailPermissionChange');
+Route::post('/company/status', [ApiController::class, 'companyStatusChange'])->name('companyStatusChange');
 Route::post('follow', [ApiController::class, 'followedAdd'])->name('followedAdd');
 Route::post('follow/cancel/{company_id}/{student_id}', [ApiController::class, 'followedDelete'])->name('followedDelete');
 Route::post('history', [ApiController::class, 'historyAdd'])->name('historyAdd');

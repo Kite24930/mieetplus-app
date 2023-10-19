@@ -49,6 +49,22 @@ class ApiController extends Controller
         }
     }
 
+    public function companyStatusChange(Request $request) {
+        try {
+            $target = Company::find($request->id);
+            $target->update([
+                'status' => $request->status,
+            ]);
+        } catch (\Exception $e) {
+            $data = [
+                'msg' => 'error',
+                'err' => $e->getMessage(),
+            ];
+            return response()->json($data, 500);
+        }
+        return response()->json(['msg' => 'ok'], 200);
+    }
+
     public function companyMailPermissionChange(Request $request) {
         try {
             $target = Company::where('user_id', $request->id)->first();

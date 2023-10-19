@@ -45,6 +45,7 @@ export default defineConfig({
                 studentList: 'resources/js/dashboard/studentList.js',
                 studentDetail: 'resources/js/dashboard/studentDetail.js',
                 companyDashboardDetail: 'resources/js/dashboard/company/companyDetail.js',
+                companyDepartment: 'resources/js/dashboard/company/companyDepartment.js',
                 companyDetailEdit: 'resources/js/dashboard/company/companyDetailEdit.js',
                 followersList: 'resources/js/dashboard/company/followersList.js',
                 companySetting: 'resources/js/dashboard/company/companySetting.js',

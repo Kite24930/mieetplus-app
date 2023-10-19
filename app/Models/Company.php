@@ -49,5 +49,6 @@ class Company extends Model
         'movie',
         'logo',
         'mail_permission',
+        'status',
     ];
 }

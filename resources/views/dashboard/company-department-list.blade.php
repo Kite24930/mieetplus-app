@@ -42,6 +42,7 @@
                 <table class="w-full">
                     <thead class="back-grey-50 border-b">
                         <tr class="text-left text-sm">
+                            <th class="p-4 border-r">ステータス</th>
                             <th class="p-4">会社名・部門名</th>
                         </tr>
                     </thead>
@@ -54,5 +55,5 @@
             </div>
         </div>
     </main>
-    @vite(['resources/js/dashboard/company/companyDetail.js'])
+    @vite(['resources/js/dashboard/company/companyDepartment.js'])
 </x-dashboard-template>
