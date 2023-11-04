@@ -31,7 +31,7 @@
         </div>
         @if(date('Y-m-d') === '2023-11-03' || date('Y-m-d') === '2023-11-04' || date('Y-m-d') == '2023-11-05')
             <div id="miefes" class="w-full px-4 md:px-16 py-4 md:py-16">
-                <a href="https://miefes.mie-projectm.com" >
+                <a href="https://festival-monitor-projectms-projects.vercel.app/monitor/" >
                     <img src="{{ asset('storage/miefes.png') }}" alt="miefes" class="drop-shadow">
                 </a>
             </div>
