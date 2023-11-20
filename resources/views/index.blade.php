@@ -29,13 +29,6 @@
                 <img src="{{ asset('storage/top-visual.png') }}" alt="top-visual" class="w-11/12 max-w-[540px]">
             </div>
         </div>
-        @if(date('Y-m-d') === '2023-11-03' || date('Y-m-d') === '2023-11-04' || date('Y-m-d') == '2023-11-05')
-            <div id="miefes" class="w-full px-4 md:px-16 py-4 md:py-16">
-                <a href="https://festival-monitor-projectms-projects.vercel.app/monitor/" >
-                    <img src="{{ asset('storage/miefes.png') }}" alt="miefes" class="drop-shadow">
-                </a>
-            </div>
-        @endif
         <div id="whats-mieet" class="w-full px-4 md:px-16 pt-40 pb-24">
             <div class="w-full flex flex-col justify-center items-center md:items-start">
                 <div class="flex items-center">

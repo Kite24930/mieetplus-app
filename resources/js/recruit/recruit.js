@@ -104,12 +104,14 @@ document.querySelectorAll('.viewer-content').forEach((el) => {
 const tellersBtnInit = (el) => {
     el.addEventListener('click', () => {
         const targetNum = Number(el.getAttribute('data-bs-target'));
+        insideSwiper.forEach((el) => {
+            el.slideTo(0);
+        });
         bar1.set(0);
         bar1.animate(1.0);
         bar2.set(0);
         bar3.set(0);
         tellerSwiper.slideTo(targetNum);
-        insideSwiper[targetNum].slideTo(0);
         modal.show();
     });
 }
