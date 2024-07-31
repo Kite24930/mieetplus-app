@@ -29,6 +29,16 @@
                 <img src="{{ asset('storage/top-visual.png') }}" alt="top-visual" class="w-11/12 max-w-[540px]">
             </div>
         </div>
+        <div class="w-full flex flex-col gap-6 py-4 justify-center items-center">
+            <div class="text-6xl font-bold">Mieet Plus 閉鎖のご案内</div>
+            <div>
+                日頃よりMieet Plusをご利用いただき、誠にありがとうございます。
+                <br>
+                2024年8月末日をもちまして、Mieet Plusは閉鎖させていただくこととなりました。
+                <br>
+                長らくのご愛顧、誠にありがとうございました。
+            </div>
+        </div>
         <div id="whats-mieet" class="w-full px-4 md:px-16 pt-40 pb-24">
             <div class="w-full flex flex-col justify-center items-center md:items-start">
                 <div class="flex items-center">
